@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GetItDone — Research Team Management</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;color:#1a1a2e;min-height:100vh}
+.screen{display:none;min-height:100vh;flex-direction:column}
+.screen.active{display:flex}
+
+/* AUTH */
+.auth-wrap{min-height:100vh;display:flex}
+.auth-left{width:380px;background:#1B3A6B;padding:48px 40px;display:flex;flex-direction:column;justify-content:space-between;flex-shrink:0}
+.auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:40px}
+.logo-mark{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#00C9A7,#0099FF);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:#fff}
+.logo-text{font-size:20px;font-weight:700;color:#fff}
+.logo-badge{font-size:10px;background:#00C9A7;color:#fff;padding:2px 7px;border-radius:4px;font-weight:700}
+.auth-tagline{color:rgba(255,255,255,0.9);font-size:22px;font-weight:700;line-height:1.4;margin-bottom:16px}
+.auth-sub{color:rgba(255,255,255,0.6);font-size:13px;line-height:1.6}
+.auth-features{margin-top:32px;display:flex;flex-direction:column;gap:14px}
+.auth-feat{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.8);font-size:13px}
+.feat-dot{width:24px;height:24px;border-radius:6px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.auth-right{flex:1;display:flex;align-items:center;justify-content:center;padding:40px;background:#f8fafc}
+.auth-card{background:#fff;border-radius:16px;padding:36px;width:100%;max-width:400px;border:1px solid #e5e7eb;box-shadow:0 4px 24px rgba(0,0,0,0.08)}
+.auth-title{font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:6px}
+.auth-subtitle{font-size:13px;color:#6b7280;margin-bottom:28px}
+.form-group{margin-bottom:16px}
+.form-label{font-size:12px;font-weight:700;color:#374151;margin-bottom:5px;display:block}
+.form-input{width:100%;padding:10px 14px;border-radius:8px;border:1.5px solid #e5e7eb;font-size:13px;font-family:inherit;outline:none;color:#1f2937;background:#fff;transition:border-color 0.15s}
+.form-input:focus{border-color:#1B3A6B;box-shadow:0 0 0 3px rgba(27,58,107,0.08)}
+.form-select{width:100%;padding:10px 14px;border-radius:8px;border:1.5px solid #e5e7eb;font-size:13px;font-family:inherit;outline:none;color:#1f2937;background:#fff}
+.btn-primary{width:100%;padding:12px;border-radius:8px;background:#1B3A6B;color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;margin-top:8px}
+.btn-primary:hover{background:#14305a}
+.auth-switch{text-align:center;margin-top:20px;font-size:13px;color:#6b7280}
+.auth-switch a{color:#1B3A6B;font-weight:700;cursor:pointer}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.error-msg{background:#FEE2E2;color:#991B1B;padding:10px 14px;border-radius:8px;font-size:12px;margin-bottom:14px;display:none}
+.demo-hint{margin-top:12px;padding:10px;background:#f8fafc;border-radius:8px;font-size:11px;color:#6b7280;text-align:center}
+
+/* APP SHELL */
+.app-header{background:#1B3A6B;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;flex-shrink:0}
+.app-logo{display:flex;align-items:center;gap:8px}
+.app-logo-mark{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#00C9A7,#0099FF);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff}
+.app-logo-text{font-size:14px;font-weight:700;color:#fff}
+.app-logo-badge{font-size:9px;background:#00C9A7;color:#fff;padding:1px 5px;border-radius:3px;font-weight:700}
+.header-right{display:flex;align-items:center;gap:12px}
+.header-notif{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:13px;color:#fff}
+.notif-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;background:#EF4444;border-radius:50%}
+.header-name{font-size:12px;color:rgba(255,255,255,0.8)}
+.header-avatar{width:30px;height:30px;border-radius:50%;background:#00C9A7;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;cursor:pointer}
+.app-body{display:flex;flex:1;overflow:hidden;height:calc(100vh - 52px)}
+.sidebar{width:210px;background:#fff;border-right:1px solid #e5e7eb;display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.sidebar-section{padding:16px 12px 4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#9ca3af}
+.sidebar-item{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:12px;font-weight:600;cursor:pointer;color:#6b7280;border-radius:6px;margin:1px 8px;transition:all 0.15s}
+.sidebar-item:hover{background:#f3f4f6;color:#374151}
+.sidebar-item.active{background:#EFF6FF;color:#1B3A6B}
+.sidebar-icon{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.sidebar-count{margin-left:auto;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;background:#f3f4f6;color:#6b7280}
+.sidebar-project{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;cursor:pointer;color:#6b7280;border-radius:6px;margin:1px 8px}
+.sidebar-project:hover{background:#f3f4f6;color:#374151}
+.sidebar-project.active{background:#EFF6FF;color:#1B3A6B;font-weight:600}
+.proj-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sidebar-add-proj{display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12px;cursor:pointer;color:#1B3A6B;font-weight:600;margin:1px 8px;border-radius:6px}
+.sidebar-add-proj:hover{background:#EFF6FF}
+.sidebar-bottom{margin-top:auto;padding:12px;border-top:1px solid #f3f4f6}
+.logout-btn{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:12px;color:#9ca3af;cursor:pointer;border-radius:6px;width:100%}
+.logout-btn:hover{background:#FEF2F2;color:#991B1B}
+.main-content{flex:1;overflow-y:auto;padding:24px}
+
+/* VIEWS */
+.view{display:none}
+.view.active{display:block}
+.page-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.page-title{font-size:20px;font-weight:700;color:#1a1a2e}
+.page-sub{font-size:12px;color:#6b7280;margin-top:3px}
+.btn-sm{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all 0.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-sm-primary{background:#1B3A6B;color:#fff}
+.btn-sm-primary:hover{background:#14305a}
+.btn-sm-outline{background:#fff;color:#374151;border:1.5px solid #e5e7eb}
+.btn-sm-outline:hover{background:#f9fafb}
+.btn-sm-green{background:#065F46;color:#fff}
+.btn-sm-red{background:#991B1B;color:#fff}
+.btn-row{display:flex;gap:8px}
+
+/* METRICS */
+.metrics-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.metric-card{border-radius:12px;padding:16px;color:#fff}
+.mc-blue{background:#1B3A6B}.mc-green{background:#065F46}.mc-amber{background:#92400E}.mc-red{background:#991B1B}.mc-teal{background:#0F4C5C}.mc-purple{background:#4C1D95}
+.mc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;opacity:0.75;margin-bottom:6px}
+.mc-val{font-size:26px;font-weight:700;line-height:1}
+.mc-sub{font-size:10px;opacity:0.7;margin-top:5px}
+
+/* CARDS */
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:16px}
+.card{background:#fff;border-radius:12px;padding:16px;border:1px solid #e5e7eb;margin-bottom:16px}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.card-title{font-size:13px;font-weight:700;color:#374151}
+.row-item{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f3f4f6;cursor:pointer}
+.row-item:last-child{border-bottom:none}
+.row-item:hover{background:#f9fafb;margin:0 -8px;padding:9px 8px;border-radius:6px}
+.row-title{font-size:13px;font-weight:600;color:#1f2937}
+.row-meta{font-size:11px;color:#9ca3af;margin-top:2px}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.b-red{background:#FEE2E2;color:#991B1B}
+.b-amber{background:#FEF3C7;color:#92400E}
+.b-green{background:#D1FAE5;color:#065F46}
+.b-blue{background:#DBEAFE;color:#1E40AF}
+.b-purple{background:#EDE9FE;color:#5B21B6}
+.b-gray{background:#F3F4F6;color:#374151}
+.b-teal{background:#CCFBF1;color:#0F6E56}
+
+/* AVATARS */
+.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex-shrink:0}
+.av-blue{background:#1B3A6B}.av-teal{background:#0F6E56}.av-red{background:#B91C1C}.av-purple{background:#6D28D9}.av-amber{background:#B45309}.av-green{background:#065F46}
+
+/* ALERT */
+.alert-bar{background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.alert-icon{width:28px;height:28px;background:#EF4444;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+.alert-text{font-size:12px;color:#991B1B;font-weight:600}
+.alert-sub{font-size:11px;color:#B91C1C;margin-top:2px}
+
+/* MEMBER ROWS */
+.member-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f3f4f6}
+.member-row:last-child{border-bottom:none}
+.bar-bg{height:5px;background:#f3f4f6;border-radius:3px;flex:1}
+.bar-fill{height:5px;border-radius:3px}
+
+/* ACTIVITY */
+.act-row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #f3f4f6}
+.act-row:last-child{border-bottom:none}
+.act-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.act-text{font-size:12px;color:#374151;line-height:1.5}
+.act-time{font-size:10px;color:#9ca3af;margin-top:2px}
+
+/* KANBAN */
+.kanban{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.k-col{border-radius:12px;padding:12px}
+.k-col-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.k-col-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
+.k-count{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;background:#fff;border:1px solid #e5e7eb;color:#6b7280}
+.k-card{background:#fff;border-radius:8px;padding:11px;margin-bottom:7px;border:1px solid #e5e7eb;cursor:pointer;transition:all 0.15s}
+.k-card:hover{border-color:#93c5fd;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.k-card-title{font-size:12px;font-weight:600;color:#1f2937;margin-bottom:4px}
+.k-card-meta{font-size:11px;color:#9ca3af}
+.k-card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:7px}
+.priority-dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.pd-red{background:#EF4444}.pd-amber{background:#F59E0B}.pd-green{background:#10B981}
+
+/* PROJECT CARDS */
+.proj-card{background:#fff;border-radius:12px;border:1px solid #e5e7eb;padding:18px;cursor:pointer;transition:all 0.15s;margin-bottom:12px}
+.proj-card:hover{border-color:#93c5fd;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.proj-name{font-size:15px;font-weight:700;color:#1a1a2e}
+.proj-meta{font-size:12px;color:#6b7280;margin-top:2px}
+.proj-progress-bar{height:5px;background:#f3f4f6;border-radius:3px;margin:10px 0}
+.proj-progress-fill{height:5px;border-radius:3px}
+.proj-stats{display:flex;gap:16px;font-size:12px;color:#6b7280}
+.proj-avatars{display:flex;margin-top:10px}
+.proj-avatar{width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;margin-left:-6px}
+.proj-avatar:first-child{margin-left:0}
+
+/* TABS */
+.proj-tabs{display:flex;gap:0;border-bottom:1px solid #e5e7eb;margin-bottom:16px}
+.proj-tab{padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;color:#6b7280;border-bottom:2px solid transparent;transition:all 0.15s}
+.proj-tab:hover{color:#374151}
+.proj-tab.active{color:#1B3A6B;border-bottom-color:#1B3A6B}
+
+/* TASK DETAIL */
+.task-header{background:linear-gradient(135deg,#1B3A6B,#1E40AF);border-radius:12px;padding:20px;color:#fff;margin-bottom:16px}
+.task-header-title{font-size:17px;font-weight:700;margin-bottom:6px}
+.task-header-meta{font-size:12px;opacity:0.8}
+.comment-item{display:flex;gap:10px;margin-bottom:10px}
+.comment-bubble{background:#f8fafc;border-radius:8px;padding:10px 12px;flex:1}
+.comment-author{font-size:11px;font-weight:700;color:#1B3A6B}
+.comment-body{font-size:12px;color:#374151;margin-top:2px}
+.comment-time{font-size:10px;color:#9ca3af;margin-top:4px}
+.comment-input-row{display:flex;gap:8px;margin-top:12px}
+.comment-input{flex:1;padding:9px 12px;border-radius:8px;border:1.5px solid #e5e7eb;font-size:12px;font-family:inherit;outline:none}
+.comment-input:focus{border-color:#1B3A6B}
+.file-drop{border:2px dashed #e5e7eb;border-radius:8px;padding:20px;text-align:center;cursor:pointer;color:#9ca3af;font-size:13px}
+.file-drop:hover{border-color:#93c5fd;background:#f8fafc}
+.progress-bar-bg{height:6px;background:#f3f4f6;border-radius:3px}
+.progress-bar-fill{height:6px;border-radius:3px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:1000}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:16px;padding:28px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.modal-title{font-size:18px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+.modal-sub{font-size:12px;color:#6b7280;margin-bottom:22px}
+.modal-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
+.btn-modal-primary{padding:9px 22px;border-radius:8px;background:#1B3A6B;color:#fff;font-size:13px;font-weight:700;border:none;cursor:pointer}
+.btn-modal-primary:hover{background:#14305a}
+.btn-modal-cancel{padding:9px 22px;border-radius:8px;background:#f3f4f6;color:#374151;font-size:13px;font-weight:700;border:none;cursor:pointer}
+.invite-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;background:#EFF6FF;color:#1E40AF;font-size:12px;font-weight:600;margin:3px}
+.invite-remove{cursor:pointer;font-weight:700}
+.my-task-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;margin-bottom:8px;cursor:pointer}
+.my-task-item:hover{border-color:#93c5fd}
+.task-check{width:20px;height:20px;border-radius:5px;border:2px solid #d1d5db;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff}
+.task-check.done{background:#10B981;border-color:#10B981}
+.task-check.prog{background:#3B82F6;border-color:#3B82F6}
+.empty-state{text-align:center;padding:50px 20px;color:#9ca3af}
+.empty-icon{font-size:48px;margin-bottom:12px}
+.empty-title{font-size:16px;font-weight:700;color:#374151;margin-bottom:6px}
+.notification-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f3f4f6}
+.notification-item:last-child{border-bottom:none}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="screen-login" class="screen active">
+<div class="auth-wrap">
+  <div class="auth-left">
+    <div>
+      <div class="auth-logo">
+        <div class="logo-mark">G</div>
+        <span class="logo-text">GetItDone</span>
+        <span class="logo-badge">BETA</span>
+      </div>
+      <div class="auth-tagline">Research team management that actually works</div>
+      <div class="auth-sub">Track who is doing what, when, and how well across your entire research team.</div>
+      <div class="auth-features">
+        <div class="auth-feat"><div class="feat-dot">✓</div>Create projects and invite collaborators</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Assign tasks with deadlines and priorities</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Track team reliability and performance</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Full activity log and progress reports</div>
+      </div>
+    </div>
+    <div style="color:rgba(255,255,255,0.4);font-size:11px">© 2026 GetItDone · Research Management Platform</div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="auth-title">Welcome back</div>
+      <div class="auth-subtitle">Sign in to your GetItDone account</div>
+      <div id="login-error" class="error-msg">Incorrect email or password. Please try again.</div>
+      <div class="form-group"><label class="form-label">Email address</label><input class="form-input" id="login-email" type="email" placeholder="your@university.edu.au"></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="login-pass" type="password" placeholder="••••••••"></div>
+      <button class="btn-primary" onclick="doLogin()">Sign in to GetItDone</button>
+      <div class="auth-switch">Don't have an account? <a onclick="showScreen('signup')">Create one free</a></div>
+      <div class="demo-hint">Demo: use any email and password to sign in</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SIGNUP SCREEN -->
+<div id="screen-signup" class="screen">
+<div class="auth-wrap">
+  <div class="auth-left">
+    <div>
+      <div class="auth-logo">
+        <div class="logo-mark">G</div>
+        <span class="logo-text">GetItDone</span>
+        <span class="logo-badge">BETA</span>
+      </div>
+      <div class="auth-tagline">Join researchers managing smarter</div>
+      <div class="auth-sub">Set up your account in 60 seconds. Free during beta.</div>
+      <div class="auth-features">
+        <div class="auth-feat"><div class="feat-dot">★</div>Free during beta period</div>
+        <div class="auth-feat"><div class="feat-dot">★</div>Unlimited projects and tasks</div>
+        <div class="auth-feat"><div class="feat-dot">★</div>Up to 20 team members per project</div>
+        <div class="auth-feat"><div class="feat-dot">★</div>Full analytics and reporting</div>
+      </div>
+    </div>
+    <div style="color:rgba(255,255,255,0.4);font-size:11px">© 2026 GetItDone · Research Management Platform</div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="auth-title">Create your account</div>
+      <div class="auth-subtitle">Start managing your research team today</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First name</label><input class="form-input" id="signup-first" placeholder="Ashenafi"></div>
+        <div class="form-group"><label class="form-label">Last name</label><input class="form-input" id="signup-last" placeholder="Biru"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email address</label><input class="form-input" id="signup-email" type="email" placeholder="your@university.edu.au"></div>
+      <div class="form-group"><label class="form-label">Institution</label><input class="form-input" id="signup-inst" placeholder="RMIT University"></div>
+      <div class="form-group"><label class="form-label">Your role</label>
+        <select class="form-select" id="signup-role">
+          <option>Principal Investigator (PI)</option>
+          <option>Postdoc Researcher</option>
+          <option>PhD Student</option>
+          <option>Research Assistant</option>
+          <option>Lab Manager</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="signup-pass" type="password" placeholder="Min. 8 characters"></div>
+      <button class="btn-primary" onclick="doSignup()">Create free account</button>
+      <div class="auth-switch">Already have an account? <a onclick="showScreen('login')">Sign in</a></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- APP SCREEN -->
+<div id="screen-app" class="screen">
+  <div class="app-header">
+    <div class="app-logo">
+      <div class="app-logo-mark">G</div>
+      <span class="app-logo-text">GetItDone</span>
+      <span class="app-logo-badge">BETA</span>
+    </div>
+    <div class="header-right">
+      <div class="header-notif" onclick="openModal('modal-notifs')">
+        🔔<div class="notif-dot"></div>
+      </div>
+      <span class="header-name" id="header-name">Loading...</span>
+      <div class="header-avatar" id="header-avatar">AB</div>
+    </div>
+  </div>
+  <div class="app-body">
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-section">Main</div>
+      <div class="sidebar-item active" id="nav-home" onclick="navTo('home')">
+        <div class="sidebar-icon" style="background:#1B3A6B">⊞</div>Home
+      </div>
+      <div class="sidebar-item" id="nav-projects" onclick="navTo('projects')">
+        <div class="sidebar-icon" style="background:#065F46">◫</div>My projects
+        <span class="sidebar-count" id="proj-count">0</span>
+      </div>
+      <div class="sidebar-item" id="nav-mytasks" onclick="navTo('mytasks')">
+        <div class="sidebar-icon" style="background:#5B21B6">✓</div>My tasks
+        <span class="sidebar-count" id="task-count">0</span>
+      </div>
+      <div class="sidebar-item" id="nav-team" onclick="navTo('team')">
+        <div class="sidebar-icon" style="background:#0F6E56">◎</div>Team
+      </div>
+      <div class="sidebar-item" id="nav-reports" onclick="navTo('reports')">
+        <div class="sidebar-icon" style="background:#92400E">↗</div>Reports
+      </div>
+      <div class="sidebar-section">Projects</div>
+      <div id="sidebar-projects"></div>
+      <div class="sidebar-add-proj" onclick="openModal('modal-new-project')">
+        <div style="width:16px;height:16px;border-radius:4px;border:2px dashed #1B3A6B;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#1B3A6B">+</div>
+        New project
+      </div>
+      <div class="sidebar-section">Account</div>
+      <div class="sidebar-item" id="nav-settings" onclick="navTo('settings')">
+        <div class="sidebar-icon" style="background:#374151">⚙</div>Settings
+      </div>
+      <div class="sidebar-bottom">
+        <div class="logout-btn" onclick="doLogout()">⬡ Sign out</div>
+      </div>
+    </div>
+
+    <div class="main-content">
+
+      <!-- HOME VIEW -->
+      <div id="view-home" class="view active">
+        <div class="page-head">
+          <div>
+            <div class="page-title" id="home-greeting">Welcome!</div>
+            <div class="page-sub">Here's what's happening across your projects</div>
+          </div>
+          <button class="btn-sm btn-sm-primary" onclick="openModal('modal-new-project')">+ New project</button>
+        </div>
+        <div id="home-alert" class="alert-bar" style="display:none">
+          <div class="alert-icon">!</div>
+          <div>
+            <div class="alert-text" id="home-alert-text">Tasks are overdue</div>
+            <div class="alert-sub" id="home-alert-sub"></div>
+          </div>
+        </div>
+        <div class="metrics-row">
+          <div class="metric-card mc-blue"><div class="mc-label">Active projects</div><div class="mc-val" id="stat-projects">0</div><div class="mc-sub">All in progress</div></div>
+          <div class="metric-card mc-green"><div class="mc-label">Tasks completed</div><div class="mc-val" id="stat-done">0</div><div class="mc-sub">This month</div></div>
+          <div class="metric-card mc-amber"><div class="mc-label">Team members</div><div class="mc-val" id="stat-members">0</div><div class="mc-sub">Across projects</div></div>
+          <div class="metric-card mc-red"><div class="mc-label">Overdue tasks</div><div class="mc-val" id="stat-overdue">0</div><div class="mc-sub">Needs attention</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><div class="card-title">My projects</div></div>
+            <div id="home-projects-list">
+              <div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Create your first project to get started</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div class="card-title">Recent activity</div></div>
+            <div id="home-activity">
+              <div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No activity yet</div><div>Activity will appear here once you start working</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS VIEW -->
+      <div id="view-projects" class="view">
+        <div class="page-head">
+          <div><div class="page-title">My projects</div><div class="page-sub">All research projects you manage or collaborate on</div></div>
+          <button class="btn-sm btn-sm-primary" onclick="openModal('modal-new-project')">+ New project</button>
+        </div>
+        <div id="projects-list">
+          <div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Click + New project to create your first one</div></div>
+        </div>
+      </div>
+
+      <!-- PROJECT DETAIL VIEW -->
+      <div id="view-project" class="view">
+        <div class="page-head">
+          <div>
+            <div style="font-size:12px;color:#6b7280;cursor:pointer;margin-bottom:4px" onclick="navTo('projects')">← Back to projects</div>
+            <div class="page-title" id="proj-detail-title"></div>
+            <div class="page-sub" id="proj-detail-sub"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-sm btn-sm-outline" onclick="openModal('modal-invite')">+ Invite member</button>
+            <button class="btn-sm btn-sm-primary" onclick="openModal('modal-add-task')">+ Add task</button>
+          </div>
+        </div>
+        <div class="metrics-row" id="proj-detail-metrics"></div>
+        <div id="proj-detail-alert" class="alert-bar" style="display:none">
+          <div class="alert-icon">!</div>
+          <div><div class="alert-text" id="proj-detail-alert-text"></div></div>
+        </div>
+        <div class="proj-tabs">
+          <div class="proj-tab active" id="ptab-board" onclick="switchTab('board')">Task board</div>
+          <div class="proj-tab" id="ptab-list" onclick="switchTab('list')">Task list</div>
+          <div class="proj-tab" id="ptab-team" onclick="switchTab('team')">Team</div>
+          <div class="proj-tab" id="ptab-activity" onclick="switchTab('activity')">Activity</div>
+        </div>
+        <div id="proj-tab-board">
+          <div class="kanban" id="kanban-board"></div>
+        </div>
+        <div id="proj-tab-list" style="display:none">
+          <div class="card"><div class="card-head"><div class="card-title">All tasks</div><button class="btn-sm btn-sm-primary" onclick="openModal('modal-add-task')">+ Add task</button></div><div id="task-list-view"></div></div>
+        </div>
+        <div id="proj-tab-team" style="display:none">
+          <div class="grid-2" id="team-grid"></div>
+          <div style="text-align:center;margin-top:8px"><button class="btn-sm btn-sm-outline" onclick="openModal('modal-invite')">+ Invite new member</button></div>
+        </div>
+        <div id="proj-tab-activity" style="display:none">
+          <div class="card"><div class="card-head"><div class="card-title">Activity log</div></div><div id="activity-log-view"></div></div>
+        </div>
+      </div>
+
+      <!-- MY TASKS VIEW -->
+      <div id="view-mytasks" class="view">
+        <div class="page-head"><div><div class="page-title">My tasks</div><div class="page-sub">Tasks assigned to you across all projects</div></div></div>
+        <div class="metrics-row">
+          <div class="metric-card mc-blue"><div class="mc-label">Assigned to me</div><div class="mc-val" id="my-assigned">0</div></div>
+          <div class="metric-card mc-green"><div class="mc-label">Completed</div><div class="mc-val" id="my-done">0</div></div>
+          <div class="metric-card mc-amber"><div class="mc-label">In progress</div><div class="mc-val" id="my-progress">0</div></div>
+          <div class="metric-card mc-red"><div class="mc-label">Overdue</div><div class="mc-val" id="my-overdue">0</div></div>
+        </div>
+        <div class="card"><div class="card-head"><div class="card-title">My active tasks</div></div><div id="my-tasks-list"><div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">No tasks yet</div><div>Tasks assigned to you will appear here</div></div></div></div>
+      </div>
+
+      <!-- TEAM VIEW -->
+      <div id="view-team" class="view">
+        <div class="page-head"><div><div class="page-title">Team</div><div class="page-sub">All collaborators across your projects</div></div><button class="btn-sm btn-sm-primary" onclick="openModal('modal-invite')">+ Invite member</button></div>
+        <div id="team-view-grid" class="grid-2"></div>
+      </div>
+
+      <!-- REPORTS VIEW -->
+      <div id="view-reports" class="view">
+        <div class="page-head"><div><div class="page-title">Reports</div><div class="page-sub">Analytics across all your projects</div></div></div>
+        <div class="metrics-row">
+          <div class="metric-card mc-blue"><div class="mc-label">Overall completion</div><div class="mc-val" id="rep-completion">0%</div></div>
+          <div class="metric-card mc-green"><div class="mc-label">Tasks done this month</div><div class="mc-val" id="rep-done">0</div></div>
+          <div class="metric-card mc-amber"><div class="mc-label">Active projects</div><div class="mc-val" id="rep-projects">0</div></div>
+          <div class="metric-card mc-purple"><div class="mc-label">Total team members</div><div class="mc-val" id="rep-members">0</div></div>
+        </div>
+        <div class="card"><div class="card-head"><div class="card-title">Project progress</div></div><div id="reports-projects"></div></div>
+      </div>
+
+      <!-- SETTINGS VIEW -->
+      <div id="view-settings" class="view">
+        <div class="page-head"><div><div class="page-title">Settings</div><div class="page-sub">Manage your account and preferences</div></div></div>
+        <div class="card" style="max-width:500px">
+          <div class="card-head"><div class="card-title">Profile settings</div></div>
+          <div class="form-group"><label class="form-label">Full name</label><input class="form-input" id="settings-name" placeholder="Your name"></div>
+          <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="settings-email" placeholder="your@email.com"></div>
+          <div class="form-group"><label class="form-label">Institution</label><input class="form-input" id="settings-inst" placeholder="Your university"></div>
+          <div class="form-group"><label class="form-label">Role</label>
+            <select class="form-select" id="settings-role">
+              <option>Principal Investigator (PI)</option>
+              <option>Postdoc Researcher</option>
+              <option>PhD Student</option>
+              <option>Research Assistant</option>
+            </select>
+          </div>
+          <button class="btn-sm btn-sm-primary" onclick="saveSettings()">Save changes</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+
+<!-- NEW PROJECT -->
+<div class="modal-overlay" id="modal-new-project">
+  <div class="modal">
+    <div class="modal-title">Create new project</div>
+    <div class="modal-sub">Set up your research project and invite your team</div>
+    <div class="form-group"><label class="form-label">Project name *</label><input class="form-input" id="np-name" placeholder="e.g. Ethiopian Entrepreneurship Ecosystems"></div>
+    <div class="form-group"><label class="form-label">Description</label><textarea class="form-input" rows="2" id="np-desc" placeholder="Brief description of the research project..."></textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Start date</label><input class="form-input" type="date" id="np-start"></div>
+      <div class="form-group"><label class="form-label">End date</label><input class="form-input" type="date" id="np-end"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Institution</label><input class="form-input" id="np-inst" placeholder="RMIT University"></div>
+    <div class="form-group">
+      <label class="form-label">Invite collaborators</label>
+      <input class="form-input" id="np-invite-input" placeholder="colleague@university.edu.au — press Enter to add" onkeydown="if(event.key==='Enter'){addInviteChip();event.preventDefault()}">
+      <div id="np-invite-chips" style="margin-top:6px;min-height:10px"></div>
+      <div style="font-size:11px;color:#9ca3af;margin-top:4px">Press Enter after each email address</div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="closeModal('modal-new-project')">Cancel</button>
+      <button class="btn-modal-primary" onclick="createProject()">Create project</button>
+    </div>
+  </div>
+</div>
+
+<!-- INVITE MEMBER -->
+<div class="modal-overlay" id="modal-invite">
+  <div class="modal">
+    <div class="modal-title">Invite team member</div>
+    <div class="modal-sub">Send an invitation to collaborate on this project</div>
+    <div class="form-group"><label class="form-label">Email address *</label><input class="form-input" id="inv-email" placeholder="colleague@university.edu.au"></div>
+    <div class="form-group"><label class="form-label">Full name</label><input class="form-input" id="inv-name" placeholder="Dr. Jane Smith"></div>
+    <div class="form-group"><label class="form-label">Role in project</label>
+      <select class="form-select" id="inv-role">
+        <option>Postdoc Researcher</option>
+        <option>PhD Student</option>
+        <option>Research Assistant</option>
+        <option>Lab Manager</option>
+        <option>Co-Investigator</option>
+        <option>External Collaborator</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Personal message (optional)</label><textarea class="form-input" rows="2" id="inv-message" placeholder="Hi, I'd like to invite you to collaborate on my research project..."></textarea></div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="closeModal('modal-invite')">Cancel</button>
+      <button class="btn-modal-primary" onclick="sendInvite()">Send invitation</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD TASK -->
+<div class="modal-overlay" id="modal-add-task">
+  <div class="modal">
+    <div class="modal-title">Add new task</div>
+    <div class="modal-sub">Create and assign a task to a team member</div>
+    <div class="form-group"><label class="form-label">Task title *</label><input class="form-input" id="at-title" placeholder="e.g. Run literature review on Ethiopian SMEs"></div>
+    <div class="form-group"><label class="form-label">Description and deliverable</label><textarea class="form-input" rows="3" id="at-desc" placeholder="Describe what needs to be done and what to deliver..."></textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Assign to</label><input class="form-input" id="at-assignee" placeholder="Team member name"></div>
+      <div class="form-group"><label class="form-label">Due date</label><input class="form-input" type="date" id="at-due"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Priority</label>
+        <select class="form-select" id="at-priority"><option>High</option><option>Medium</option><option>Low</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Task type</label>
+        <select class="form-select" id="at-type">
+          <option>Literature review</option><option>Data collection</option><option>Data analysis</option><option>Writing</option><option>Admin</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="closeModal('modal-add-task')">Cancel</button>
+      <button class="btn-modal-primary" onclick="createTask()">Create task</button>
+    </div>
+  </div>
+</div>
+
+<!-- TASK DETAIL -->
+<div class="modal-overlay" id="modal-task-detail">
+  <div class="modal" style="max-width:580px">
+    <div class="task-header">
+      <div class="task-header-title" id="td-title"></div>
+      <div class="task-header-meta" id="td-meta"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
+      <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#9ca3af;text-transform:uppercase;font-weight:700;margin-bottom:4px">Status</div><span class="badge" id="td-status-badge"></span></div>
+      <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#9ca3af;text-transform:uppercase;font-weight:700;margin-bottom:4px">Priority</div><span class="badge" id="td-priority-badge"></span></div>
+      <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#9ca3af;text-transform:uppercase;font-weight:700;margin-bottom:4px">Due date</div><span style="font-size:12px;font-weight:700;color:#374151" id="td-due-display"></span></div>
+    </div>
+    <div style="margin-bottom:14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#9ca3af;margin-bottom:6px">Description</div><div style="font-size:13px;color:#374151" id="td-desc"></div></div>
+    <div style="margin-bottom:14px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#9ca3af;margin-bottom:6px">Deliverable upload</div>
+      <div class="file-drop" onclick="alert('In the real platform this will allow file uploads. For now this is a demo.')">📎 Click to upload your deliverable file</div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#9ca3af;margin-bottom:10px">Comments</div>
+      <div id="td-comments"></div>
+      <div class="comment-input-row">
+        <input class="comment-input" id="td-comment-input" placeholder="Add a comment...">
+        <button class="btn-sm btn-sm-primary" onclick="addTaskComment()">Send</button>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:16px">
+      <div style="display:flex;gap:8px">
+        <button class="btn-sm btn-sm-green" onclick="approveTask()">✓ Approve</button>
+        <button class="btn-sm btn-sm-outline" onclick="requestRevision()">↩ Request revision</button>
+      </div>
+      <button class="btn-sm btn-sm-outline" onclick="closeModal('modal-task-detail')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATIONS -->
+<div class="modal-overlay" id="modal-notifs">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-title">Notifications</div>
+    <div class="modal-sub" style="margin-bottom:14px">Recent alerts across your projects</div>
+    <div id="notif-list"></div>
+    <div class="modal-actions"><button class="btn-modal-cancel" onclick="closeModal('modal-notifs')">Close</button></div>
+  </div>
+</div>
+
+<script>
+// ============================================
+// DATA STORE — all data lives here in memory
+// ============================================
+let currentUser = null;
+let currentProjectId = null;
+let currentTaskId = null;
+const inviteEmails = [];
+
+const store = {
+  users: [],
+  projects: [],
+  tasks: [],
+  comments: [],
+  activity: [],
+  invitations: [],
+  notifications: []
+};
+
+// ============================================
+// AUTH
+// ============================================
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value.trim();
+  const err = document.getElementById('login-error');
+  if (!email || !pass) { err.style.display = 'block'; err.textContent = 'Please enter your email and password.'; return; }
+  let user = store.users.find(u => u.email === email);
+  if (!user) {
+    user = { id: genId(), email, name: email.split('@')[0], institution: '', role: 'Researcher', initials: email.substring(0,2).toUpperCase(), createdAt: new Date() };
+    store.users.push(user);
+  }
+  err.style.display = 'none';
+  currentUser = user;
+  initApp();
+  showScreen('app');
+}
+
+function doSignup() {
+  const first = document.getElementById('signup-first').value.trim();
+  const last = document.getElementById('signup-last').value.trim();
+  const email = document.getElementById('signup-email').value.trim();
+  const inst = document.getElementById('signup-inst').value.trim();
+  const role = document.getElementById('signup-role').value;
+  const pass = document.getElementById('signup-pass').value.trim();
+  if (!first || !last || !email || !pass) { alert('Please fill in all required fields.'); return; }
+  if (pass.length < 8) { alert('Password must be at least 8 characters.'); return; }
+  const user = {
+    id: genId(), email, name: first + ' ' + last, institution: inst, role,
+    initials: (first[0] + last[0]).toUpperCase(), createdAt: new Date()
+  };
+  store.users.push(user);
+  currentUser = user;
+  initApp();
+  showScreen('app');
+}
+
+function doLogout() {
+  currentUser = null;
+  currentProjectId = null;
+  showScreen('login');
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-pass').value = '';
+}
+
+// ============================================
+// APP INIT
+// ============================================
+function initApp() {
+  document.getElementById('header-name').textContent = currentUser.name;
+  document.getElementById('header-avatar').textContent = currentUser.initials;
+  document.getElementById('home-greeting').textContent = getGreeting() + ', ' + currentUser.name.split(' ')[0] + '!';
+  document.getElementById('settings-name').value = currentUser.name;
+  document.getElementById('settings-email').value = currentUser.email;
+  document.getElementById('settings-inst').value = currentUser.institution || '';
+  refreshSidebar();
+  refreshHomeStats();
+  navTo('home');
+}
+
+function getGreeting() {
+  const h = new Date().getHours();
+  return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+}
+
+function genId() {
+  return Math.random().toString(36).substr(2, 9);
+}
+
+// ============================================
+// NAVIGATION
+// ============================================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+}
+
+function navTo(view) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar-project').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('view-' + view);
+  if (el) el.classList.add('active');
+  const nav = document.getElementById('nav-' + view);
+  if (nav) nav.classList.add('active');
+  if (view === 'home') refreshHome();
+  if (view === 'projects') refreshProjects();
+  if (view === 'mytasks') refreshMyTasks();
+  if (view === 'team') refreshTeam();
+  if (view === 'reports') refreshReports();
+}
+
+function openProject(id) {
+  currentProjectId = id;
+  const p = store.projects.find(x => x.id === id);
+  if (!p) return;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-project').classList.add('active');
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar-project').forEach(s => s.classList.remove('active'));
+  const sp = document.getElementById('sproj-' + id);
+  if (sp) sp.classList.add('active');
+  document.getElementById('proj-detail-title').textContent = p.name;
+  document.getElementById('proj-detail-sub').textContent = 'PI: ' + currentUser.name + ' · ' + (p.institution || 'RMIT University');
+  renderProjectMetrics(p);
+  renderProjectAlert(p);
+  switchTab('board');
+}
+
+// ============================================
+// MODALS
+// ============================================
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+window.onclick = function(e) {
+  document.querySelectorAll('.modal-overlay').forEach(m => { if (e.target === m) m.classList.remove('open'); });
+};
+
+// ============================================
+// SIDEBAR
+// ============================================
+function refreshSidebar() {
+  const myProjects = store.projects.filter(p => p.createdBy === currentUser.id || (p.members && p.members.includes(currentUser.id)));
+  document.getElementById('proj-count').textContent = myProjects.length;
+  const myTasks = store.tasks.filter(t => t.assignee === currentUser.name && t.status !== 'Done');
+  document.getElementById('task-count').textContent = myTasks.length;
+  const container = document.getElementById('sidebar-projects');
+  const colors = ['#1B3A6B','#065F46','#5B21B6','#0F4C5C','#92400E','#991B1B'];
+  container.innerHTML = myProjects.map((p, i) => `
+    <div class="sidebar-project" id="sproj-${p.id}" onclick="openProject('${p.id}')">
+      <div class="proj-dot" style="background:${colors[i % colors.length]}"></div>
+      ${p.name.length > 20 ? p.name.substring(0,20)+'...' : p.name}
+    </div>
+  `).join('');
+}
+
+// ============================================
+// HOME
+// ============================================
+function refreshHome() { refreshHomeStats(); renderHomeProjects(); renderHomeActivity(); }
+
+function refreshHomeStats() {
+  const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
+  const allTasks = store.tasks.filter(t => myProjects.some(p => p.id === t.projectId));
+  const doneTasks = allTasks.filter(t => t.status === 'Done');
+  const overdueTasks = allTasks.filter(t => isOverdue(t));
+  const allMembers = new Set();
+  myProjects.forEach(p => { if (p.members) p.members.forEach(m => allMembers.add(m)); });
+  document.getElementById('stat-projects').textContent = myProjects.length;
+  document.getElementById('stat-done').textContent = doneTasks.length;
+  document.getElementById('stat-members').textContent = allMembers.size;
+  document.getElementById('stat-overdue').textContent = overdueTasks.length;
+  const alertBar = document.getElementById('home-alert');
+  if (overdueTasks.length > 0) {
+    alertBar.style.display = 'flex';
+    document.getElementById('home-alert-text').textContent = overdueTasks.length + ' task' + (overdueTasks.length > 1 ? 's are' : ' is') + ' overdue across your projects';
+    document.getElementById('home-alert-sub').textContent = overdueTasks.slice(0,3).map(t => t.title + ' (' + t.assignee + ')').join(', ');
+  } else { alertBar.style.display = 'none'; }
+}
+
+function renderHomeProjects() {
+  const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
+  const el = document.getElementById('home-projects-list');
+  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Create your first project to get started</div></div>'; return; }
+  el.innerHTML = myProjects.map(p => {
+    const tasks = store.tasks.filter(t => t.projectId === p.id);
+    const done = tasks.filter(t => t.status === 'Done').length;
+    const pct = tasks.length > 0 ? Math.round((done / tasks.length) * 100) : 0;
+    const overdue = tasks.filter(t => isOverdue(t)).length;
+    return `<div class="row-item" onclick="openProject('${p.id}')">
+      <div><div class="row-title">${p.name}</div><div class="row-meta">${tasks.length} tasks · ${pct}% complete</div></div>
+      ${overdue > 0 ? `<span class="badge b-red">${overdue} overdue</span>` : '<span class="badge b-green">On track</span>'}
+    </div>`;
+  }).join('');
+}
+
+function renderHomeActivity() {
+  const el = document.getElementById('home-activity');
+  const recent = store.activity.slice(-5).reverse();
+  if (recent.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No activity yet</div><div>Activity will appear here once you start working</div></div>'; return; }
+  el.innerHTML = recent.map(a => `
+    <div class="act-row">
+      <div class="act-icon" style="background:${a.color || '#DBEAFE'}">${a.icon || '•'}</div>
+      <div><div class="act-text">${a.text}</div><div class="act-time">${formatTime(a.time)}</div></div>
+    </div>
+  `).join('');
+}
+
+// ============================================
+// PROJECTS
+// ============================================
+function refreshProjects() {
+  const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
+  const el = document.getElementById('projects-list');
+  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Click + New project to create your first one</div></div>'; return; }
+  const colors = ['#1B3A6B','#065F46','#5B21B6','#0F4C5C'];
+  el.innerHTML = myProjects.map((p, i) => {
+    const tasks = store.tasks.filter(t => t.projectId === p.id);
+    const done = tasks.filter(t => t.status === 'Done').length;
+    const pct = tasks.length > 0 ? Math.round((done / tasks.length) * 100) : 0;
+    const overdue = tasks.filter(t => isOverdue(t)).length;
+    const members = p.members || [];
+    return `<div class="proj-card" onclick="openProject('${p.id}')">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
+        <div><div class="proj-name">${p.name}</div><div class="proj-meta">${p.institution || 'RMIT University'} · ${p.startDate || 'Started 2026'}</div></div>
+        ${overdue > 0 ? `<span class="badge b-red">${overdue} overdue</span>` : '<span class="badge b-green">On track</span>'}
+      </div>
+      <div class="proj-progress-bar"><div class="proj-progress-fill" style="width:${pct}%;background:${colors[i%colors.length]}"></div></div>
+      <div class="proj-stats"><span><strong>${pct}%</strong> complete</span><span><strong>${tasks.length}</strong> tasks</span><span><strong>${members.length + 1}</strong> members</span></div>
+    </div>`;
+  }).join('');
+}
+
+function createProject() {
+  const name = document.getElementById('np-name').value.trim();
+  if (!name) { alert('Please enter a project name.'); return; }
+  const p = {
+    id: genId(), name,
+    description: document.getElementById('np-desc').value,
+    institution: document.getElementById('np-inst').value || 'RMIT University',
+    startDate: document.getElementById('np-start').value,
+    endDate: document.getElementById('np-end').value,
+    createdBy: currentUser.id,
+    members: [],
+    invitedEmails: [...inviteEmails],
+    createdAt: new Date()
+  };
+  store.projects.push(p);
+  addActivity('+ ' + currentUser.name.split(' ')[0] + ' created project: ' + name, '#D1FAE5', '+');
+  inviteEmails.length = 0;
+  document.getElementById('np-invite-chips').innerHTML = '';
+  document.getElementById('np-name').value = '';
+  document.getElementById('np-desc').value = '';
+  document.getElementById('np-start').value = '';
+  document.getElementById('np-end').value = '';
+  document.getElementById('np-inst').value = '';
+  closeModal('modal-new-project');
+  refreshSidebar();
+  setTimeout(() => openProject(p.id), 100);
+}
+
+// ============================================
+// INVITE
+// ============================================
+function addInviteChip() {
+  const input = document.getElementById('np-invite-input');
+  const email = input.value.trim().replace(',','');
+  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+  inviteEmails.push(email);
+  renderInviteChips();
+  input.value = '';
+}
+
+function renderInviteChips() {
+  document.getElementById('np-invite-chips').innerHTML = inviteEmails.map((e, i) =>
+    `<span class="invite-chip">${e}<span class="invite-remove" onclick="removeInviteChip(${i})"> ×</span></span>`
+  ).join('');
+}
+
+function removeInviteChip(i) {
+  inviteEmails.splice(i, 1);
+  renderInviteChips();
+}
+
+function sendInvite() {
+  const email = document.getElementById('inv-email').value.trim();
+  const name = document.getElementById('inv-name').value.trim();
+  const role = document.getElementById('inv-role').value;
+  if (!email) { alert('Please enter an email address.'); return; }
+  const inv = { id: genId(), email, name: name || email, role, projectId: currentProjectId, status: 'Pending', sentAt: new Date() };
+  store.invitations.push(inv);
+  const p = store.projects.find(x => x.id === currentProjectId);
+  if (p) {
+    if (!p.invitedMembers) p.invitedMembers = [];
+    p.invitedMembers.push({ email, name: name || email, role });
+  }
+  addActivity('✉ Invitation sent to ' + (name || email) + ' (' + role + ')', '#DBEAFE', '✉');
+  addNotification('Invitation sent to ' + (name || email));
+  closeModal('modal-invite');
+  document.getElementById('inv-email').value = '';
+  document.getElementById('inv-name').value = '';
+  if (currentProjectId) renderProjectTeam();
+  alert('Invitation sent to ' + email + '! They will receive an email to join the project.');
+}
+
+// ============================================
+// TASKS
+// ============================================
+function createTask() {
+  const title = document.getElementById('at-title').value.trim();
+  if (!title) { alert('Please enter a task title.'); return; }
+  const task = {
+    id: genId(),
+    title,
+    description: document.getElementById('at-desc').value,
+    assignee: document.getElementById('at-assignee').value || 'Unassigned',
+    due: document.getElementById('at-due').value,
+    priority: document.getElementById('at-priority').value,
+    type: document.getElementById('at-type').value,
+    status: 'To do',
+    projectId: currentProjectId,
+    createdBy: currentUser.id,
+    createdAt: new Date(),
+    comments: []
+  };
+  store.tasks.push(task);
+  addActivity('+ ' + currentUser.name.split(' ')[0] + ' created task: ' + title, '#D1FAE5', '+');
+  addNotification('New task created: ' + title);
+  document.getElementById('at-title').value = '';
+  document.getElementById('at-desc').value = '';
+  document.getElementById('at-assignee').value = '';
+  document.getElementById('at-due').value = '';
+  closeModal('modal-add-task');
+  renderKanban();
+  renderTaskList();
+  refreshSidebar();
+  renderProjectMetrics(store.projects.find(p => p.id === currentProjectId));
+}
+
+function openTaskDetail(id) {
+  currentTaskId = id;
+  const t = store.tasks.find(x => x.id === id);
+  if (!t) return;
+  document.getElementById('td-title').textContent = t.title;
+  document.getElementById('td-meta').textContent = 'Assigned to ' + t.assignee + ' · Due ' + (t.due || 'No deadline') + ' · ' + t.priority + ' priority';
+  document.getElementById('td-desc').textContent = t.description || 'No description provided.';
+  document.getElementById('td-due-display').textContent = t.due || 'No deadline';
+  const sb = document.getElementById('td-status-badge');
+  sb.textContent = t.status;
+  sb.className = 'badge ' + (t.status === 'Done' ? 'b-green' : t.status === 'In review' ? 'b-purple' : t.status === 'In progress' ? 'b-blue' : 'b-gray');
+  const pb = document.getElementById('td-priority-badge');
+  pb.textContent = t.priority;
+  pb.className = 'badge ' + (t.priority === 'High' ? 'b-red' : t.priority === 'Medium' ? 'b-amber' : 'b-green');
+  renderTaskComments(t);
+  openModal('modal-task-detail');
+}
+
+function renderTaskComments(t) {
+  const el = document.getElementById('td-comments');
+  if (!t.comments || t.comments.length === 0) { el.innerHTML = '<div style="font-size:12px;color:#9ca3af;padding:8px 0">No comments yet. Be the first to comment.</div>'; return; }
+  el.innerHTML = t.comments.map(c => `
+    <div class="comment-item">
+      <div class="avatar" style="width:28px;height:28px;font-size:10px;background:#1B3A6B">${c.initials}</div>
+      <div class="comment-bubble">
+        <div class="comment-author">${c.author}</div>
+        <div class="comment-body">${c.text}</div>
+        <div class="comment-time">${formatTime(c.time)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addTaskComment() {
+  const input = document.getElementById('td-comment-input');
+  const text = input.value.trim();
+  if (!text) return;
+  const task = store.tasks.find(t => t.id === currentTaskId);
+  if (!task) return;
+  if (!task.comments) task.comments = [];
+  task.comments.push({ author: currentUser.name, initials: currentUser.initials, text, time: new Date() });
+  addActivity('💬 ' + currentUser.name.split(' ')[0] + ' commented on: ' + task.title, '#EDE9FE', '💬');
+  input.value = '';
+  renderTaskComments(task);
+}
+
+function approveTask() {
+  const task = store.tasks.find(t => t.id === currentTaskId);
+  if (!task) return;
+  task.status = 'Done';
+  addActivity('✓ ' + currentUser.name.split(' ')[0] + ' approved task: ' + task.title, '#D1FAE5', '✓');
+  closeModal('modal-task-detail');
+  renderKanban();
+  renderTaskList();
+  renderProjectMetrics(store.projects.find(p => p.id === currentProjectId));
+  refreshHomeStats();
+  alert('Task approved and moved to Done!');
+}
+
+function requestRevision() {
+  const task = store.tasks.find(t => t.id === currentTaskId);
+  if (!task) return;
+  task.status = 'In progress';
+  addActivity('↩ ' + currentUser.name.split(' ')[0] + ' requested revision on: ' + task.title, '#FEF3C7', '↩');
+  closeModal('modal-task-detail');
+  renderKanban();
+  alert('Revision requested. Task moved back to In Progress.');
+}
+
+function isOverdue(task) {
+  if (!task.due || task.status === 'Done') return false;
+  return new Date(task.due) < new Date();
+}
+
+// ============================================
+// KANBAN
+// ============================================
+function renderKanban() {
+  const statuses = [
+    { key: 'To do', label: 'To do', bg: '#FEF9F0', titleColor: '#92400E' },
+    { key: 'In progress', label: 'In progress', bg: '#EFF6FF', titleColor: '#1E40AF' },
+    { key: 'In review', label: 'In review', bg: '#F5F3FF', titleColor: '#5B21B6' },
+    { key: 'Done', label: 'Done', bg: '#F0FDF4', titleColor: '#065F46' }
+  ];
+  const tasks = store.tasks.filter(t => t.projectId === currentProjectId);
+  const board = document.getElementById('kanban-board');
+  board.innerHTML = statuses.map(s => {
+    const colTasks = tasks.filter(t => t.status === s.key);
+    return `<div class="k-col" style="background:${s.bg}">
+      <div class="k-col-head">
+        <span class="k-col-title" style="color:${s.titleColor}">${s.label}</span>
+        <span class="k-count">${colTasks.length}</span>
+      </div>
+      ${colTasks.map(t => {
+        const overdue = isOverdue(t);
+        const badgeClass = overdue ? 'b-red' : t.due ? 'b-blue' : 'b-gray';
+        const badgeText = overdue ? 'Overdue' : t.due || 'No date';
+        const dotClass = t.priority === 'High' ? 'pd-red' : t.priority === 'Medium' ? 'pd-amber' : 'pd-green';
+        const borderStyle = overdue ? 'border-left:3px solid #EF4444;' : '';
+        const metaStyle = overdue ? 'color:#EF4444;font-weight:600' : '';
+        return `<div class="k-card" style="${borderStyle}" onclick="openTaskDetail('${t.id}')">
+          <div class="k-card-title">${t.title}</div>
+          <div class="k-card-meta" style="${metaStyle}">${t.assignee}${overdue ? ' · Overdue' : ''}</div>
+          <div class="k-card-foot">
+            <span class="badge ${badgeClass}">${badgeText}</span>
+            <span class="priority-dot ${dotClass}"></span>
+          </div>
+        </div>`;
+      }).join('')}
+      <div style="border:2px dashed #e5e7eb;border-radius:8px;padding:10px;text-align:center;color:#9ca3af;font-size:12px;cursor:pointer;margin-top:4px" onclick="openModal('modal-add-task')">+ Add task</div>
+    </div>`;
+  }).join('');
+}
+
+function renderTaskList() {
+  const tasks = store.tasks.filter(t => t.projectId === currentProjectId);
+  const el = document.getElementById('task-list-view');
+  if (tasks.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">No tasks yet</div><div>Add your first task to get started</div></div>'; return; }
+  el.innerHTML = tasks.map(t => {
+    const overdue = isOverdue(t);
+    return `<div class="row-item" onclick="openTaskDetail('${t.id}')">
+      <div><div class="row-title">${t.title}</div><div class="row-meta">${t.assignee} · Due ${t.due || 'No deadline'}</div></div>
+      <span class="badge ${overdue ? 'b-red' : t.status === 'Done' ? 'b-green' : t.status === 'In review' ? 'b-purple' : t.status === 'In progress' ? 'b-blue' : 'b-gray'}">${overdue ? 'Overdue' : t.status}</span>
+    </div>`;
+  }).join('');
+}
+
+// ============================================
+// PROJECT TABS
+// ============================================
+function switchTab(tab) {
+  ['board','list','team','activity'].forEach(t => {
+    document.getElementById('proj-tab-' + t).style.display = t === tab ? 'block' : 'none';
+    const tabEl = document.getElementById('ptab-' + t);
+    tabEl.classList.toggle('active', t === tab);
+  });
+  if (tab === 'board') renderKanban();
+  if (tab === 'list') renderTaskList();
+  if (tab === 'team') renderProjectTeam();
+  if (tab === 'activity') renderProjectActivity();
+}
+
+function renderProjectMetrics(p) {
+  if (!p) return;
+  const tasks = store.tasks.filter(t => t.projectId === p.id);
+  const done = tasks.filter(t => t.status === 'Done').length;
+  const overdue = tasks.filter(t => isOverdue(t)).length;
+  const inprog = tasks.filter(t => t.status === 'In progress').length;
+  const members = (p.members || []).length + (p.invitedMembers || []).length + 1;
+  document.getElementById('proj-detail-metrics').innerHTML = `
+    <div class="metric-card mc-blue"><div class="mc-label">Total tasks</div><div class="mc-val">${tasks.length}</div><div class="mc-sub">All members</div></div>
+    <div class="metric-card mc-green"><div class="mc-label">Completed</div><div class="mc-val">${done}</div><div class="mc-sub">${tasks.length > 0 ? Math.round(done/tasks.length*100) : 0}% done</div></div>
+    <div class="metric-card mc-amber"><div class="mc-label">In progress</div><div class="mc-val">${inprog}</div><div class="mc-sub">Active now</div></div>
+    <div class="metric-card mc-red"><div class="mc-label">Overdue</div><div class="mc-val">${overdue}</div><div class="mc-sub">${overdue > 0 ? 'Needs attention' : 'All clear'}</div></div>
+  `;
+}
+
+function renderProjectAlert(p) {
+  const tasks = store.tasks.filter(t => t.projectId === p.id);
+  const overdue = tasks.filter(t => isOverdue(t));
+  const alertEl = document.getElementById('proj-detail-alert');
+  if (overdue.length > 0) {
+    alertEl.style.display = 'flex';
+    document.getElementById('proj-detail-alert-text').textContent = overdue.length + ' task' + (overdue.length > 1 ? 's are' : ' is') + ' overdue: ' + overdue.map(t => t.title + ' (' + t.assignee + ')').join(', ');
+  } else { alertEl.style.display = 'none'; }
+}
+
+function renderProjectTeam() {
+  const p = store.projects.find(x => x.id === currentProjectId);
+  if (!p) return;
+  const el = document.getElementById('team-grid');
+  const members = [
+    { name: currentUser.name, role: currentUser.role || 'PI', initials: currentUser.initials, bg: '#1B3A6B' },
+    ...(p.invitedMembers || []).map(m => ({ name: m.name, role: m.role, initials: m.name.substring(0,2).toUpperCase(), bg: '#065F46' }))
+  ];
+  if (members.length === 0) { el.innerHTML = '<div class="empty-state"><div>No team members yet. Invite someone!</div></div>'; return; }
+  el.innerHTML = members.map(m => `
+    <div class="card" style="border-top:4px solid ${m.bg}">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:${m.bg}">${m.initials}</div>
+        <div><div style="font-size:14px;font-weight:700">${m.name}</div><div style="font-size:11px;color:#6b7280">${m.role}</div></div>
+      </div>
+      <div style="font-size:12px;color:#6b7280">Active team member</div>
+    </div>
+  `).join('');
+}
+
+function renderProjectActivity() {
+  const el = document.getElementById('activity-log-view');
+  const acts = store.activity.slice(-10).reverse();
+  if (acts.length === 0) { el.innerHTML = '<div class="empty-state"><div>No activity yet</div></div>'; return; }
+  el.innerHTML = acts.map(a => `
+    <div class="act-row">
+      <div class="act-icon" style="background:${a.color}">${a.icon}</div>
+      <div><div class="act-text">${a.text}</div><div class="act-time">${formatTime(a.time)}</div></div>
+    </div>
+  `).join('');
+}
+
+// ============================================
+// MY TASKS
+// ============================================
+function refreshMyTasks() {
+  const allTasks = store.tasks.filter(t => t.assignee === currentUser.name || t.createdBy === currentUser.id);
+  const active = allTasks.filter(t => t.status !== 'Done');
+  const done = allTasks.filter(t => t.status === 'Done');
+  const inprog = allTasks.filter(t => t.status === 'In progress');
+  const overdue = allTasks.filter(t => isOverdue(t));
+  document.getElementById('my-assigned').textContent = allTasks.length;
+  document.getElementById('my-done').textContent = done.length;
+  document.getElementById('my-progress').textContent = inprog.length;
+  document.getElementById('my-overdue').textContent = overdue.length;
+  const el = document.getElementById('my-tasks-list');
+  if (active.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">All caught up!</div><div>No active tasks assigned to you</div></div>'; return; }
+  el.innerHTML = active.map(t => {
+    const od = isOverdue(t);
+    const checkClass = t.status === 'Done' ? 'done' : t.status === 'In progress' ? 'prog' : '';
+    const checkText = t.status === 'Done' ? '✓' : t.status === 'In progress' ? '▶' : '';
+    return `<div class="my-task-item" style="border-left:4px solid ${od ? '#EF4444' : t.status === 'In progress' ? '#3B82F6' : '#9CA3AF'}" onclick="openTaskDetail('${t.id}')">
+      <div class="task-check ${checkClass}">${checkText}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:600">${t.title}</div><div style="font-size:11px;color:${od ? '#EF4444' : '#6b7280'};font-weight:${od ? '600' : '400'}">${od ? 'OVERDUE · ' : ''}Due ${t.due || 'No deadline'}</div></div>
+      <span class="badge ${od ? 'b-red' : t.status === 'In progress' ? 'b-blue' : 'b-gray'}">${od ? 'Overdue' : t.status}</span>
+    </div>`;
+  }).join('');
+}
+
+// ============================================
+// TEAM
+// ============================================
+function refreshTeam() {
+  const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
+  const el = document.getElementById('team-view-grid');
+  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-title">No team members yet</div><div>Create a project and invite collaborators</div></div>'; return; }
+  const allMembers = new Map();
+  allMembers.set(currentUser.id, { name: currentUser.name, role: currentUser.role || 'PI', initials: currentUser.initials, bg: '#1B3A6B', projects: myProjects.map(p => p.name) });
+  myProjects.forEach(p => {
+    (p.invitedMembers || []).forEach(m => {
+      if (!allMembers.has(m.email)) {
+        allMembers.set(m.email, { name: m.name, role: m.role, initials: m.name.substring(0,2).toUpperCase(), bg: '#065F46', projects: [p.name] });
+      }
+    });
+  });
+  el.innerHTML = Array.from(allMembers.values()).map(m => `
+    <div class="card" style="border-top:4px solid ${m.bg}">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:${m.bg}">${m.initials}</div>
+        <div><div style="font-size:14px;font-weight:700">${m.name}</div><div style="font-size:11px;color:#6b7280">${m.role}</div></div>
+      </div>
+      <div style="font-size:12px;color:#6b7280">Projects: ${m.projects.join(', ')}</div>
+    </div>
+  `).join('');
+}
+
+// ============================================
+// REPORTS
+// ============================================
+function refreshReports() {
+  const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
+  const allTasks = store.tasks.filter(t => myProjects.some(p => p.id === t.projectId));
+  const done = allTasks.filter(t => t.status === 'Done').length;
+  const pct = allTasks.length > 0 ? Math.round(done / allTasks.length * 100) : 0;
+  const allMembers = new Set();
+  myProjects.forEach(p => { (p.invitedMembers || []).forEach(m => allMembers.add(m.email)); });
+  document.getElementById('rep-completion').textContent = pct + '%';
+  document.getElementById('rep-done').textContent = done;
+  document.getElementById('rep-projects').textContent = myProjects.length;
+  document.getElementById('rep-members').textContent = allMembers.size + 1;
+  const el = document.getElementById('reports-projects');
+  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div>No projects yet</div></div>'; return; }
+  el.innerHTML = myProjects.map(p => {
+    const tasks = store.tasks.filter(t => t.projectId === p.id);
+    const d = tasks.filter(t => t.status === 'Done').length;
+    const pct2 = tasks.length > 0 ? Math.round(d / tasks.length * 100) : 0;
+    return `<div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="font-weight:600">${p.name}</span><span style="font-weight:700;color:#1B3A6B">${pct2}%</span></div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${pct2}%;background:#1B3A6B"></div></div>
+      <div style="font-size:11px;color:#6b7280;margin-top:4px">${tasks.length} tasks · ${d} completed · ${tasks.filter(t=>isOverdue(t)).length} overdue</div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================
+// SETTINGS
+// ============================================
+function saveSettings() {
+  currentUser.name = document.getElementById('settings-name').value;
+  currentUser.email = document.getElementById('settings-email').value;
+  currentUser.institution = document.getElementById('settings-inst').value;
+  currentUser.role = document.getElementById('settings-role').value;
+  currentUser.initials = currentUser.name.split(' ').map(n=>n[0]).join('').toUpperCase().substring(0,2);
+  document.getElementById('header-name').textContent = currentUser.name;
+  document.getElementById('header-avatar').textContent = currentUser.initials;
+  alert('Settings saved successfully!');
+}
+
+// ============================================
+// ACTIVITY & NOTIFICATIONS
+// ============================================
+function addActivity(text, color, icon) {
+  store.activity.push({ text, color: color || '#DBEAFE', icon: icon || '•', time: new Date() });
+  if (store.activity.length > 50) store.activity.shift();
+}
+
+function addNotification(text) {
+  store.notifications.push({ text, time: new Date(), read: false });
+}
+
+function renderNotifications() {
+  const el = document.getElementById('notif-list');
+  if (store.notifications.length === 0) { el.innerHTML = '<div style="text-align:center;color:#9ca3af;padding:20px;font-size:13px">No notifications yet</div>'; return; }
+  el.innerHTML = store.notifications.slice(-10).reverse().map(n => `
+    <div class="notification-item">
+      <div class="act-icon" style="background:#DBEAFE;font-size:12px">🔔</div>
+      <div><div class="act-text">${n.text}</div><div class="act-time">${formatTime(n.time)}</div></div>
+    </div>
+  `).join('');
+}
+
+const origOpenModal = openModal;
+window.openModal = function(id) {
+  if (id === 'modal-notifs') renderNotifications();
+  origOpenModal(id);
+};
+
+// ============================================
+// UTILS
+// ============================================
+function formatTime(date) {
+  if (!date) return '';
+  const d = new Date(date);
+  const now = new Date();
+  const diff = now - d;
+  if (diff < 60000) return 'Just now';
+  if (diff < 3600000) return Math.floor(diff/60000) + 'm ago';
+  if (diff < 86400000) return Math.floor(diff/3600000) + 'h ago';
+  return d.toLocaleDateString('en-AU', { day:'numeric', month:'short' });
+}
+</script>
+</body>
+</html>
