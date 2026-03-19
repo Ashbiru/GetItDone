@@ -9,8 +9,6 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;color:#1a1a2e;min-height:100vh}
 .screen{display:none;min-height:100vh;flex-direction:column}
 .screen.active{display:flex}
-
-/* AUTH */
 .auth-wrap{min-height:100vh;display:flex}
 .auth-left{width:380px;background:#1B3A6B;padding:48px 40px;display:flex;flex-direction:column;justify-content:space-between;flex-shrink:0}
 .auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:40px}
@@ -38,8 +36,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .error-msg{background:#FEE2E2;color:#991B1B;padding:10px 14px;border-radius:8px;font-size:12px;margin-bottom:14px;display:none}
 .demo-hint{margin-top:12px;padding:10px;background:#f8fafc;border-radius:8px;font-size:11px;color:#6b7280;text-align:center}
-
-/* APP SHELL */
 .app-header{background:#1B3A6B;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;flex-shrink:0}
 .app-logo{display:flex;align-items:center;gap:8px}
 .app-logo-mark{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#00C9A7,#0099FF);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff}
@@ -68,8 +64,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .logout-btn{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:12px;color:#9ca3af;cursor:pointer;border-radius:6px;width:100%}
 .logout-btn:hover{background:#FEF2F2;color:#991B1B}
 .main-content{flex:1;overflow-y:auto;padding:24px}
-
-/* VIEWS */
 .view{display:none}
 .view.active{display:block}
 .page-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
@@ -81,18 +75,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .btn-sm-outline{background:#fff;color:#374151;border:1.5px solid #e5e7eb}
 .btn-sm-outline:hover{background:#f9fafb}
 .btn-sm-green{background:#065F46;color:#fff}
-.btn-sm-red{background:#991B1B;color:#fff}
 .btn-row{display:flex;gap:8px}
-
-/* METRICS */
 .metrics-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
 .metric-card{border-radius:12px;padding:16px;color:#fff}
 .mc-blue{background:#1B3A6B}.mc-green{background:#065F46}.mc-amber{background:#92400E}.mc-red{background:#991B1B}.mc-teal{background:#0F4C5C}.mc-purple{background:#4C1D95}
 .mc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;opacity:0.75;margin-bottom:6px}
 .mc-val{font-size:26px;font-weight:700;line-height:1}
 .mc-sub{font-size:10px;opacity:0.7;margin-top:5px}
-
-/* CARDS */
 .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:16px}
 .card{background:#fff;border-radius:12px;padding:16px;border:1px solid #e5e7eb;margin-bottom:16px}
 .card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
@@ -102,8 +91,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .row-item:hover{background:#f9fafb;margin:0 -8px;padding:9px 8px;border-radius:6px}
 .row-title{font-size:13px;font-weight:600;color:#1f2937}
 .row-meta{font-size:11px;color:#9ca3af;margin-top:2px}
-
-/* BADGES */
 .badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700}
 .b-red{background:#FEE2E2;color:#991B1B}
 .b-amber{background:#FEF3C7;color:#92400E}
@@ -112,31 +99,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .b-purple{background:#EDE9FE;color:#5B21B6}
 .b-gray{background:#F3F4F6;color:#374151}
 .b-teal{background:#CCFBF1;color:#0F6E56}
-
-/* AVATARS */
+.b-navy{background:#EFF6FF;color:#1B3A6B}
 .avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex-shrink:0}
-.av-blue{background:#1B3A6B}.av-teal{background:#0F6E56}.av-red{background:#B91C1C}.av-purple{background:#6D28D9}.av-amber{background:#B45309}.av-green{background:#065F46}
-
-/* ALERT */
 .alert-bar{background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .alert-icon{width:28px;height:28px;background:#EF4444;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
 .alert-text{font-size:12px;color:#991B1B;font-weight:600}
 .alert-sub{font-size:11px;color:#B91C1C;margin-top:2px}
-
-/* MEMBER ROWS */
 .member-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f3f4f6}
 .member-row:last-child{border-bottom:none}
 .bar-bg{height:5px;background:#f3f4f6;border-radius:3px;flex:1}
 .bar-fill{height:5px;border-radius:3px}
-
-/* ACTIVITY */
 .act-row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #f3f4f6}
 .act-row:last-child{border-bottom:none}
 .act-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
 .act-text{font-size:12px;color:#374151;line-height:1.5}
 .act-time{font-size:10px;color:#9ca3af;margin-top:2px}
-
-/* KANBAN */
 .kanban{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .k-col{border-radius:12px;padding:12px}
 .k-col-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
@@ -149,8 +126,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .k-card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:7px}
 .priority-dot{width:7px;height:7px;border-radius:50%;display:inline-block}
 .pd-red{background:#EF4444}.pd-amber{background:#F59E0B}.pd-green{background:#10B981}
-
-/* PROJECT CARDS */
 .proj-card{background:#fff;border-radius:12px;border:1px solid #e5e7eb;padding:18px;cursor:pointer;transition:all 0.15s;margin-bottom:12px}
 .proj-card:hover{border-color:#93c5fd;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
 .proj-name{font-size:15px;font-weight:700;color:#1a1a2e}
@@ -158,17 +133,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .proj-progress-bar{height:5px;background:#f3f4f6;border-radius:3px;margin:10px 0}
 .proj-progress-fill{height:5px;border-radius:3px}
 .proj-stats{display:flex;gap:16px;font-size:12px;color:#6b7280}
-.proj-avatars{display:flex;margin-top:10px}
-.proj-avatar{width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;margin-left:-6px}
-.proj-avatar:first-child{margin-left:0}
-
-/* TABS */
-.proj-tabs{display:flex;gap:0;border-bottom:1px solid #e5e7eb;margin-bottom:16px}
+.proj-tabs{display:flex;border-bottom:1px solid #e5e7eb;margin-bottom:16px}
 .proj-tab{padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;color:#6b7280;border-bottom:2px solid transparent;transition:all 0.15s}
 .proj-tab:hover{color:#374151}
 .proj-tab.active{color:#1B3A6B;border-bottom-color:#1B3A6B}
-
-/* TASK DETAIL */
 .task-header{background:linear-gradient(135deg,#1B3A6B,#1E40AF);border-radius:12px;padding:20px;color:#fff;margin-bottom:16px}
 .task-header-title{font-size:17px;font-weight:700;margin-bottom:6px}
 .task-header-meta{font-size:12px;opacity:0.8}
@@ -184,8 +152,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .file-drop:hover{border-color:#93c5fd;background:#f8fafc}
 .progress-bar-bg{height:6px;background:#f3f4f6;border-radius:3px}
 .progress-bar-fill{height:6px;border-radius:3px}
-
-/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:1000}
 .modal-overlay.open{display:flex}
 .modal{background:#fff;border-radius:16px;padding:28px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
@@ -205,8 +171,50 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .empty-state{text-align:center;padding:50px 20px;color:#9ca3af}
 .empty-icon{font-size:48px;margin-bottom:12px}
 .empty-title{font-size:16px;font-weight:700;color:#374151;margin-bottom:6px}
-.notification-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f3f4f6}
-.notification-item:last-child{border-bottom:none}
+.notification-item{display:flex;gap:10px;padding:10px;border-radius:8px;margin-bottom:4px}
+.notif-unread{background:#EFF6FF}
+.timer-bar{background:#1B3A6B;border-radius:10px;padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;color:#fff}
+.timer-display{font-size:22px;font-weight:700;font-family:monospace}
+.timer-label{font-size:12px;opacity:0.8;margin-top:2px}
+.timer-btn{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none}
+.timer-start{background:#00C9A7;color:#fff}
+.timer-stop{background:#EF4444;color:#fff}
+.session-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f3f4f6;font-size:12px}
+.session-row:last-child{border-bottom:none}
+.inv-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f3f4f6}
+.inv-row:last-child{border-bottom:none}
+.score-circle{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;border:5px solid}
+.score-10{border-color:#10B981;color:#065F46;background:#F0FDF4}
+.score-8{border-color:#3B82F6;color:#1E40AF;background:#EFF6FF}
+.score-6{border-color:#F59E0B;color:#92400E;background:#FEF3C7}
+.score-4{border-color:#EF4444;color:#991B1B;background:#FEF2F2}
+.score-bar{height:4px;border-radius:2px;background:#f3f4f6;margin-top:3px}
+.score-bar-fill{height:4px;border-radius:2px}
+.identity-hero{background:linear-gradient(135deg,#1B3A6B 0%,#4C1D95 100%);border-radius:16px;padding:32px;color:#fff;margin-bottom:20px}
+.identity-name{font-size:22px;font-weight:800;margin-bottom:6px}
+.identity-tagline{font-size:14px;opacity:0.85;font-style:italic;margin-bottom:18px;line-height:1.5}
+.identity-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.identity-tag{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.25)}
+.identity-tag.primary{background:rgba(255,255,255,0.9);color:#1B3A6B}
+.identity-stats{display:flex;gap:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.2)}
+.identity-stat-val{font-size:20px;font-weight:800}
+.identity-stat-label{font-size:10px;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px}
+.narrative-box{background:linear-gradient(135deg,#F8FAFF,#EEF2FF);border:1px solid #C7D2FE;border-radius:14px;padding:24px;margin-bottom:16px;position:relative}
+.narrative-label{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.narrative-label-text{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#4338CA}
+.narrative-ai-badge{background:#4338CA;color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px}
+.narrative-text{font-size:14px;color:#1e1b4b;line-height:1.8;font-style:italic}
+.narrative-regenerate{position:absolute;top:16px;right:16px;padding:5px 12px;border-radius:6px;background:#4338CA;color:#fff;font-size:11px;font-weight:700;border:none;cursor:pointer}
+.trajectory-box{background:#FAFDF7;border:1px solid #BBF7D0;border-radius:12px;padding:18px;margin-bottom:16px}
+.trajectory-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#065F46;margin-bottom:10px}
+.trajectory-text{font-size:13px;color:#14532D;line-height:1.7}
+.strength-item{margin-bottom:14px}
+.strength-name{font-size:13px;font-weight:700;color:#1f2937}
+.strength-evidence{font-size:11px;color:#6b7280;margin-top:2px;margin-bottom:5px}
+.past-proj-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:14px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px}
+.past-proj-year{background:#1B3A6B;color:#fff;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;flex-shrink:0;white-space:nowrap}
+.past-proj-title{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:3px}
+.past-proj-meta{font-size:11px;color:#6b7280}
 </style>
 </head>
 <body>
@@ -216,18 +224,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="auth-wrap">
   <div class="auth-left">
     <div>
-      <div class="auth-logo">
-        <div class="logo-mark">G</div>
-        <span class="logo-text">GetItDone</span>
-        <span class="logo-badge">BETA</span>
-      </div>
+      <div class="auth-logo"><div class="logo-mark">G</div><span class="logo-text">GetItDone</span><span class="logo-badge">BETA</span></div>
       <div class="auth-tagline">Research team management that actually works</div>
-      <div class="auth-sub">Track who is doing what, when, and how well across your entire research team.</div>
+      <div class="auth-sub">Track who is doing what, when and how well. Build your research identity. Know your team reliability score.</div>
       <div class="auth-features">
+        <div class="auth-feat"><div class="feat-dot">✓</div>Smart AI-powered Research Identity narratives</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Reliability scores out of 10 for every member</div>
         <div class="auth-feat"><div class="feat-dot">✓</div>Create projects and invite collaborators</div>
-        <div class="auth-feat"><div class="feat-dot">✓</div>Assign tasks with deadlines and priorities</div>
-        <div class="auth-feat"><div class="feat-dot">✓</div>Track team reliability and performance</div>
-        <div class="auth-feat"><div class="feat-dot">✓</div>Full activity log and progress reports</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Analytics with session and time tracking</div>
+        <div class="auth-feat"><div class="feat-dot">✓</div>Invitation status tracking and notifications</div>
       </div>
     </div>
     <div style="color:rgba(255,255,255,0.4);font-size:11px">© 2026 GetItDone · Research Management Platform</div>
@@ -236,7 +241,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="auth-card">
       <div class="auth-title">Welcome back</div>
       <div class="auth-subtitle">Sign in to your GetItDone account</div>
-      <div id="login-error" class="error-msg">Incorrect email or password. Please try again.</div>
+      <div id="login-error" class="error-msg">Please enter your email and password.</div>
       <div class="form-group"><label class="form-label">Email address</label><input class="form-input" id="login-email" type="email" placeholder="your@university.edu.au"></div>
       <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="login-pass" type="password" placeholder="••••••••"></div>
       <button class="btn-primary" onclick="doLogin()">Sign in to GetItDone</button>
@@ -252,19 +257,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="auth-wrap">
   <div class="auth-left">
     <div>
-      <div class="auth-logo">
-        <div class="logo-mark">G</div>
-        <span class="logo-text">GetItDone</span>
-        <span class="logo-badge">BETA</span>
-      </div>
+      <div class="auth-logo"><div class="logo-mark">G</div><span class="logo-text">GetItDone</span><span class="logo-badge">BETA</span></div>
       <div class="auth-tagline">Join researchers managing smarter</div>
       <div class="auth-sub">Set up your account in 60 seconds. Free during beta.</div>
-      <div class="auth-features">
-        <div class="auth-feat"><div class="feat-dot">★</div>Free during beta period</div>
-        <div class="auth-feat"><div class="feat-dot">★</div>Unlimited projects and tasks</div>
-        <div class="auth-feat"><div class="feat-dot">★</div>Up to 20 team members per project</div>
-        <div class="auth-feat"><div class="feat-dot">★</div>Full analytics and reporting</div>
-      </div>
     </div>
     <div style="color:rgba(255,255,255,0.4);font-size:11px">© 2026 GetItDone · Research Management Platform</div>
   </div>
@@ -278,13 +273,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
       <div class="form-group"><label class="form-label">Email address</label><input class="form-input" id="signup-email" type="email" placeholder="your@university.edu.au"></div>
       <div class="form-group"><label class="form-label">Institution</label><input class="form-input" id="signup-inst" placeholder="RMIT University"></div>
+      <div class="form-group"><label class="form-label">Primary research area</label><input class="form-input" id="signup-area" placeholder="e.g. Entrepreneurship, Social Enterprise"></div>
       <div class="form-group"><label class="form-label">Your role</label>
         <select class="form-select" id="signup-role">
-          <option>Principal Investigator (PI)</option>
-          <option>Postdoc Researcher</option>
-          <option>PhD Student</option>
-          <option>Research Assistant</option>
-          <option>Lab Manager</option>
+          <option>Principal Investigator (PI)</option><option>Postdoc Researcher</option><option>PhD Student</option><option>Research Assistant</option><option>Lab Manager</option>
         </select>
       </div>
       <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="signup-pass" type="password" placeholder="Min. 8 characters"></div>
@@ -298,52 +290,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- APP SCREEN -->
 <div id="screen-app" class="screen">
   <div class="app-header">
-    <div class="app-logo">
-      <div class="app-logo-mark">G</div>
-      <span class="app-logo-text">GetItDone</span>
-      <span class="app-logo-badge">BETA</span>
-    </div>
+    <div class="app-logo"><div class="app-logo-mark">G</div><span class="app-logo-text">GetItDone</span><span class="app-logo-badge">BETA</span></div>
     <div class="header-right">
-      <div class="header-notif" onclick="openModal('modal-notifs')">
-        🔔<div class="notif-dot"></div>
-      </div>
+      <div class="header-notif" onclick="openModal('modal-notifs')">🔔<div class="notif-dot" id="notif-dot" style="display:none"></div></div>
       <span class="header-name" id="header-name">Loading...</span>
       <div class="header-avatar" id="header-avatar">AB</div>
     </div>
   </div>
   <div class="app-body">
-    <div class="sidebar" id="sidebar">
+    <div class="sidebar">
       <div class="sidebar-section">Main</div>
-      <div class="sidebar-item active" id="nav-home" onclick="navTo('home')">
-        <div class="sidebar-icon" style="background:#1B3A6B">⊞</div>Home
-      </div>
-      <div class="sidebar-item" id="nav-projects" onclick="navTo('projects')">
-        <div class="sidebar-icon" style="background:#065F46">◫</div>My projects
-        <span class="sidebar-count" id="proj-count">0</span>
-      </div>
-      <div class="sidebar-item" id="nav-mytasks" onclick="navTo('mytasks')">
-        <div class="sidebar-icon" style="background:#5B21B6">✓</div>My tasks
-        <span class="sidebar-count" id="task-count">0</span>
-      </div>
-      <div class="sidebar-item" id="nav-team" onclick="navTo('team')">
-        <div class="sidebar-icon" style="background:#0F6E56">◎</div>Team
-      </div>
-      <div class="sidebar-item" id="nav-reports" onclick="navTo('reports')">
-        <div class="sidebar-icon" style="background:#92400E">↗</div>Reports
-      </div>
+      <div class="sidebar-item active" id="nav-home" onclick="navTo('home')"><div class="sidebar-icon" style="background:#1B3A6B">⊞</div>Home</div>
+      <div class="sidebar-item" id="nav-projects" onclick="navTo('projects')"><div class="sidebar-icon" style="background:#065F46">◫</div>My projects<span class="sidebar-count" id="proj-count">0</span></div>
+      <div class="sidebar-item" id="nav-mytasks" onclick="navTo('mytasks')"><div class="sidebar-icon" style="background:#5B21B6">✓</div>My tasks<span class="sidebar-count" id="task-count">0</span></div>
+      <div class="sidebar-item" id="nav-team" onclick="navTo('team')"><div class="sidebar-icon" style="background:#0F6E56">◎</div>Team</div>
+      <div class="sidebar-item" id="nav-identity" onclick="navTo('identity')"><div class="sidebar-icon" style="background:#4C1D95">🔬</div>Research Identity</div>
+      <div class="sidebar-item" id="nav-analytics" onclick="navTo('analytics')"><div class="sidebar-icon" style="background:#0F4C5C">📊</div>Analytics</div>
+      <div class="sidebar-item" id="nav-invitations" onclick="navTo('invitations')"><div class="sidebar-icon" style="background:#92400E">✉</div>Invitations<span class="sidebar-count" id="inv-count">0</span></div>
+      <div class="sidebar-item" id="nav-reports" onclick="navTo('reports')"><div class="sidebar-icon" style="background:#991B1B">↗</div>Reports</div>
       <div class="sidebar-section">Projects</div>
       <div id="sidebar-projects"></div>
-      <div class="sidebar-add-proj" onclick="openModal('modal-new-project')">
-        <div style="width:16px;height:16px;border-radius:4px;border:2px dashed #1B3A6B;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#1B3A6B">+</div>
-        New project
-      </div>
+      <div class="sidebar-add-proj" onclick="openModal('modal-new-project')"><div style="width:16px;height:16px;border-radius:4px;border:2px dashed #1B3A6B;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#1B3A6B">+</div>New project</div>
       <div class="sidebar-section">Account</div>
-      <div class="sidebar-item" id="nav-settings" onclick="navTo('settings')">
-        <div class="sidebar-icon" style="background:#374151">⚙</div>Settings
-      </div>
-      <div class="sidebar-bottom">
-        <div class="logout-btn" onclick="doLogout()">⬡ Sign out</div>
-      </div>
+      <div class="sidebar-item" id="nav-settings" onclick="navTo('settings')"><div class="sidebar-icon" style="background:#374151">⚙</div>Settings</div>
+      <div class="sidebar-bottom"><div class="logout-btn" onclick="doLogout()">⬡ Sign out</div></div>
     </div>
 
     <div class="main-content">
@@ -351,38 +321,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- HOME VIEW -->
       <div id="view-home" class="view active">
         <div class="page-head">
-          <div>
-            <div class="page-title" id="home-greeting">Welcome!</div>
-            <div class="page-sub">Here's what's happening across your projects</div>
-          </div>
+          <div><div class="page-title" id="home-greeting">Welcome!</div><div class="page-sub">Here is what is happening across your projects</div></div>
           <button class="btn-sm btn-sm-primary" onclick="openModal('modal-new-project')">+ New project</button>
         </div>
         <div id="home-alert" class="alert-bar" style="display:none">
           <div class="alert-icon">!</div>
-          <div>
-            <div class="alert-text" id="home-alert-text">Tasks are overdue</div>
-            <div class="alert-sub" id="home-alert-sub"></div>
-          </div>
+          <div><div class="alert-text" id="home-alert-text"></div><div class="alert-sub" id="home-alert-sub"></div></div>
         </div>
         <div class="metrics-row">
-          <div class="metric-card mc-blue"><div class="mc-label">Active projects</div><div class="mc-val" id="stat-projects">0</div><div class="mc-sub">All in progress</div></div>
-          <div class="metric-card mc-green"><div class="mc-label">Tasks completed</div><div class="mc-val" id="stat-done">0</div><div class="mc-sub">This month</div></div>
-          <div class="metric-card mc-amber"><div class="mc-label">Team members</div><div class="mc-val" id="stat-members">0</div><div class="mc-sub">Across projects</div></div>
-          <div class="metric-card mc-red"><div class="mc-label">Overdue tasks</div><div class="mc-val" id="stat-overdue">0</div><div class="mc-sub">Needs attention</div></div>
+          <div class="metric-card mc-blue"><div class="mc-label">Active projects</div><div class="mc-val" id="stat-projects">0</div></div>
+          <div class="metric-card mc-green"><div class="mc-label">Tasks completed</div><div class="mc-val" id="stat-done">0</div></div>
+          <div class="metric-card mc-amber"><div class="mc-label">Team members</div><div class="mc-val" id="stat-members">0</div></div>
+          <div class="metric-card mc-teal"><div class="mc-label">My reliability</div><div class="mc-val" id="stat-reliability">—</div><div class="mc-sub">Out of 10</div></div>
         </div>
         <div class="grid-2">
-          <div class="card">
-            <div class="card-head"><div class="card-title">My projects</div></div>
-            <div id="home-projects-list">
-              <div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Create your first project to get started</div></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-head"><div class="card-title">Recent activity</div></div>
-            <div id="home-activity">
-              <div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No activity yet</div><div>Activity will appear here once you start working</div></div>
-            </div>
-          </div>
+          <div class="card"><div class="card-head"><div class="card-title">My projects</div></div><div id="home-projects-list"><div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Create your first project</div></div></div></div>
+          <div class="card"><div class="card-head"><div class="card-title">Recent activity</div></div><div id="home-activity"><div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No activity yet</div></div></div></div>
         </div>
       </div>
 
@@ -392,9 +346,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div><div class="page-title">My projects</div><div class="page-sub">All research projects you manage or collaborate on</div></div>
           <button class="btn-sm btn-sm-primary" onclick="openModal('modal-new-project')">+ New project</button>
         </div>
-        <div id="projects-list">
-          <div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Click + New project to create your first one</div></div>
-        </div>
+        <div id="projects-list"><div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div></div></div>
       </div>
 
       <!-- PROJECT DETAIL VIEW -->
@@ -411,47 +363,113 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           </div>
         </div>
         <div class="metrics-row" id="proj-detail-metrics"></div>
-        <div id="proj-detail-alert" class="alert-bar" style="display:none">
-          <div class="alert-icon">!</div>
-          <div><div class="alert-text" id="proj-detail-alert-text"></div></div>
-        </div>
+        <div id="proj-detail-alert" class="alert-bar" style="display:none"><div class="alert-icon">!</div><div><div class="alert-text" id="proj-detail-alert-text"></div></div></div>
         <div class="proj-tabs">
           <div class="proj-tab active" id="ptab-board" onclick="switchTab('board')">Task board</div>
           <div class="proj-tab" id="ptab-list" onclick="switchTab('list')">Task list</div>
           <div class="proj-tab" id="ptab-team" onclick="switchTab('team')">Team</div>
           <div class="proj-tab" id="ptab-activity" onclick="switchTab('activity')">Activity</div>
         </div>
-        <div id="proj-tab-board">
-          <div class="kanban" id="kanban-board"></div>
-        </div>
-        <div id="proj-tab-list" style="display:none">
-          <div class="card"><div class="card-head"><div class="card-title">All tasks</div><button class="btn-sm btn-sm-primary" onclick="openModal('modal-add-task')">+ Add task</button></div><div id="task-list-view"></div></div>
-        </div>
-        <div id="proj-tab-team" style="display:none">
-          <div class="grid-2" id="team-grid"></div>
-          <div style="text-align:center;margin-top:8px"><button class="btn-sm btn-sm-outline" onclick="openModal('modal-invite')">+ Invite new member</button></div>
-        </div>
-        <div id="proj-tab-activity" style="display:none">
-          <div class="card"><div class="card-head"><div class="card-title">Activity log</div></div><div id="activity-log-view"></div></div>
-        </div>
+        <div id="proj-tab-board"><div class="kanban" id="kanban-board"></div></div>
+        <div id="proj-tab-list" style="display:none"><div class="card"><div class="card-head"><div class="card-title">All tasks</div><button class="btn-sm btn-sm-primary" onclick="openModal('modal-add-task')">+ Add task</button></div><div id="task-list-view"></div></div></div>
+        <div id="proj-tab-team" style="display:none"><div class="grid-2" id="team-grid"></div><div style="text-align:center;margin-top:8px"><button class="btn-sm btn-sm-outline" onclick="openModal('modal-invite')">+ Invite member</button></div></div>
+        <div id="proj-tab-activity" style="display:none"><div class="card"><div class="card-head"><div class="card-title">Activity log</div></div><div id="activity-log-view"></div></div></div>
       </div>
 
       <!-- MY TASKS VIEW -->
       <div id="view-mytasks" class="view">
         <div class="page-head"><div><div class="page-title">My tasks</div><div class="page-sub">Tasks assigned to you across all projects</div></div></div>
         <div class="metrics-row">
-          <div class="metric-card mc-blue"><div class="mc-label">Assigned to me</div><div class="mc-val" id="my-assigned">0</div></div>
+          <div class="metric-card mc-blue"><div class="mc-label">Assigned</div><div class="mc-val" id="my-assigned">0</div></div>
           <div class="metric-card mc-green"><div class="mc-label">Completed</div><div class="mc-val" id="my-done">0</div></div>
           <div class="metric-card mc-amber"><div class="mc-label">In progress</div><div class="mc-val" id="my-progress">0</div></div>
           <div class="metric-card mc-red"><div class="mc-label">Overdue</div><div class="mc-val" id="my-overdue">0</div></div>
         </div>
-        <div class="card"><div class="card-head"><div class="card-title">My active tasks</div></div><div id="my-tasks-list"><div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">No tasks yet</div><div>Tasks assigned to you will appear here</div></div></div></div>
+        <div class="card"><div class="card-head"><div class="card-title">My active tasks</div></div><div id="my-tasks-list"><div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">No tasks yet</div></div></div></div>
       </div>
 
       <!-- TEAM VIEW -->
       <div id="view-team" class="view">
-        <div class="page-head"><div><div class="page-title">Team</div><div class="page-sub">All collaborators across your projects</div></div><button class="btn-sm btn-sm-primary" onclick="openModal('modal-invite')">+ Invite member</button></div>
+        <div class="page-head"><div><div class="page-title">Team</div><div class="page-sub">All collaborators with reliability scores</div></div><button class="btn-sm btn-sm-primary" onclick="openModal('modal-invite')">+ Invite member</button></div>
         <div id="team-view-grid" class="grid-2"></div>
+      </div>
+
+      <!-- RESEARCH IDENTITY VIEW -->
+      <div id="view-identity" class="view">
+        <div class="page-head">
+          <div><div class="page-title">Research Identity</div><div class="page-sub">Smart narrative engine powered by your project data</div></div>
+          <div class="btn-row">
+            <button class="btn-sm btn-sm-outline" onclick="regenerateNarrative()">↻ Regenerate</button>
+            <button class="btn-sm btn-sm-primary" onclick="openModal('modal-add-past-proj')">+ Add past project</button>
+          </div>
+        </div>
+        <div class="identity-hero" id="identity-hero">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:0.7;margin-bottom:8px;font-weight:700">Research Identity Profile</div>
+          <div class="identity-name" id="identity-hero-name">Your Research Profile</div>
+          <div class="identity-tagline" id="identity-hero-tagline">Add projects to generate your research identity</div>
+          <div class="identity-tags" id="identity-hero-tags"></div>
+          <div class="identity-stats" id="identity-hero-stats"></div>
+        </div>
+        <div style="background:linear-gradient(135deg,#F8FAFF,#EEF2FF);border:1px solid #C7D2FE;border-radius:14px;padding:24px;margin-bottom:16px;position:relative">
+          <div class="narrative-label">
+            <span class="narrative-label-text">AI-Generated Research Narrative</span>
+            <span class="narrative-ai-badge">SMART ENGINE</span>
+          </div>
+          <button class="narrative-regenerate" onclick="regenerateNarrative()">↻ Regenerate</button>
+          <div class="narrative-text" id="narrative-text">Add at least one project to generate your personalised research identity narrative...</div>
+        </div>
+        <div id="trajectory-box" style="display:none;background:#FAFDF7;border:1px solid #BBF7D0;border-radius:12px;padding:18px;margin-bottom:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#065F46;margin-bottom:10px">📈 Research Trajectory</div>
+          <div style="font-size:13px;color:#14532D;line-height:1.7" id="trajectory-text"></div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><div class="card-title">Research identity strengths</div><span class="badge b-purple" id="identity-area-count">0 areas</span></div>
+            <div id="identity-strengths"><div class="empty-state"><div>Add projects to see your strengths</div></div></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div class="card-title">My reliability score</div></div>
+            <div id="my-reliability-card"><div class="empty-state"><div>Complete tasks to build your score</div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div class="card-title">Current projects (auto-imported)</div><span class="badge b-green" id="current-proj-count">0 projects</span></div>
+          <div id="identity-current-projects"><div class="empty-state"><div>No current projects yet. Create a project to see it here.</div></div></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div class="card-title">Past projects</div><button class="btn-sm btn-sm-outline" onclick="openModal('modal-add-past-proj')">+ Add past project</button></div>
+          <div id="past-projects-list"><div class="empty-state"><div class="empty-icon">📚</div><div class="empty-title">No past projects added yet</div><div>Add your previous research to build your full identity profile</div></div></div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS VIEW -->
+      <div id="view-analytics" class="view">
+        <div class="page-head"><div><div class="page-title">Analytics</div><div class="page-sub">Team performance, session tracking and deadline compliance</div></div></div>
+        <div class="metrics-row">
+          <div class="metric-card mc-blue"><div class="mc-label">Total sessions</div><div class="mc-val" id="an-sessions">0</div></div>
+          <div class="metric-card mc-green"><div class="mc-label">Avg session</div><div class="mc-val" id="an-avg-session">0m</div></div>
+          <div class="metric-card mc-teal"><div class="mc-label">Total task time</div><div class="mc-val" id="an-total-time">0h</div></div>
+          <div class="metric-card mc-amber"><div class="mc-label">On-time rate</div><div class="mc-val" id="an-ontime">0%</div></div>
+        </div>
+        <div class="card"><div class="card-head"><div class="card-title">Team reliability scores</div><span class="badge b-navy">Out of 10</span></div><div id="analytics-reliability"></div></div>
+        <div class="card"><div class="card-head"><div class="card-title">Login and session history</div><span class="badge b-blue" id="session-count-badge">0 sessions</span></div><div id="session-list"><div class="empty-state"><div class="empty-icon">🔐</div><div class="empty-title">No sessions yet</div></div></div></div>
+        <div class="card"><div class="card-head"><div class="card-title">Deadline compliance by member</div></div><div id="deadline-compliance"><div class="empty-state"><div>No task data yet</div></div></div></div>
+        <div class="card"><div class="card-head"><div class="card-title">Time tracked on tasks</div></div><div id="time-tracking-list"><div class="empty-state"><div>No time tracked yet. Use the timer inside tasks.</div></div></div></div>
+      </div>
+
+      <!-- INVITATIONS VIEW -->
+      <div id="view-invitations" class="view">
+        <div class="page-head">
+          <div><div class="page-title">Invitations</div><div class="page-sub">Track who has accepted, declined or not responded</div></div>
+          <button class="btn-sm btn-sm-primary" onclick="openModal('modal-invite')">+ Send invitation</button>
+        </div>
+        <div class="metrics-row">
+          <div class="metric-card mc-blue"><div class="mc-label">Total sent</div><div class="mc-val" id="inv-total">0</div></div>
+          <div class="metric-card mc-green"><div class="mc-label">Accepted</div><div class="mc-val" id="inv-accepted">0</div></div>
+          <div class="metric-card mc-amber"><div class="mc-label">Pending</div><div class="mc-val" id="inv-pending">0</div></div>
+          <div class="metric-card mc-red"><div class="mc-label">Declined</div><div class="mc-val" id="inv-declined">0</div></div>
+        </div>
+        <div class="card"><div class="card-head"><div class="card-title">All invitations</div></div><div id="invitations-list"><div class="empty-state"><div class="empty-icon">✉</div><div class="empty-title">No invitations sent yet</div></div></div></div>
       </div>
 
       <!-- REPORTS VIEW -->
@@ -459,9 +477,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="page-head"><div><div class="page-title">Reports</div><div class="page-sub">Analytics across all your projects</div></div></div>
         <div class="metrics-row">
           <div class="metric-card mc-blue"><div class="mc-label">Overall completion</div><div class="mc-val" id="rep-completion">0%</div></div>
-          <div class="metric-card mc-green"><div class="mc-label">Tasks done this month</div><div class="mc-val" id="rep-done">0</div></div>
+          <div class="metric-card mc-green"><div class="mc-label">Tasks done</div><div class="mc-val" id="rep-done">0</div></div>
           <div class="metric-card mc-amber"><div class="mc-label">Active projects</div><div class="mc-val" id="rep-projects">0</div></div>
-          <div class="metric-card mc-purple"><div class="mc-label">Total team members</div><div class="mc-val" id="rep-members">0</div></div>
+          <div class="metric-card mc-purple"><div class="mc-label">Team members</div><div class="mc-val" id="rep-members">0</div></div>
         </div>
         <div class="card"><div class="card-head"><div class="card-title">Project progress</div></div><div id="reports-projects"></div></div>
       </div>
@@ -471,15 +489,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="page-head"><div><div class="page-title">Settings</div><div class="page-sub">Manage your account and preferences</div></div></div>
         <div class="card" style="max-width:500px">
           <div class="card-head"><div class="card-title">Profile settings</div></div>
-          <div class="form-group"><label class="form-label">Full name</label><input class="form-input" id="settings-name" placeholder="Your name"></div>
-          <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="settings-email" placeholder="your@email.com"></div>
-          <div class="form-group"><label class="form-label">Institution</label><input class="form-input" id="settings-inst" placeholder="Your university"></div>
+          <div class="form-group"><label class="form-label">Full name</label><input class="form-input" id="settings-name"></div>
+          <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="settings-email"></div>
+          <div class="form-group"><label class="form-label">Institution</label><input class="form-input" id="settings-inst"></div>
           <div class="form-group"><label class="form-label">Role</label>
             <select class="form-select" id="settings-role">
-              <option>Principal Investigator (PI)</option>
-              <option>Postdoc Researcher</option>
-              <option>PhD Student</option>
-              <option>Research Assistant</option>
+              <option>Principal Investigator (PI)</option><option>Postdoc Researcher</option><option>PhD Student</option><option>Research Assistant</option>
             </select>
           </div>
           <button class="btn-sm btn-sm-primary" onclick="saveSettings()">Save changes</button>
@@ -490,15 +505,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- MODALS -->
-
-<!-- NEW PROJECT -->
+<!-- MODAL: NEW PROJECT -->
 <div class="modal-overlay" id="modal-new-project">
   <div class="modal">
     <div class="modal-title">Create new project</div>
     <div class="modal-sub">Set up your research project and invite your team</div>
     <div class="form-group"><label class="form-label">Project name *</label><input class="form-input" id="np-name" placeholder="e.g. Ethiopian Entrepreneurship Ecosystems"></div>
-    <div class="form-group"><label class="form-label">Description</label><textarea class="form-input" rows="2" id="np-desc" placeholder="Brief description of the research project..."></textarea></div>
+    <div class="form-group"><label class="form-label">Description</label><textarea class="form-input" rows="2" id="np-desc" placeholder="Brief description..."></textarea></div>
+    <div class="form-group"><label class="form-label">Research area and topic</label><input class="form-input" id="np-area" placeholder="e.g. Entrepreneurship, Social Enterprise, African Development"></div>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Start date</label><input class="form-input" type="date" id="np-start"></div>
       <div class="form-group"><label class="form-label">End date</label><input class="form-input" type="date" id="np-end"></div>
@@ -517,7 +531,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- INVITE MEMBER -->
+<!-- MODAL: INVITE -->
 <div class="modal-overlay" id="modal-invite">
   <div class="modal">
     <div class="modal-title">Invite team member</div>
@@ -526,15 +540,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="form-group"><label class="form-label">Full name</label><input class="form-input" id="inv-name" placeholder="Dr. Jane Smith"></div>
     <div class="form-group"><label class="form-label">Role in project</label>
       <select class="form-select" id="inv-role">
-        <option>Postdoc Researcher</option>
-        <option>PhD Student</option>
-        <option>Research Assistant</option>
-        <option>Lab Manager</option>
-        <option>Co-Investigator</option>
-        <option>External Collaborator</option>
+        <option>Postdoc Researcher</option><option>PhD Student</option><option>Research Assistant</option><option>Lab Manager</option><option>Co-Investigator</option><option>External Collaborator</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">Personal message (optional)</label><textarea class="form-input" rows="2" id="inv-message" placeholder="Hi, I'd like to invite you to collaborate on my research project..."></textarea></div>
+    <div class="form-group"><label class="form-label">Personal message (optional)</label><textarea class="form-input" rows="2" id="inv-message" placeholder="Hi, I would like to invite you to collaborate..."></textarea></div>
     <div class="modal-actions">
       <button class="btn-modal-cancel" onclick="closeModal('modal-invite')">Cancel</button>
       <button class="btn-modal-primary" onclick="sendInvite()">Send invitation</button>
@@ -542,7 +551,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- ADD TASK -->
+<!-- MODAL: ADD TASK -->
 <div class="modal-overlay" id="modal-add-task">
   <div class="modal">
     <div class="modal-title">Add new task</div>
@@ -570,23 +579,56 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- TASK DETAIL -->
+<!-- MODAL: ADD PAST PROJECT -->
+<div class="modal-overlay" id="modal-add-past-proj">
+  <div class="modal">
+    <div class="modal-title">Add past project</div>
+    <div class="modal-sub">Add a previous research project to build your identity profile</div>
+    <div class="form-group"><label class="form-label">Project title *</label><input class="form-input" id="pp-title" placeholder="e.g. Productive Entrepreneurship in Sub-Saharan Africa"></div>
+    <div class="form-group"><label class="form-label">Research area and topic *</label><input class="form-input" id="pp-area" placeholder="e.g. Entrepreneurship, Social Enterprise, Innovation, Africa"></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Year started</label><input class="form-input" type="number" id="pp-start-year" placeholder="2020" min="1980" max="2026"></div>
+      <div class="form-group"><label class="form-label">Year ended</label><input class="form-input" type="number" id="pp-end-year" placeholder="2022" min="1980" max="2026"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Your role</label>
+      <select class="form-select" id="pp-role">
+        <option>Principal Investigator</option><option>Co-Investigator</option><option>Postdoc Researcher</option><option>PhD Student</option><option>Research Assistant</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Institution</label><input class="form-input" id="pp-inst" placeholder="RMIT University"></div>
+    <div class="form-group"><label class="form-label">Brief description</label><textarea class="form-input" rows="2" id="pp-desc" placeholder="What was this research about? Key findings or contributions..."></textarea></div>
+    <div class="form-group"><label class="form-label">Research outputs</label><input class="form-input" id="pp-outputs" placeholder="e.g. 3 journal papers, 1 book chapter, conference presentations"></div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="closeModal('modal-add-past-proj')">Cancel</button>
+      <button class="btn-modal-primary" onclick="addPastProject()">Add to my profile</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: TASK DETAIL WITH TIMER -->
 <div class="modal-overlay" id="modal-task-detail">
   <div class="modal" style="max-width:580px">
     <div class="task-header">
       <div class="task-header-title" id="td-title"></div>
       <div class="task-header-meta" id="td-meta"></div>
     </div>
+    <div class="timer-bar">
+      <div>
+        <div class="timer-display" id="timer-display">00:00:00</div>
+        <div class="timer-label" id="timer-label">Timer ready — click Start to begin tracking</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="timer-btn timer-start" id="timer-start-btn" onclick="startTimer()">▶ Start</button>
+        <button class="timer-btn timer-stop" id="timer-stop-btn" onclick="stopTimer()" style="display:none">■ Stop</button>
+      </div>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
       <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#9ca3af;text-transform:uppercase;font-weight:700;margin-bottom:4px">Status</div><span class="badge" id="td-status-badge"></span></div>
       <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#9ca3af;text-transform:uppercase;font-weight:700;margin-bottom:4px">Priority</div><span class="badge" id="td-priority-badge"></span></div>
-      <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#9ca3af;text-transform:uppercase;font-weight:700;margin-bottom:4px">Due date</div><span style="font-size:12px;font-weight:700;color:#374151" id="td-due-display"></span></div>
+      <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#9ca3af;text-transform:uppercase;font-weight:700;margin-bottom:4px">Time tracked</div><span style="font-size:12px;font-weight:700;color:#0F4C5C" id="td-time-tracked">0m</span></div>
     </div>
     <div style="margin-bottom:14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#9ca3af;margin-bottom:6px">Description</div><div style="font-size:13px;color:#374151" id="td-desc"></div></div>
-    <div style="margin-bottom:14px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#9ca3af;margin-bottom:6px">Deliverable upload</div>
-      <div class="file-drop" onclick="alert('In the real platform this will allow file uploads. For now this is a demo.')">📎 Click to upload your deliverable file</div>
-    </div>
+    <div style="margin-bottom:14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#9ca3af;margin-bottom:6px">Deliverable upload</div><div class="file-drop" onclick="alert('File uploads available in the full platform.')">📎 Click to upload your deliverable</div></div>
     <div>
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#9ca3af;margin-bottom:10px">Comments</div>
       <div id="td-comments"></div>
@@ -600,39 +642,434 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <button class="btn-sm btn-sm-green" onclick="approveTask()">✓ Approve</button>
         <button class="btn-sm btn-sm-outline" onclick="requestRevision()">↩ Request revision</button>
       </div>
-      <button class="btn-sm btn-sm-outline" onclick="closeModal('modal-task-detail')">Close</button>
+      <button class="btn-sm btn-sm-outline" onclick="closeTaskDetail()">Close</button>
     </div>
   </div>
 </div>
 
-<!-- NOTIFICATIONS -->
+<!-- MODAL: NOTIFICATIONS -->
 <div class="modal-overlay" id="modal-notifs">
-  <div class="modal" style="max-width:400px">
+  <div class="modal" style="max-width:440px">
     <div class="modal-title">Notifications</div>
-    <div class="modal-sub" style="margin-bottom:14px">Recent alerts across your projects</div>
+    <div class="modal-sub" style="margin-bottom:14px">Recent alerts and invitation updates</div>
     <div id="notif-list"></div>
-    <div class="modal-actions"><button class="btn-modal-cancel" onclick="closeModal('modal-notifs')">Close</button></div>
+    <div class="modal-actions"><button class="btn-modal-cancel" onclick="closeModal('modal-notifs');markNotifsRead()">Mark all read</button></div>
   </div>
 </div>
-
 <script>
 // ============================================
-// DATA STORE — all data lives here in memory
+// DATA STORE
 // ============================================
 let currentUser = null;
 let currentProjectId = null;
 let currentTaskId = null;
+let timerInterval = null;
+let timerSeconds = 0;
+let timerRunning = false;
 const inviteEmails = [];
 
 const store = {
-  users: [],
-  projects: [],
-  tasks: [],
-  comments: [],
-  activity: [],
-  invitations: [],
-  notifications: []
+  users:[],projects:[],tasks:[],activity:[],invitations:[],notifications:[],sessions:[],timeTracking:[],pastProjects:[]
 };
+
+// ============================================
+// SMART NARRATIVE ENGINE
+// ============================================
+const researchDNA = {
+  themes: {
+    'Entrepreneurship': { keywords:['entrepreneur','startup','venture','new venture','business creation','self-employ','firm creation','spin-off','new firm'], weight:0 },
+    'Social Enterprise': { keywords:['social enterprise','social entrepreneur','hybrid org','nonprofit','ngo','social impact','social value','civil society','philanthrop'], weight:0 },
+    'African Development': { keywords:['africa','ethiopia','sub-saharan','kenya','nigeria','ghana','rwanda','east africa','horn of africa','developing countr','low-income','emerging econom'], weight:0 },
+    'Innovation and Technology': { keywords:['innovation','technology','digital','disrupt','fintech','tech-based','r&d','product development','technological'], weight:0 },
+    'Ecosystem Research': { keywords:['ecosystem','cluster','network','stakeholder','institutional environment','support system','incubat','accelerat'], weight:0 },
+    'Conflict and Post-Conflict': { keywords:['conflict','war','post-conflict','peace','refugee','displacement','tigray','civil war','violence','humanitarian','fragile state'], weight:0 },
+    'Legitimacy and Institutions': { keywords:['legitimacy','institution','isomorphism','regulatory','governance','compliance','institutional theory','organizational field'], weight:0 },
+    'Resilience and Sustainability': { keywords:['resilience','sustain','recovery','adaptive','long-term','endur','survive','viability'], weight:0 },
+    'Higher Education': { keywords:['university','higher education','academic','student','teaching','curriculum','pedagogy','learning','scholarly'], weight:0 },
+    'Policy and Government': { keywords:['policy','government','regulation','public sector','reform','intervention','legislation','ministry'], weight:0 },
+    'Qualitative Methods': { keywords:['qualitative','interview','ethnograph','case study','grounded theory','thematic analysis','narrative','discourse'], weight:0 },
+    'Quantitative Methods': { keywords:['quantitative','survey','regression','statistical','econometric','data analysis','structural equation','factor analysis'], weight:0 },
+    'Mixed Methods': { keywords:['mixed method','triangulat','multi-method','sequential','concurrent design','pragmati'], weight:0 },
+    'Productive Entrepreneurship': { keywords:['productive entrepreneurship','unproductive','destructive','baumol','rent-seeking','value creation','wealth creation'], weight:0 }
+  },
+  geography: {
+    'Ethiopia': ['ethiopia','ethiopian','addis ababa','tigray','amhara','oromia'],
+    'Sub-Saharan Africa': ['sub-saharan','kenya','nigeria','ghana','tanzania','uganda','rwanda','senegal','cameroon','zambia'],
+    'Australia': ['australia','australian','melbourne','sydney','rmit','monash','victoria'],
+    'Global/Comparative': ['global','international','comparative','cross-national','multi-country','worldwide'],
+    'Europe': ['europe','european','uk','britain','germany','france','netherlands'],
+    'Middle East': ['middle east','arab','gulf','jordan','lebanon','palestine']
+  },
+  methods: {
+    'Qualitative': ['interview','case study','ethnograph','grounded theory','thematic','narrative','discourse','focus group'],
+    'Quantitative': ['survey','regression','econometric','statistical','structural equation','factor analysis','longitudinal'],
+    'Mixed Methods': ['mixed method','triangulat','multi-method','sequential'],
+    'Systematic Review': ['systematic review','meta-analysis','bibliometric','literature review','scoping review'],
+    'Action Research': ['action research','participatory','co-design','engaged scholarship']
+  },
+  titleVariants: [
+    'a distinguished scholar',
+    'an established researcher',
+    'a prominent academic',
+    'a leading researcher',
+    'a dedicated scholar'
+  ],
+  trajectoryPhrases: [
+    'Your research journey shows a clear and purposeful trajectory',
+    'Across your research portfolio, a coherent intellectual journey emerges',
+    'Your scholarly trajectory reveals a deepening commitment to',
+    'The arc of your research reflects a growing expertise in'
+  ]
+};
+
+function analyseProjects() {
+  const currentProjects = store.projects.filter(p => p.createdBy === currentUser.id);
+  const pastProjects = store.pastProjects.filter(p => p.userId === currentUser.id);
+  const allProjects = [
+    ...currentProjects.map(p => ({ title:p.name, area:p.area||'', desc:p.description||'', year:new Date(p.createdAt).getFullYear(), role:'PI', institution:p.institution||'', isCurrent:true })),
+    ...pastProjects.map(p => ({ title:p.title, area:p.area||'', desc:p.description||'', year:parseInt(p.startYear)||2020, role:p.role||'', institution:p.institution||'', isCurrent:false, outputs:p.outputs||'' }))
+  ];
+
+  if (allProjects.length === 0) return null;
+
+  // Reset weights
+  Object.keys(researchDNA.themes).forEach(k => researchDNA.themes[k].weight = 0);
+
+  // Score each theme
+  const themeEvidence = {};
+  allProjects.forEach(proj => {
+    const text = (proj.title + ' ' + proj.area + ' ' + proj.desc).toLowerCase();
+    Object.entries(researchDNA.themes).forEach(([theme, data]) => {
+      data.keywords.forEach(kw => {
+        if (text.includes(kw)) {
+          data.weight += 1;
+          if (!themeEvidence[theme]) themeEvidence[theme] = [];
+          themeEvidence[theme].push(proj.title);
+        }
+      });
+    });
+  });
+
+  // Score geography
+  const geoScores = {};
+  allProjects.forEach(proj => {
+    const text = (proj.title + ' ' + proj.area + ' ' + proj.desc).toLowerCase();
+    Object.entries(researchDNA.geography).forEach(([geo, keywords]) => {
+      keywords.forEach(kw => {
+        if (text.includes(kw)) {
+          geoScores[geo] = (geoScores[geo] || 0) + 1;
+        }
+      });
+    });
+  });
+
+  // Score methods
+  const methodScores = {};
+  allProjects.forEach(proj => {
+    const text = (proj.title + ' ' + proj.area + ' ' + proj.desc).toLowerCase();
+    Object.entries(researchDNA.methods).forEach(([method, keywords]) => {
+      keywords.forEach(kw => {
+        if (text.includes(kw)) {
+          methodScores[method] = (methodScores[method] || 0) + 1;
+        }
+      });
+    });
+  });
+
+  // Sort themes by weight
+  const sortedThemes = Object.entries(researchDNA.themes)
+    .filter(([,v]) => v.weight > 0)
+    .sort((a,b) => b[1].weight - a[1].weight);
+
+  const sortedGeo = Object.entries(geoScores).sort((a,b) => b[1]-a[1]);
+  const sortedMethods = Object.entries(methodScores).sort((a,b) => b[1]-a[1]);
+  const years = allProjects.map(p => p.year).filter(Boolean);
+  const earliestYear = years.length > 0 ? Math.min(...years) : new Date().getFullYear();
+  const totalProjects = allProjects.length;
+
+  return { sortedThemes, sortedGeo, sortedMethods, themeEvidence, allProjects, totalProjects, earliestYear };
+}
+
+function generateNarrative(analysis) {
+  if (!analysis) return 'Add at least one project to generate your personalised research identity narrative...';
+
+  const { sortedThemes, sortedGeo, sortedMethods, totalProjects, earliestYear, allProjects } = analysis;
+  const name = currentUser.name;
+  const firstName = name.split(' ')[0];
+  const role = currentUser.role || 'researcher';
+  const institution = currentUser.institution || 'their institution';
+  const currentYear = new Date().getFullYear();
+  const yearsActive = currentYear - earliestYear;
+  const titleVariant = researchDNA.titleVariants[Math.floor(Math.random() * researchDNA.titleVariants.length)];
+
+  // Build theme sentence
+  let themeSentence = '';
+  if (sortedThemes.length >= 2) {
+    const primary = sortedThemes[0][0];
+    const secondary = sortedThemes[1][0];
+    const tertiary = sortedThemes[2] ? sortedThemes[2][0] : null;
+    themeSentence = tertiary
+      ? `Your scholarly work sits at the intersection of ${primary}, ${secondary}, and ${tertiary}`
+      : `Your research spans the connected fields of ${primary} and ${secondary}`;
+  } else if (sortedThemes.length === 1) {
+    themeSentence = `Your research is deeply focused on ${sortedThemes[0][0]}`;
+  } else {
+    themeSentence = `Your research portfolio is taking shape`;
+  }
+
+  // Build geography sentence
+  let geoSentence = '';
+  if (sortedGeo.length > 0) {
+    const primaryGeo = sortedGeo[0][0];
+    const secondaryGeo = sortedGeo[1] ? sortedGeo[1][0] : null;
+    geoSentence = secondaryGeo
+      ? `with a distinctive geographic focus on ${primaryGeo} and ${secondaryGeo}`
+      : `with a focused geographic emphasis on ${primaryGeo}`;
+  }
+
+  // Build methods sentence
+  let methodSentence = '';
+  if (sortedMethods.length > 0) {
+    const primaryMethod = sortedMethods[0][0];
+    methodSentence = `Your methodological approach draws primarily on ${primaryMethod.toLowerCase()} research traditions`;
+    if (sortedMethods.length >= 2) {
+      methodSentence += `, complemented by ${sortedMethods[1][0].toLowerCase()} approaches`;
+    }
+    methodSentence += '.';
+  }
+
+  // Build contribution sentence
+  let contributionSentence = '';
+  if (sortedThemes.length > 0 && sortedGeo.length > 0) {
+    contributionSentence = `Your work makes a distinctive contribution by connecting ${sortedThemes[0][0].toLowerCase()} theory with ${sortedGeo[0][0]} empirical contexts, positioning you as a bridge between global scholarship and local development realities.`;
+  } else if (sortedThemes.length > 0) {
+    contributionSentence = `Your work contributes meaningfully to the ${sortedThemes[0][0].toLowerCase()} literature, building a coherent and recognisable scholarly voice.`;
+  }
+
+  // Build trajectory sentence
+  let trajectorySentence = '';
+  if (totalProjects >= 2) {
+    const trajectoryOpener = researchDNA.trajectoryPhrases[Math.floor(Math.random() * researchDNA.trajectoryPhrases.length)];
+    trajectorySentence = `${trajectoryOpener} ${sortedThemes.length > 0 ? sortedThemes[0][0].toLowerCase() : 'your chosen field'}, spanning ${yearsActive > 0 ? yearsActive + ' years' : 'recent years'} and ${totalProjects} project${totalProjects > 1 ? 's' : ''}.`;
+  }
+
+  // Assemble full narrative
+  const parts = [];
+  parts.push(`${name} is ${titleVariant} at ${institution}.`);
+  parts.push(`${themeSentence}${geoSentence ? ', ' + geoSentence : ''}.`);
+  if (methodSentence) parts.push(methodSentence);
+  if (contributionSentence) parts.push(contributionSentence);
+  if (trajectorySentence) parts.push(trajectorySentence);
+  if (sortedThemes.length > 0) {
+    parts.push(`${firstName} is building a strong and recognisable scholarly reputation as a researcher who advances knowledge in ${sortedThemes[0][0].toLowerCase()}${sortedThemes[1] ? ' and ' + sortedThemes[1][0].toLowerCase() : ''}.`);
+  }
+
+  return parts.join(' ');
+}
+
+function generateTrajectory(analysis) {
+  if (!analysis || analysis.allProjects.length < 2) return null;
+  const { allProjects, sortedThemes, earliestYear } = analysis;
+  const currentYear = new Date().getFullYear();
+  const sorted = allProjects.sort((a,b) => a.year - b.year);
+  const phases = [];
+  const span = currentYear - earliestYear;
+  if (span > 0) {
+    if (sorted.length >= 1) phases.push({ label: 'Foundation', years: earliestYear + '–' + (earliestYear + Math.floor(span/3)), desc: 'Early research formation' });
+    if (sorted.length >= 2) phases.push({ label: 'Development', years: (earliestYear + Math.floor(span/3)) + '–' + (earliestYear + Math.floor(2*span/3)), desc: 'Building expertise' });
+    phases.push({ label: 'Maturity', years: (earliestYear + Math.floor(2*span/3)) + '–present', desc: 'Established scholarship' });
+  }
+  const primaryTheme = sortedThemes.length > 0 ? sortedThemes[0][0] : 'your field';
+  const text = `Your research trajectory shows consistent deepening in ${primaryTheme.toLowerCase()} over ${currentYear - earliestYear} years. Starting from ${earliestYear}, your work has grown from foundational inquiry into a mature, internationally recognised scholarly agenda.`;
+  return { text, phases };
+}
+
+function refreshIdentityPage() {
+  const analysis = analyseProjects();
+  const currentProjects = store.projects.filter(p => p.createdBy === currentUser.id);
+  const pastProjects = store.pastProjects.filter(p => p.userId === currentUser.id);
+  const totalProjects = currentProjects.length + pastProjects.length;
+
+  document.getElementById('current-proj-count').textContent = currentProjects.length + ' project' + (currentProjects.length !== 1 ? 's' : '');
+  document.getElementById('identity-area-count').textContent = analysis ? analysis.sortedThemes.length + ' areas' : '0 areas';
+
+  if (!analysis || analysis.sortedThemes.length === 0) {
+    document.getElementById('identity-hero-name').textContent = currentUser.name;
+    document.getElementById('identity-hero-tagline').textContent = 'Add projects to discover your research identity';
+    document.getElementById('identity-hero-tags').innerHTML = '<span class="identity-tag">Add projects to get started</span>';
+    document.getElementById('identity-hero-stats').innerHTML = '';
+    document.getElementById('narrative-text').textContent = 'Add at least one project to generate your personalised research identity narrative...';
+  } else {
+    const primary = analysis.sortedThemes[0][0];
+    const secondary = analysis.sortedThemes[1] ? analysis.sortedThemes[1][0] : '';
+    document.getElementById('identity-hero-name').textContent = currentUser.name;
+    document.getElementById('identity-hero-tagline').textContent = secondary ? primary + ' · ' + secondary + ' Researcher' : primary + ' Researcher';
+    const topTags = analysis.sortedThemes.slice(0, 5).map((t,i) => `<span class="identity-tag ${i===0?'primary':''}">${t[0]}</span>`).join('');
+    document.getElementById('identity-hero-tags').innerHTML = topTags;
+    document.getElementById('identity-hero-stats').innerHTML = `
+      <div class="identity-stat"><div class="identity-stat-val">${totalProjects}</div><div class="identity-stat-label">Total projects</div></div>
+      <div class="identity-stat"><div class="identity-stat-val">${analysis.sortedThemes.length}</div><div class="identity-stat-label">Research areas</div></div>
+      <div class="identity-stat"><div class="identity-stat-val">${currentProjects.length}</div><div class="identity-stat-label">Active now</div></div>
+      <div class="identity-stat"><div class="identity-stat-val">${new Date().getFullYear() - analysis.earliestYear || 1}y</div><div class="identity-stat-label">Years active</div></div>`;
+    document.getElementById('narrative-text').textContent = generateNarrative(analysis);
+
+    // Trajectory
+    const traj = generateTrajectory(analysis);
+    if (traj) {
+      document.getElementById('trajectory-box').style.display = 'block';
+      document.getElementById('trajectory-text').textContent = traj.text;
+    } else {
+      document.getElementById('trajectory-box').style.display = 'none';
+    }
+
+    // Strengths
+    const maxWeight = analysis.sortedThemes[0][1].weight;
+    document.getElementById('identity-strengths').innerHTML = analysis.sortedThemes.slice(0, 7).map(([name, data]) => {
+      const pct = Math.min(100, Math.round((data.weight / maxWeight) * 100));
+      const color = pct >= 80 ? '#1B3A6B' : pct >= 50 ? '#4C1D95' : '#9ca3af';
+      const evidence = analysis.themeEvidence[name] ? analysis.themeEvidence[name].slice(0,2).join(', ') : '';
+      return `<div class="strength-item">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+          <span class="strength-name">${name}</span>
+          <span style="font-size:12px;font-weight:700;color:${color}">${pct}%</span>
+        </div>
+        ${evidence ? `<div class="strength-evidence">Evidence: ${evidence}</div>` : ''}
+        <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+      </div>`;
+    }).join('');
+  }
+
+  // Current projects
+  const cpEl = document.getElementById('identity-current-projects');
+  if (currentProjects.length === 0) {
+    cpEl.innerHTML = '<div class="empty-state"><div>No current projects yet. Create a project to see it here.</div></div>';
+  } else {
+    cpEl.innerHTML = currentProjects.map(p => {
+      const tasks = store.tasks.filter(t => t.projectId === p.id);
+      const done = tasks.filter(t => t.status === 'Done').length;
+      const pct = tasks.length > 0 ? Math.round(done/tasks.length*100) : 0;
+      return `<div class="past-proj-card">
+        <span class="past-proj-year" style="background:#065F46">${new Date(p.createdAt).getFullYear()}</span>
+        <div style="flex:1">
+          <div class="past-proj-title">${p.name}</div>
+          <div class="past-proj-meta">${p.area || 'Research project'} · ${p.institution || ''} · ${pct}% complete · ${tasks.length} tasks</div>
+        </div>
+        <span class="badge b-green">Active</span>
+      </div>`;
+    }).join('');
+  }
+
+  // Past projects
+  const ppEl = document.getElementById('past-projects-list');
+  if (pastProjects.length === 0) {
+    ppEl.innerHTML = '<div class="empty-state"><div class="empty-icon">📚</div><div class="empty-title">No past projects added yet</div><div>Add your previous research to build your full identity profile</div></div>';
+  } else {
+    ppEl.innerHTML = pastProjects.map(p => `
+      <div class="past-proj-card">
+        <span class="past-proj-year">${p.startYear}${p.endYear && p.endYear !== p.startYear ? '–' + p.endYear : ''}</span>
+        <div style="flex:1">
+          <div class="past-proj-title">${p.title}</div>
+          <div class="past-proj-meta">${p.area} · ${p.role} · ${p.institution || ''}${p.outputs ? ' · ' + p.outputs : ''}</div>
+          ${p.description ? `<div style="font-size:12px;color:#374151;margin-top:4px">${p.description}</div>` : ''}
+        </div>
+        <button class="btn-sm btn-sm-outline" style="font-size:10px;padding:3px 10px;flex-shrink:0" onclick="removePastProject('${p.id}')">Remove</button>
+      </div>`).join('');
+  }
+
+  // Reliability card
+  renderReliabilityCard(currentUser.name, 'my-reliability-card');
+}
+
+function regenerateNarrative() {
+  const analysis = analyseProjects();
+  if (!analysis || analysis.sortedThemes.length === 0) {
+    alert('Add at least one project to generate a narrative.');
+    return;
+  }
+  document.getElementById('narrative-text').textContent = generateNarrative(analysis);
+  addActivity('↻ ' + currentUser.name.split(' ')[0] + ' regenerated their research identity narrative', '#EDE9FE', '↻');
+}
+
+function addPastProject() {
+  const title = document.getElementById('pp-title').value.trim();
+  const area = document.getElementById('pp-area').value.trim();
+  if (!title || !area) { alert('Please enter at least the project title and research area.'); return; }
+  const pp = {
+    id: genId(), userId: currentUser.id, title, area,
+    startYear: document.getElementById('pp-start-year').value || new Date().getFullYear(),
+    endYear: document.getElementById('pp-end-year').value || '',
+    role: document.getElementById('pp-role').value,
+    institution: document.getElementById('pp-inst').value || '',
+    description: document.getElementById('pp-desc').value || '',
+    outputs: document.getElementById('pp-outputs').value || '',
+    addedAt: new Date()
+  };
+  store.pastProjects.push(pp);
+  addActivity('📚 Added past project: ' + title, '#EDE9FE', '📚');
+  ['pp-title','pp-area','pp-start-year','pp-end-year','pp-inst','pp-desc','pp-outputs'].forEach(id => document.getElementById(id).value = '');
+  closeModal('modal-add-past-proj');
+  refreshIdentityPage();
+}
+
+function removePastProject(id) {
+  const idx = store.pastProjects.findIndex(p => p.id === id);
+  if (idx > -1) { store.pastProjects.splice(idx, 1); refreshIdentityPage(); }
+}
+
+// ============================================
+// RELIABILITY SCORE ENGINE
+// ============================================
+function calculateReliabilityScore(userName) {
+  const tasks = store.tasks.filter(t => t.assignee === userName);
+  if (tasks.length === 0) return { score: 0, breakdown: { onTime:0, completion:0, quality:0, consistency:0 }, label:'No data yet', color:'score-4' };
+  const doneTasks = tasks.filter(t => t.status === 'Done');
+  const overdueTasks = tasks.filter(t => isOverdue(t));
+  const noRevisionTasks = doneTasks.filter(t => !t.hadRevision);
+  const recentTasks = tasks.filter(t => new Date(t.createdAt) > new Date(Date.now() - 30*24*60*60*1000));
+  const recentDone = recentTasks.filter(t => t.status === 'Done');
+  const onTimeRate = tasks.length > 0 ? (tasks.length - overdueTasks.length) / tasks.length : 1;
+  const completionRate = tasks.length > 0 ? doneTasks.length / tasks.length : 0;
+  const qualityRate = doneTasks.length > 0 ? noRevisionTasks.length / doneTasks.length : 1;
+  const consistencyRate = recentTasks.length > 0 ? recentDone.length / recentTasks.length : doneTasks.length > 0 ? 0.5 : 0;
+  const onTimeScore = Math.round(onTimeRate * 4 * 10) / 10;
+  const completionScore = Math.round(completionRate * 3 * 10) / 10;
+  const qualityScore = Math.round(qualityRate * 2 * 10) / 10;
+  const consistencyScore = Math.round(consistencyRate * 1 * 10) / 10;
+  const total = Math.round((onTimeScore + completionScore + qualityScore + consistencyScore) * 10) / 10;
+  const label = total >= 9 ? 'Exceptional' : total >= 7 ? 'Strong' : total >= 5 ? 'Developing' : total >= 3 ? 'Needs improvement' : 'Getting started';
+  const color = total >= 8 ? 'score-10' : total >= 6 ? 'score-8' : total >= 4 ? 'score-6' : 'score-4';
+  return { score:total, breakdown:{onTime:onTimeScore, completion:completionScore, quality:qualityScore, consistency:consistencyScore}, label, color };
+}
+
+function renderReliabilityCard(userName, containerId) {
+  const s = calculateReliabilityScore(userName);
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const scoreColor = s.score >= 8 ? '#065F46' : s.score >= 6 ? '#1E40AF' : s.score >= 4 ? '#92400E' : '#9ca3af';
+  el.innerHTML = `
+    <div style="display:flex;align-items:center;gap:20px;padding:8px 0">
+      <div style="text-align:center;flex-shrink:0">
+        <div class="score-circle ${s.color}" style="width:72px;height:72px;font-size:22px;margin:0 auto 8px">${s.score}</div>
+        <div style="font-size:11px;font-weight:700;color:${scoreColor};text-transform:uppercase;letter-spacing:0.5px">${s.label}</div>
+      </div>
+      <div style="flex:1">
+        <div style="font-size:12px;color:#6b7280;margin-bottom:10px">Score breakdown — out of 10 total</div>
+        ${[
+          {label:'On-time completion', val:s.breakdown.onTime, max:4, color:'#10B981'},
+          {label:'Task completion rate', val:s.breakdown.completion, max:3, color:'#3B82F6'},
+          {label:'Quality — no revisions', val:s.breakdown.quality, max:2, color:'#8B5CF6'},
+          {label:'Recent consistency', val:s.breakdown.consistency, max:1, color:'#F59E0B'}
+        ].map(item => `
+          <div style="margin-bottom:8px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+              <span style="color:#6b7280">${item.label}</span>
+              <span style="font-weight:700;color:${item.color}">${item.val} / ${item.max}</span>
+            </div>
+            <div class="score-bar"><div class="score-bar-fill" style="width:${(item.val/item.max)*100}%;background:${item.color}"></div></div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
 
 // ============================================
 // AUTH
@@ -641,13 +1078,18 @@ function doLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pass = document.getElementById('login-pass').value.trim();
   const err = document.getElementById('login-error');
-  if (!email || !pass) { err.style.display = 'block'; err.textContent = 'Please enter your email and password.'; return; }
+  if (!email || !pass) { err.style.display='block'; err.textContent='Please enter your email and password.'; return; }
   let user = store.users.find(u => u.email === email);
   if (!user) {
-    user = { id: genId(), email, name: email.split('@')[0], institution: '', role: 'Researcher', initials: email.substring(0,2).toUpperCase(), createdAt: new Date() };
+    user = { id:genId(), email, name:email.split('@')[0], institution:'', role:'Researcher', initials:email.substring(0,2).toUpperCase(), createdAt:new Date(), totalSessions:0 };
     store.users.push(user);
   }
   err.style.display = 'none';
+  const session = { id:genId(), userId:user.id, userName:user.name, loginTime:new Date(), logoutTime:null, duration:null };
+  store.sessions.push(session);
+  user.currentSessionId = session.id;
+  user.totalSessions = (user.totalSessions || 0) + 1;
+  addActivity('🔐 ' + user.name + ' logged in', '#DBEAFE', '🔐');
   currentUser = user;
   initApp();
   showScreen('app');
@@ -659,29 +1101,35 @@ function doSignup() {
   const email = document.getElementById('signup-email').value.trim();
   const inst = document.getElementById('signup-inst').value.trim();
   const role = document.getElementById('signup-role').value;
+  const area = document.getElementById('signup-area').value.trim();
   const pass = document.getElementById('signup-pass').value.trim();
   if (!first || !last || !email || !pass) { alert('Please fill in all required fields.'); return; }
   if (pass.length < 8) { alert('Password must be at least 8 characters.'); return; }
-  const user = {
-    id: genId(), email, name: first + ' ' + last, institution: inst, role,
-    initials: (first[0] + last[0]).toUpperCase(), createdAt: new Date()
-  };
+  const user = { id:genId(), email, name:first+' '+last, institution:inst, role, area, initials:(first[0]+last[0]).toUpperCase(), createdAt:new Date(), totalSessions:1 };
   store.users.push(user);
+  const session = { id:genId(), userId:user.id, userName:user.name, loginTime:new Date(), logoutTime:null, duration:null };
+  store.sessions.push(session);
+  user.currentSessionId = session.id;
   currentUser = user;
+  addActivity('🆕 ' + user.name + ' joined GetItDone', '#D1FAE5', '🆕');
   initApp();
   showScreen('app');
 }
 
 function doLogout() {
-  currentUser = null;
-  currentProjectId = null;
+  if (currentUser && currentUser.currentSessionId) {
+    const session = store.sessions.find(s => s.id === currentUser.currentSessionId);
+    if (session) { session.logoutTime = new Date(); session.duration = Math.round((session.logoutTime - session.loginTime) / 60000); }
+  }
+  stopTimer();
+  currentUser = null; currentProjectId = null;
   showScreen('login');
   document.getElementById('login-email').value = '';
   document.getElementById('login-pass').value = '';
 }
 
 // ============================================
-// APP INIT
+// INIT
 // ============================================
 function initApp() {
   document.getElementById('header-name').textContent = currentUser.name;
@@ -692,25 +1140,17 @@ function initApp() {
   document.getElementById('settings-inst').value = currentUser.institution || '';
   refreshSidebar();
   refreshHomeStats();
+  updateNotifBell();
   navTo('home');
 }
 
-function getGreeting() {
-  const h = new Date().getHours();
-  return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
-}
-
-function genId() {
-  return Math.random().toString(36).substr(2, 9);
-}
+function getGreeting() { const h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
+function genId() { return Math.random().toString(36).substr(2, 9); }
 
 // ============================================
 // NAVIGATION
 // ============================================
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + id).classList.add('active');
-}
+function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('screen-' + id).classList.add('active'); }
 
 function navTo(view) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -724,6 +1164,9 @@ function navTo(view) {
   if (view === 'projects') refreshProjects();
   if (view === 'mytasks') refreshMyTasks();
   if (view === 'team') refreshTeam();
+  if (view === 'identity') refreshIdentityPage();
+  if (view === 'analytics') refreshAnalytics();
+  if (view === 'invitations') refreshInvitations();
   if (view === 'reports') refreshReports();
 }
 
@@ -749,27 +1192,21 @@ function openProject(id) {
 // ============================================
 function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-
-window.onclick = function(e) {
-  document.querySelectorAll('.modal-overlay').forEach(m => { if (e.target === m) m.classList.remove('open'); });
-};
+function closeTaskDetail() { stopTimer(); closeModal('modal-task-detail'); }
+window.onclick = function(e) { document.querySelectorAll('.modal-overlay').forEach(m => { if (e.target === m) { if (m.id === 'modal-task-detail') stopTimer(); m.classList.remove('open'); } }); };
 
 // ============================================
 // SIDEBAR
 // ============================================
 function refreshSidebar() {
-  const myProjects = store.projects.filter(p => p.createdBy === currentUser.id || (p.members && p.members.includes(currentUser.id)));
+  const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
   document.getElementById('proj-count').textContent = myProjects.length;
-  const myTasks = store.tasks.filter(t => t.assignee === currentUser.name && t.status !== 'Done');
-  document.getElementById('task-count').textContent = myTasks.length;
-  const container = document.getElementById('sidebar-projects');
+  document.getElementById('task-count').textContent = store.tasks.filter(t => t.assignee === currentUser.name && t.status !== 'Done').length;
+  document.getElementById('inv-count').textContent = store.invitations.filter(i => i.sentBy === currentUser.id && i.status === 'Pending').length;
   const colors = ['#1B3A6B','#065F46','#5B21B6','#0F4C5C','#92400E','#991B1B'];
-  container.innerHTML = myProjects.map((p, i) => `
-    <div class="sidebar-project" id="sproj-${p.id}" onclick="openProject('${p.id}')">
-      <div class="proj-dot" style="background:${colors[i % colors.length]}"></div>
-      ${p.name.length > 20 ? p.name.substring(0,20)+'...' : p.name}
-    </div>
-  `).join('');
+  document.getElementById('sidebar-projects').innerHTML = myProjects.map((p,i) =>
+    `<div class="sidebar-project" id="sproj-${p.id}" onclick="openProject('${p.id}')"><div class="proj-dot" style="background:${colors[i%colors.length]}"></div>${p.name.length>20?p.name.substring(0,20)+'...':p.name}</div>`
+  ).join('');
 }
 
 // ============================================
@@ -780,18 +1217,18 @@ function refreshHome() { refreshHomeStats(); renderHomeProjects(); renderHomeAct
 function refreshHomeStats() {
   const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
   const allTasks = store.tasks.filter(t => myProjects.some(p => p.id === t.projectId));
-  const doneTasks = allTasks.filter(t => t.status === 'Done');
   const overdueTasks = allTasks.filter(t => isOverdue(t));
   const allMembers = new Set();
-  myProjects.forEach(p => { if (p.members) p.members.forEach(m => allMembers.add(m)); });
+  myProjects.forEach(p => { (p.invitedMembers||[]).forEach(m => allMembers.add(m.email)); });
   document.getElementById('stat-projects').textContent = myProjects.length;
-  document.getElementById('stat-done').textContent = doneTasks.length;
+  document.getElementById('stat-done').textContent = allTasks.filter(t => t.status === 'Done').length;
   document.getElementById('stat-members').textContent = allMembers.size;
-  document.getElementById('stat-overdue').textContent = overdueTasks.length;
+  const rs = calculateReliabilityScore(currentUser.name);
+  document.getElementById('stat-reliability').textContent = rs.score > 0 ? rs.score + '' : '—';
   const alertBar = document.getElementById('home-alert');
   if (overdueTasks.length > 0) {
     alertBar.style.display = 'flex';
-    document.getElementById('home-alert-text').textContent = overdueTasks.length + ' task' + (overdueTasks.length > 1 ? 's are' : ' is') + ' overdue across your projects';
+    document.getElementById('home-alert-text').textContent = overdueTasks.length + ' task' + (overdueTasks.length > 1 ? 's are' : ' is') + ' overdue';
     document.getElementById('home-alert-sub').textContent = overdueTasks.slice(0,3).map(t => t.title + ' (' + t.assignee + ')').join(', ');
   } else { alertBar.style.display = 'none'; }
 }
@@ -799,29 +1236,21 @@ function refreshHomeStats() {
 function renderHomeProjects() {
   const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
   const el = document.getElementById('home-projects-list');
-  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Create your first project to get started</div></div>'; return; }
+  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Create your first project</div></div>'; return; }
   el.innerHTML = myProjects.map(p => {
     const tasks = store.tasks.filter(t => t.projectId === p.id);
     const done = tasks.filter(t => t.status === 'Done').length;
-    const pct = tasks.length > 0 ? Math.round((done / tasks.length) * 100) : 0;
+    const pct = tasks.length > 0 ? Math.round(done/tasks.length*100) : 0;
     const overdue = tasks.filter(t => isOverdue(t)).length;
-    return `<div class="row-item" onclick="openProject('${p.id}')">
-      <div><div class="row-title">${p.name}</div><div class="row-meta">${tasks.length} tasks · ${pct}% complete</div></div>
-      ${overdue > 0 ? `<span class="badge b-red">${overdue} overdue</span>` : '<span class="badge b-green">On track</span>'}
-    </div>`;
+    return `<div class="row-item" onclick="openProject('${p.id}')"><div><div class="row-title">${p.name}</div><div class="row-meta">${tasks.length} tasks · ${pct}% complete</div></div>${overdue > 0 ? `<span class="badge b-red">${overdue} overdue</span>` : '<span class="badge b-green">On track</span>'}</div>`;
   }).join('');
 }
 
 function renderHomeActivity() {
   const el = document.getElementById('home-activity');
-  const recent = store.activity.slice(-5).reverse();
-  if (recent.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No activity yet</div><div>Activity will appear here once you start working</div></div>'; return; }
-  el.innerHTML = recent.map(a => `
-    <div class="act-row">
-      <div class="act-icon" style="background:${a.color || '#DBEAFE'}">${a.icon || '•'}</div>
-      <div><div class="act-text">${a.text}</div><div class="act-time">${formatTime(a.time)}</div></div>
-    </div>
-  `).join('');
+  const recent = store.activity.slice(-6).reverse();
+  if (recent.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No activity yet</div></div>'; return; }
+  el.innerHTML = recent.map(a => `<div class="act-row"><div class="act-icon" style="background:${a.color||'#DBEAFE'}">${a.icon||'•'}</div><div><div class="act-text">${a.text}</div><div class="act-time">${formatTime(a.time)}</div></div></div>`).join('');
 }
 
 // ============================================
@@ -830,21 +1259,17 @@ function renderHomeActivity() {
 function refreshProjects() {
   const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
   const el = document.getElementById('projects-list');
-  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div><div>Click + New project to create your first one</div></div>'; return; }
+  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📁</div><div class="empty-title">No projects yet</div></div>'; return; }
   const colors = ['#1B3A6B','#065F46','#5B21B6','#0F4C5C'];
-  el.innerHTML = myProjects.map((p, i) => {
+  el.innerHTML = myProjects.map((p,i) => {
     const tasks = store.tasks.filter(t => t.projectId === p.id);
     const done = tasks.filter(t => t.status === 'Done').length;
-    const pct = tasks.length > 0 ? Math.round((done / tasks.length) * 100) : 0;
+    const pct = tasks.length > 0 ? Math.round(done/tasks.length*100) : 0;
     const overdue = tasks.filter(t => isOverdue(t)).length;
-    const members = p.members || [];
     return `<div class="proj-card" onclick="openProject('${p.id}')">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
-        <div><div class="proj-name">${p.name}</div><div class="proj-meta">${p.institution || 'RMIT University'} · ${p.startDate || 'Started 2026'}</div></div>
-        ${overdue > 0 ? `<span class="badge b-red">${overdue} overdue</span>` : '<span class="badge b-green">On track</span>'}
-      </div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px"><div><div class="proj-name">${p.name}</div><div class="proj-meta">${p.institution||'RMIT University'}${p.area?' · '+p.area:''}</div></div>${overdue>0?`<span class="badge b-red">${overdue} overdue</span>`:'<span class="badge b-green">On track</span>'}</div>
       <div class="proj-progress-bar"><div class="proj-progress-fill" style="width:${pct}%;background:${colors[i%colors.length]}"></div></div>
-      <div class="proj-stats"><span><strong>${pct}%</strong> complete</span><span><strong>${tasks.length}</strong> tasks</span><span><strong>${members.length + 1}</strong> members</span></div>
+      <div class="proj-stats"><span><strong>${pct}%</strong> complete</span><span><strong>${tasks.length}</strong> tasks</span></div>
     </div>`;
   }).join('');
 }
@@ -852,26 +1277,14 @@ function refreshProjects() {
 function createProject() {
   const name = document.getElementById('np-name').value.trim();
   if (!name) { alert('Please enter a project name.'); return; }
-  const p = {
-    id: genId(), name,
-    description: document.getElementById('np-desc').value,
-    institution: document.getElementById('np-inst').value || 'RMIT University',
-    startDate: document.getElementById('np-start').value,
-    endDate: document.getElementById('np-end').value,
-    createdBy: currentUser.id,
-    members: [],
-    invitedEmails: [...inviteEmails],
-    createdAt: new Date()
-  };
+  const p = { id:genId(), name, description:document.getElementById('np-desc').value, area:document.getElementById('np-area').value, institution:document.getElementById('np-inst').value||'RMIT University', startDate:document.getElementById('np-start').value, endDate:document.getElementById('np-end').value, createdBy:currentUser.id, members:[], invitedMembers:[], invitedEmails:[...inviteEmails], createdAt:new Date() };
   store.projects.push(p);
+  inviteEmails.forEach(email => { store.invitations.push({ id:genId(), email, name:email, role:'Collaborator', projectId:p.id, projectName:p.name, sentBy:currentUser.id, sentByName:currentUser.name, status:'Pending', sentAt:new Date(), respondedAt:null }); });
   addActivity('+ ' + currentUser.name.split(' ')[0] + ' created project: ' + name, '#D1FAE5', '+');
   inviteEmails.length = 0;
   document.getElementById('np-invite-chips').innerHTML = '';
-  document.getElementById('np-name').value = '';
-  document.getElementById('np-desc').value = '';
-  document.getElementById('np-start').value = '';
-  document.getElementById('np-end').value = '';
-  document.getElementById('np-inst').value = '';
+  ['np-name','np-desc','np-area','np-inst'].forEach(id => document.getElementById(id).value = '');
+  ['np-start','np-end'].forEach(id => document.getElementById(id).value = '');
   closeModal('modal-new-project');
   refreshSidebar();
   setTimeout(() => openProject(p.id), 100);
@@ -885,19 +1298,8 @@ function addInviteChip() {
   const email = input.value.trim().replace(',','');
   if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
   inviteEmails.push(email);
-  renderInviteChips();
+  document.getElementById('np-invite-chips').innerHTML = inviteEmails.map((e,i) => `<span class="invite-chip">${e}<span class="invite-remove" onclick="inviteEmails.splice(${i},1);document.getElementById('np-invite-chips').innerHTML=inviteEmails.map((e2,i2)=>'<span class=invite-chip>'+e2+'<span class=invite-remove onclick=inviteEmails.splice('+i2+',1)> ×</span></span>').join('')"> ×</span></span>`).join('');
   input.value = '';
-}
-
-function renderInviteChips() {
-  document.getElementById('np-invite-chips').innerHTML = inviteEmails.map((e, i) =>
-    `<span class="invite-chip">${e}<span class="invite-remove" onclick="removeInviteChip(${i})"> ×</span></span>`
-  ).join('');
-}
-
-function removeInviteChip(i) {
-  inviteEmails.splice(i, 1);
-  renderInviteChips();
 }
 
 function sendInvite() {
@@ -905,20 +1307,57 @@ function sendInvite() {
   const name = document.getElementById('inv-name').value.trim();
   const role = document.getElementById('inv-role').value;
   if (!email) { alert('Please enter an email address.'); return; }
-  const inv = { id: genId(), email, name: name || email, role, projectId: currentProjectId, status: 'Pending', sentAt: new Date() };
+  const inv = { id:genId(), email, name:name||email, role, projectId:currentProjectId, projectName:currentProjectId?(store.projects.find(p=>p.id===currentProjectId)||{}).name||'Unknown':'General', sentBy:currentUser.id, sentByName:currentUser.name, status:'Pending', sentAt:new Date(), respondedAt:null };
   store.invitations.push(inv);
-  const p = store.projects.find(x => x.id === currentProjectId);
-  if (p) {
-    if (!p.invitedMembers) p.invitedMembers = [];
-    p.invitedMembers.push({ email, name: name || email, role });
+  if (currentProjectId) {
+    const p = store.projects.find(x => x.id === currentProjectId);
+    if (p) { if (!p.invitedMembers) p.invitedMembers = []; p.invitedMembers.push({ email, name:name||email, role }); }
   }
-  addActivity('✉ Invitation sent to ' + (name || email) + ' (' + role + ')', '#DBEAFE', '✉');
-  addNotification('Invitation sent to ' + (name || email));
+  addActivity('✉ Invitation sent to ' + (name||email), '#DBEAFE', '✉');
+  addNotification('Invitation sent to ' + (name||email) + ' — awaiting response', 'info');
+  refreshSidebar();
   closeModal('modal-invite');
   document.getElementById('inv-email').value = '';
   document.getElementById('inv-name').value = '';
   if (currentProjectId) renderProjectTeam();
-  alert('Invitation sent to ' + email + '! They will receive an email to join the project.');
+  alert('Invitation sent to ' + email + '!\n\nTrack their response in the Invitations page.');
+}
+
+function simulateInvitationResponse(invId) {
+  const inv = store.invitations.find(i => i.id === invId);
+  if (!inv || inv.status !== 'Pending') return;
+  const responses = ['Accepted','Accepted','Accepted','Declined'];
+  inv.status = responses[Math.floor(Math.random() * responses.length)];
+  inv.respondedAt = new Date();
+  if (inv.status === 'Accepted') {
+    addNotification('🎉 ' + inv.name + ' accepted your invitation to join ' + inv.projectName, 'success');
+    addActivity('🎉 ' + inv.name + ' accepted invitation to ' + inv.projectName, '#D1FAE5', '🎉');
+  } else {
+    addNotification('❌ ' + inv.name + ' declined your invitation to ' + inv.projectName, 'warning');
+    addActivity('❌ ' + inv.name + ' declined invitation to ' + inv.projectName, '#FEE2E2', '❌');
+  }
+  updateNotifBell();
+  refreshInvitations();
+}
+
+// ============================================
+// INVITATIONS VIEW
+// ============================================
+function refreshInvitations() {
+  const myInvs = store.invitations.filter(i => i.sentBy === currentUser.id);
+  document.getElementById('inv-total').textContent = myInvs.length;
+  document.getElementById('inv-accepted').textContent = myInvs.filter(i => i.status === 'Accepted').length;
+  document.getElementById('inv-pending').textContent = myInvs.filter(i => i.status === 'Pending').length;
+  document.getElementById('inv-declined').textContent = myInvs.filter(i => i.status === 'Declined').length;
+  const el = document.getElementById('invitations-list');
+  if (myInvs.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">✉</div><div class="empty-title">No invitations sent yet</div></div>'; return; }
+  el.innerHTML = myInvs.map(inv => {
+    const badgeClass = inv.status === 'Accepted' ? 'b-green' : inv.status === 'Declined' ? 'b-red' : 'b-amber';
+    return `<div class="inv-row">
+      <div><div style="font-size:13px;font-weight:600">${inv.name} <span style="color:#9ca3af;font-weight:400">&lt;${inv.email}&gt;</span></div><div style="font-size:11px;color:#9ca3af;margin-top:2px">${inv.role} · ${inv.projectName} · Sent ${formatTime(inv.sentAt)}${inv.respondedAt?' · Responded '+formatTime(inv.respondedAt):''}</div></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="badge ${badgeClass}">${inv.status}</span>${inv.status==='Pending'?`<button class="btn-sm btn-sm-outline" style="font-size:10px;padding:4px 10px" onclick="simulateInvitationResponse('${inv.id}')">Simulate response</button>`:''}</div>
+    </div>`;
+  }).join('');
 }
 
 // ============================================
@@ -927,30 +1366,12 @@ function sendInvite() {
 function createTask() {
   const title = document.getElementById('at-title').value.trim();
   if (!title) { alert('Please enter a task title.'); return; }
-  const task = {
-    id: genId(),
-    title,
-    description: document.getElementById('at-desc').value,
-    assignee: document.getElementById('at-assignee').value || 'Unassigned',
-    due: document.getElementById('at-due').value,
-    priority: document.getElementById('at-priority').value,
-    type: document.getElementById('at-type').value,
-    status: 'To do',
-    projectId: currentProjectId,
-    createdBy: currentUser.id,
-    createdAt: new Date(),
-    comments: []
-  };
+  const task = { id:genId(), title, description:document.getElementById('at-desc').value, assignee:document.getElementById('at-assignee').value||'Unassigned', due:document.getElementById('at-due').value, priority:document.getElementById('at-priority').value, type:document.getElementById('at-type').value, status:'To do', projectId:currentProjectId, createdBy:currentUser.id, createdAt:new Date(), comments:[], timeTracked:0, timerSessions:[], hadRevision:false };
   store.tasks.push(task);
   addActivity('+ ' + currentUser.name.split(' ')[0] + ' created task: ' + title, '#D1FAE5', '+');
-  addNotification('New task created: ' + title);
-  document.getElementById('at-title').value = '';
-  document.getElementById('at-desc').value = '';
-  document.getElementById('at-assignee').value = '';
-  document.getElementById('at-due').value = '';
+  ['at-title','at-desc','at-assignee','at-due'].forEach(id => document.getElementById(id).value = '');
   closeModal('modal-add-task');
-  renderKanban();
-  renderTaskList();
+  renderKanban(); renderTaskList();
   refreshSidebar();
   renderProjectMetrics(store.projects.find(p => p.id === currentProjectId));
 }
@@ -960,32 +1381,25 @@ function openTaskDetail(id) {
   const t = store.tasks.find(x => x.id === id);
   if (!t) return;
   document.getElementById('td-title').textContent = t.title;
-  document.getElementById('td-meta').textContent = 'Assigned to ' + t.assignee + ' · Due ' + (t.due || 'No deadline') + ' · ' + t.priority + ' priority';
+  document.getElementById('td-meta').textContent = 'Assigned to ' + t.assignee + ' · Due ' + (t.due||'No deadline') + ' · ' + t.priority + ' priority';
   document.getElementById('td-desc').textContent = t.description || 'No description provided.';
-  document.getElementById('td-due-display').textContent = t.due || 'No deadline';
-  const sb = document.getElementById('td-status-badge');
-  sb.textContent = t.status;
-  sb.className = 'badge ' + (t.status === 'Done' ? 'b-green' : t.status === 'In review' ? 'b-purple' : t.status === 'In progress' ? 'b-blue' : 'b-gray');
-  const pb = document.getElementById('td-priority-badge');
-  pb.textContent = t.priority;
-  pb.className = 'badge ' + (t.priority === 'High' ? 'b-red' : t.priority === 'Medium' ? 'b-amber' : 'b-green');
+  const totalMins = Math.round((t.timeTracked||0) / 60);
+  document.getElementById('td-time-tracked').textContent = totalMins >= 60 ? Math.round(totalMins/60*10)/10+'h' : totalMins+'m';
+  const sb = document.getElementById('td-status-badge'); sb.textContent = t.status; sb.className = 'badge ' + (t.status==='Done'?'b-green':t.status==='In review'?'b-purple':t.status==='In progress'?'b-blue':'b-gray');
+  const pb = document.getElementById('td-priority-badge'); pb.textContent = t.priority; pb.className = 'badge ' + (t.priority==='High'?'b-red':t.priority==='Medium'?'b-amber':'b-green');
+  timerSeconds = 0; timerRunning = false;
+  document.getElementById('timer-display').textContent = '00:00:00';
+  document.getElementById('timer-label').textContent = 'Timer ready — click Start to begin tracking';
+  document.getElementById('timer-start-btn').style.display = 'inline-flex';
+  document.getElementById('timer-stop-btn').style.display = 'none';
   renderTaskComments(t);
   openModal('modal-task-detail');
 }
 
 function renderTaskComments(t) {
   const el = document.getElementById('td-comments');
-  if (!t.comments || t.comments.length === 0) { el.innerHTML = '<div style="font-size:12px;color:#9ca3af;padding:8px 0">No comments yet. Be the first to comment.</div>'; return; }
-  el.innerHTML = t.comments.map(c => `
-    <div class="comment-item">
-      <div class="avatar" style="width:28px;height:28px;font-size:10px;background:#1B3A6B">${c.initials}</div>
-      <div class="comment-bubble">
-        <div class="comment-author">${c.author}</div>
-        <div class="comment-body">${c.text}</div>
-        <div class="comment-time">${formatTime(c.time)}</div>
-      </div>
-    </div>
-  `).join('');
+  if (!t.comments || t.comments.length === 0) { el.innerHTML = '<div style="font-size:12px;color:#9ca3af;padding:8px 0">No comments yet.</div>'; return; }
+  el.innerHTML = t.comments.map(c => `<div class="comment-item"><div class="avatar" style="width:28px;height:28px;font-size:10px;background:#1B3A6B">${c.initials}</div><div class="comment-bubble"><div class="comment-author">${c.author}</div><div class="comment-body">${c.text}</div><div class="comment-time">${formatTime(c.time)}</div></div></div>`).join('');
 }
 
 function addTaskComment() {
@@ -995,7 +1409,7 @@ function addTaskComment() {
   const task = store.tasks.find(t => t.id === currentTaskId);
   if (!task) return;
   if (!task.comments) task.comments = [];
-  task.comments.push({ author: currentUser.name, initials: currentUser.initials, text, time: new Date() });
+  task.comments.push({ author:currentUser.name, initials:currentUser.initials, text, time:new Date() });
   addActivity('💬 ' + currentUser.name.split(' ')[0] + ' commented on: ' + task.title, '#EDE9FE', '💬');
   input.value = '';
   renderTaskComments(task);
@@ -1005,10 +1419,10 @@ function approveTask() {
   const task = store.tasks.find(t => t.id === currentTaskId);
   if (!task) return;
   task.status = 'Done';
-  addActivity('✓ ' + currentUser.name.split(' ')[0] + ' approved task: ' + task.title, '#D1FAE5', '✓');
+  addActivity('✓ ' + currentUser.name.split(' ')[0] + ' approved: ' + task.title, '#D1FAE5', '✓');
+  stopTimer();
   closeModal('modal-task-detail');
-  renderKanban();
-  renderTaskList();
+  renderKanban(); renderTaskList();
   renderProjectMetrics(store.projects.find(p => p.id === currentProjectId));
   refreshHomeStats();
   alert('Task approved and moved to Done!');
@@ -1018,15 +1432,55 @@ function requestRevision() {
   const task = store.tasks.find(t => t.id === currentTaskId);
   if (!task) return;
   task.status = 'In progress';
-  addActivity('↩ ' + currentUser.name.split(' ')[0] + ' requested revision on: ' + task.title, '#FEF3C7', '↩');
+  task.hadRevision = true;
+  addActivity('↩ Revision requested on: ' + task.title, '#FEF3C7', '↩');
+  stopTimer();
   closeModal('modal-task-detail');
   renderKanban();
-  alert('Revision requested. Task moved back to In Progress.');
+  alert('Revision requested. Task moved back to In Progress.\n\nThis will affect the reliability score.');
 }
 
-function isOverdue(task) {
-  if (!task.due || task.status === 'Done') return false;
-  return new Date(task.due) < new Date();
+function isOverdue(task) { if (!task.due || task.status === 'Done') return false; return new Date(task.due) < new Date(); }
+
+// ============================================
+// TIMER
+// ============================================
+function startTimer() {
+  if (timerRunning) return;
+  timerRunning = true;
+  document.getElementById('timer-start-btn').style.display = 'none';
+  document.getElementById('timer-stop-btn').style.display = 'inline-flex';
+  document.getElementById('timer-label').textContent = 'Timer running — tracking your work time';
+  timerInterval = setInterval(() => { timerSeconds++; document.getElementById('timer-display').textContent = formatTimerDisplay(timerSeconds); }, 1000);
+}
+
+function stopTimer() {
+  if (!timerRunning && timerSeconds === 0) return;
+  timerRunning = false;
+  clearInterval(timerInterval);
+  timerInterval = null;
+  if (timerSeconds > 0 && currentTaskId) {
+    const task = store.tasks.find(t => t.id === currentTaskId);
+    if (task) {
+      task.timeTracked = (task.timeTracked||0) + timerSeconds;
+      if (!task.timerSessions) task.timerSessions = [];
+      task.timerSessions.push({ start:new Date(Date.now()-timerSeconds*1000), end:new Date(), seconds:timerSeconds, user:currentUser.name });
+      store.timeTracking.push({ taskId:task.id, taskTitle:task.title, userId:currentUser.id, userName:currentUser.name, seconds:timerSeconds, date:new Date() });
+      const mins = Math.round(timerSeconds / 60);
+      addActivity('⏱ ' + currentUser.name.split(' ')[0] + ' tracked ' + mins + 'm on: ' + task.title, '#CCFBF1', '⏱');
+      const totalMins = Math.round((task.timeTracked||0) / 60);
+      if (document.getElementById('td-time-tracked')) document.getElementById('td-time-tracked').textContent = totalMins >= 60 ? Math.round(totalMins/60*10)/10+'h' : totalMins+'m';
+    }
+  }
+  document.getElementById('timer-start-btn').style.display = 'inline-flex';
+  document.getElementById('timer-stop-btn').style.display = 'none';
+  document.getElementById('timer-label').textContent = timerSeconds > 0 ? 'Time saved: ' + formatTimerDisplay(timerSeconds) : 'Timer ready';
+  timerSeconds = 0;
+}
+
+function formatTimerDisplay(s) {
+  const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
+  return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
 }
 
 // ============================================
@@ -1034,34 +1488,23 @@ function isOverdue(task) {
 // ============================================
 function renderKanban() {
   const statuses = [
-    { key: 'To do', label: 'To do', bg: '#FEF9F0', titleColor: '#92400E' },
-    { key: 'In progress', label: 'In progress', bg: '#EFF6FF', titleColor: '#1E40AF' },
-    { key: 'In review', label: 'In review', bg: '#F5F3FF', titleColor: '#5B21B6' },
-    { key: 'Done', label: 'Done', bg: '#F0FDF4', titleColor: '#065F46' }
+    {key:'To do',label:'To do',bg:'#FEF9F0',titleColor:'#92400E'},
+    {key:'In progress',label:'In progress',bg:'#EFF6FF',titleColor:'#1E40AF'},
+    {key:'In review',label:'In review',bg:'#F5F3FF',titleColor:'#5B21B6'},
+    {key:'Done',label:'Done',bg:'#F0FDF4',titleColor:'#065F46'}
   ];
   const tasks = store.tasks.filter(t => t.projectId === currentProjectId);
-  const board = document.getElementById('kanban-board');
-  board.innerHTML = statuses.map(s => {
+  document.getElementById('kanban-board').innerHTML = statuses.map(s => {
     const colTasks = tasks.filter(t => t.status === s.key);
     return `<div class="k-col" style="background:${s.bg}">
-      <div class="k-col-head">
-        <span class="k-col-title" style="color:${s.titleColor}">${s.label}</span>
-        <span class="k-count">${colTasks.length}</span>
-      </div>
+      <div class="k-col-head"><span class="k-col-title" style="color:${s.titleColor}">${s.label}</span><span class="k-count">${colTasks.length}</span></div>
       ${colTasks.map(t => {
-        const overdue = isOverdue(t);
-        const badgeClass = overdue ? 'b-red' : t.due ? 'b-blue' : 'b-gray';
-        const badgeText = overdue ? 'Overdue' : t.due || 'No date';
-        const dotClass = t.priority === 'High' ? 'pd-red' : t.priority === 'Medium' ? 'pd-amber' : 'pd-green';
-        const borderStyle = overdue ? 'border-left:3px solid #EF4444;' : '';
-        const metaStyle = overdue ? 'color:#EF4444;font-weight:600' : '';
-        return `<div class="k-card" style="${borderStyle}" onclick="openTaskDetail('${t.id}')">
+        const od = isOverdue(t);
+        const mins = Math.round((t.timeTracked||0)/60);
+        return `<div class="k-card" style="${od?'border-left:3px solid #EF4444':''}" onclick="openTaskDetail('${t.id}')">
           <div class="k-card-title">${t.title}</div>
-          <div class="k-card-meta" style="${metaStyle}">${t.assignee}${overdue ? ' · Overdue' : ''}</div>
-          <div class="k-card-foot">
-            <span class="badge ${badgeClass}">${badgeText}</span>
-            <span class="priority-dot ${dotClass}"></span>
-          </div>
+          <div class="k-card-meta" style="${od?'color:#EF4444;font-weight:600':''}">${t.assignee}${od?' · Overdue':''}${mins>0?' · ⏱'+mins+'m':''}</div>
+          <div class="k-card-foot"><span class="badge ${od?'b-red':t.due?'b-blue':'b-gray'}">${od?'Overdue':t.due||'No date'}</span><span class="priority-dot ${t.priority==='High'?'pd-red':t.priority==='Medium'?'pd-amber':'pd-green'}"></span></div>
         </div>`;
       }).join('')}
       <div style="border:2px dashed #e5e7eb;border-radius:8px;padding:10px;text-align:center;color:#9ca3af;font-size:12px;cursor:pointer;margin-top:4px" onclick="openModal('modal-add-task')">+ Add task</div>
@@ -1072,13 +1515,11 @@ function renderKanban() {
 function renderTaskList() {
   const tasks = store.tasks.filter(t => t.projectId === currentProjectId);
   const el = document.getElementById('task-list-view');
-  if (tasks.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">No tasks yet</div><div>Add your first task to get started</div></div>'; return; }
+  if (tasks.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">No tasks yet</div></div>'; return; }
   el.innerHTML = tasks.map(t => {
-    const overdue = isOverdue(t);
-    return `<div class="row-item" onclick="openTaskDetail('${t.id}')">
-      <div><div class="row-title">${t.title}</div><div class="row-meta">${t.assignee} · Due ${t.due || 'No deadline'}</div></div>
-      <span class="badge ${overdue ? 'b-red' : t.status === 'Done' ? 'b-green' : t.status === 'In review' ? 'b-purple' : t.status === 'In progress' ? 'b-blue' : 'b-gray'}">${overdue ? 'Overdue' : t.status}</span>
-    </div>`;
+    const od = isOverdue(t);
+    const mins = Math.round((t.timeTracked||0)/60);
+    return `<div class="row-item" onclick="openTaskDetail('${t.id}')"><div><div class="row-title">${t.title}</div><div class="row-meta">${t.assignee} · Due ${t.due||'No deadline'}${mins>0?' · ⏱'+mins+'m':''}</div></div><span class="badge ${od?'b-red':t.status==='Done'?'b-green':t.status==='In review'?'b-purple':t.status==='In progress'?'b-blue':'b-gray'}">${od?'Overdue':t.status}</span></div>`;
   }).join('');
 }
 
@@ -1087,9 +1528,8 @@ function renderTaskList() {
 // ============================================
 function switchTab(tab) {
   ['board','list','team','activity'].forEach(t => {
-    document.getElementById('proj-tab-' + t).style.display = t === tab ? 'block' : 'none';
-    const tabEl = document.getElementById('ptab-' + t);
-    tabEl.classList.toggle('active', t === tab);
+    document.getElementById('proj-tab-'+t).style.display = t === tab ? 'block' : 'none';
+    document.getElementById('ptab-'+t).classList.toggle('active', t === tab);
   });
   if (tab === 'board') renderKanban();
   if (tab === 'list') renderTaskList();
@@ -1102,56 +1542,46 @@ function renderProjectMetrics(p) {
   const tasks = store.tasks.filter(t => t.projectId === p.id);
   const done = tasks.filter(t => t.status === 'Done').length;
   const overdue = tasks.filter(t => isOverdue(t)).length;
-  const inprog = tasks.filter(t => t.status === 'In progress').length;
-  const members = (p.members || []).length + (p.invitedMembers || []).length + 1;
   document.getElementById('proj-detail-metrics').innerHTML = `
-    <div class="metric-card mc-blue"><div class="mc-label">Total tasks</div><div class="mc-val">${tasks.length}</div><div class="mc-sub">All members</div></div>
-    <div class="metric-card mc-green"><div class="mc-label">Completed</div><div class="mc-val">${done}</div><div class="mc-sub">${tasks.length > 0 ? Math.round(done/tasks.length*100) : 0}% done</div></div>
-    <div class="metric-card mc-amber"><div class="mc-label">In progress</div><div class="mc-val">${inprog}</div><div class="mc-sub">Active now</div></div>
-    <div class="metric-card mc-red"><div class="mc-label">Overdue</div><div class="mc-val">${overdue}</div><div class="mc-sub">${overdue > 0 ? 'Needs attention' : 'All clear'}</div></div>
-  `;
+    <div class="metric-card mc-blue"><div class="mc-label">Total tasks</div><div class="mc-val">${tasks.length}</div></div>
+    <div class="metric-card mc-green"><div class="mc-label">Completed</div><div class="mc-val">${done}</div><div class="mc-sub">${tasks.length>0?Math.round(done/tasks.length*100):0}% done</div></div>
+    <div class="metric-card mc-amber"><div class="mc-label">In progress</div><div class="mc-val">${tasks.filter(t=>t.status==='In progress').length}</div></div>
+    <div class="metric-card mc-red"><div class="mc-label">Overdue</div><div class="mc-val">${overdue}</div><div class="mc-sub">${overdue>0?'Needs attention':'All clear'}</div></div>`;
 }
 
 function renderProjectAlert(p) {
-  const tasks = store.tasks.filter(t => t.projectId === p.id);
-  const overdue = tasks.filter(t => isOverdue(t));
-  const alertEl = document.getElementById('proj-detail-alert');
-  if (overdue.length > 0) {
-    alertEl.style.display = 'flex';
-    document.getElementById('proj-detail-alert-text').textContent = overdue.length + ' task' + (overdue.length > 1 ? 's are' : ' is') + ' overdue: ' + overdue.map(t => t.title + ' (' + t.assignee + ')').join(', ');
-  } else { alertEl.style.display = 'none'; }
+  const overdue = store.tasks.filter(t => t.projectId === p.id && isOverdue(t));
+  const el = document.getElementById('proj-detail-alert');
+  if (overdue.length > 0) { el.style.display='flex'; document.getElementById('proj-detail-alert-text').textContent = overdue.length + ' task(s) overdue: ' + overdue.map(t=>t.title+' ('+t.assignee+')').join(', '); }
+  else { el.style.display = 'none'; }
 }
 
 function renderProjectTeam() {
   const p = store.projects.find(x => x.id === currentProjectId);
   if (!p) return;
-  const el = document.getElementById('team-grid');
   const members = [
-    { name: currentUser.name, role: currentUser.role || 'PI', initials: currentUser.initials, bg: '#1B3A6B' },
-    ...(p.invitedMembers || []).map(m => ({ name: m.name, role: m.role, initials: m.name.substring(0,2).toUpperCase(), bg: '#065F46' }))
+    {name:currentUser.name, role:currentUser.role||'PI', initials:currentUser.initials, bg:'#1B3A6B'},
+    ...(p.invitedMembers||[]).map(m => ({name:m.name, role:m.role, initials:m.name.substring(0,2).toUpperCase(), bg:'#065F46'}))
   ];
-  if (members.length === 0) { el.innerHTML = '<div class="empty-state"><div>No team members yet. Invite someone!</div></div>'; return; }
-  el.innerHTML = members.map(m => `
-    <div class="card" style="border-top:4px solid ${m.bg}">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+  document.getElementById('team-grid').innerHTML = members.map(m => {
+    const s = calculateReliabilityScore(m.name);
+    const scoreColor = s.score >= 8 ? '#065F46' : s.score >= 6 ? '#1E40AF' : s.score >= 4 ? '#92400E' : '#9ca3af';
+    return `<div class="card" style="border-top:4px solid ${m.bg}">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
         <div class="avatar" style="width:44px;height:44px;font-size:15px;background:${m.bg}">${m.initials}</div>
-        <div><div style="font-size:14px;font-weight:700">${m.name}</div><div style="font-size:11px;color:#6b7280">${m.role}</div></div>
+        <div style="flex:1"><div style="font-size:14px;font-weight:700">${m.name}</div><div style="font-size:11px;color:#6b7280">${m.role}</div></div>
+        <div style="text-align:center"><div class="score-circle ${s.color}" style="width:44px;height:44px;font-size:16px;margin:0">${s.score}</div><div style="font-size:9px;color:#6b7280;margin-top:3px">/ 10</div></div>
       </div>
-      <div style="font-size:12px;color:#6b7280">Active team member</div>
-    </div>
-  `).join('');
+      <div style="font-size:11px;color:#6b7280">Reliability: <strong style="color:${scoreColor}">${s.label}</strong></div>
+    </div>`;
+  }).join('');
 }
 
 function renderProjectActivity() {
   const el = document.getElementById('activity-log-view');
   const acts = store.activity.slice(-10).reverse();
   if (acts.length === 0) { el.innerHTML = '<div class="empty-state"><div>No activity yet</div></div>'; return; }
-  el.innerHTML = acts.map(a => `
-    <div class="act-row">
-      <div class="act-icon" style="background:${a.color}">${a.icon}</div>
-      <div><div class="act-text">${a.text}</div><div class="act-time">${formatTime(a.time)}</div></div>
-    </div>
-  `).join('');
+  el.innerHTML = acts.map(a => `<div class="act-row"><div class="act-icon" style="background:${a.color}">${a.icon}</div><div><div class="act-text">${a.text}</div><div class="act-time">${formatTime(a.time)}</div></div></div>`).join('');
 }
 
 // ============================================
@@ -1160,23 +1590,18 @@ function renderProjectActivity() {
 function refreshMyTasks() {
   const allTasks = store.tasks.filter(t => t.assignee === currentUser.name || t.createdBy === currentUser.id);
   const active = allTasks.filter(t => t.status !== 'Done');
-  const done = allTasks.filter(t => t.status === 'Done');
-  const inprog = allTasks.filter(t => t.status === 'In progress');
-  const overdue = allTasks.filter(t => isOverdue(t));
   document.getElementById('my-assigned').textContent = allTasks.length;
-  document.getElementById('my-done').textContent = done.length;
-  document.getElementById('my-progress').textContent = inprog.length;
-  document.getElementById('my-overdue').textContent = overdue.length;
+  document.getElementById('my-done').textContent = allTasks.filter(t => t.status === 'Done').length;
+  document.getElementById('my-progress').textContent = allTasks.filter(t => t.status === 'In progress').length;
+  document.getElementById('my-overdue').textContent = allTasks.filter(t => isOverdue(t)).length;
   const el = document.getElementById('my-tasks-list');
-  if (active.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">All caught up!</div><div>No active tasks assigned to you</div></div>'; return; }
+  if (active.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">All caught up!</div></div>'; return; }
   el.innerHTML = active.map(t => {
     const od = isOverdue(t);
-    const checkClass = t.status === 'Done' ? 'done' : t.status === 'In progress' ? 'prog' : '';
-    const checkText = t.status === 'Done' ? '✓' : t.status === 'In progress' ? '▶' : '';
-    return `<div class="my-task-item" style="border-left:4px solid ${od ? '#EF4444' : t.status === 'In progress' ? '#3B82F6' : '#9CA3AF'}" onclick="openTaskDetail('${t.id}')">
-      <div class="task-check ${checkClass}">${checkText}</div>
-      <div style="flex:1"><div style="font-size:13px;font-weight:600">${t.title}</div><div style="font-size:11px;color:${od ? '#EF4444' : '#6b7280'};font-weight:${od ? '600' : '400'}">${od ? 'OVERDUE · ' : ''}Due ${t.due || 'No deadline'}</div></div>
-      <span class="badge ${od ? 'b-red' : t.status === 'In progress' ? 'b-blue' : 'b-gray'}">${od ? 'Overdue' : t.status}</span>
+    return `<div class="my-task-item" style="border-left:4px solid ${od?'#EF4444':t.status==='In progress'?'#3B82F6':'#9CA3AF'}" onclick="openTaskDetail('${t.id}')">
+      <div class="task-check ${t.status==='Done'?'done':t.status==='In progress'?'prog':''}">${t.status==='Done'?'✓':t.status==='In progress'?'▶':''}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:600">${t.title}</div><div style="font-size:11px;color:${od?'#EF4444':'#6b7280'};font-weight:${od?'600':'400'}">${od?'OVERDUE · ':''}Due ${t.due||'No deadline'}</div></div>
+      <span class="badge ${od?'b-red':t.status==='In progress'?'b-blue':'b-gray'}">${od?'Overdue':t.status}</span>
     </div>`;
   }).join('');
 }
@@ -1187,25 +1612,80 @@ function refreshMyTasks() {
 function refreshTeam() {
   const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
   const el = document.getElementById('team-view-grid');
-  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-title">No team members yet</div><div>Create a project and invite collaborators</div></div>'; return; }
+  if (myProjects.length === 0) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-title">No team members yet</div></div>'; return; }
   const allMembers = new Map();
-  allMembers.set(currentUser.id, { name: currentUser.name, role: currentUser.role || 'PI', initials: currentUser.initials, bg: '#1B3A6B', projects: myProjects.map(p => p.name) });
-  myProjects.forEach(p => {
-    (p.invitedMembers || []).forEach(m => {
-      if (!allMembers.has(m.email)) {
-        allMembers.set(m.email, { name: m.name, role: m.role, initials: m.name.substring(0,2).toUpperCase(), bg: '#065F46', projects: [p.name] });
-      }
-    });
-  });
-  el.innerHTML = Array.from(allMembers.values()).map(m => `
-    <div class="card" style="border-top:4px solid ${m.bg}">
+  allMembers.set(currentUser.id, {name:currentUser.name, role:currentUser.role||'PI', initials:currentUser.initials, bg:'#1B3A6B', projects:[]});
+  myProjects.forEach(p => { (p.invitedMembers||[]).forEach(m => { if (!allMembers.has(m.email)) allMembers.set(m.email, {name:m.name, role:m.role, initials:m.name.substring(0,2).toUpperCase(), bg:'#065F46', projects:[]}); allMembers.get(m.email).projects.push(p.name); }); });
+  el.innerHTML = Array.from(allMembers.values()).map(m => {
+    const s = calculateReliabilityScore(m.name);
+    const scoreColor = s.score >= 8 ? '#065F46' : s.score >= 6 ? '#1E40AF' : s.score >= 4 ? '#92400E' : '#9ca3af';
+    return `<div class="card" style="border-top:4px solid ${m.bg}">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
         <div class="avatar" style="width:44px;height:44px;font-size:15px;background:${m.bg}">${m.initials}</div>
-        <div><div style="font-size:14px;font-weight:700">${m.name}</div><div style="font-size:11px;color:#6b7280">${m.role}</div></div>
+        <div style="flex:1"><div style="font-size:14px;font-weight:700">${m.name}</div><div style="font-size:11px;color:#6b7280">${m.role}</div></div>
+        <div style="text-align:center"><div class="score-circle ${s.color}" style="width:50px;height:50px;font-size:18px;margin:0">${s.score}</div><div style="font-size:9px;color:#6b7280;margin-top:3px">/ 10</div></div>
       </div>
-      <div style="font-size:12px;color:#6b7280">Projects: ${m.projects.join(', ')}</div>
-    </div>
-  `).join('');
+      <div style="font-size:12px;margin-bottom:4px">Reliability: <strong style="color:${scoreColor}">${s.label}</strong></div>
+      ${m.projects.length>0?`<div style="font-size:11px;color:#9ca3af">Projects: ${m.projects.join(', ')}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ============================================
+// ANALYTICS
+// ============================================
+function refreshAnalytics() {
+  const totalSessions = store.sessions.length;
+  const completedSessions = store.sessions.filter(s => s.duration !== null);
+  const avgDuration = completedSessions.length > 0 ? Math.round(completedSessions.reduce((a,b) => a+b.duration,0) / completedSessions.length) : 0;
+  const totalTimeSeconds = store.timeTracking.reduce((a,b) => a+b.seconds, 0);
+  const allTasks = store.tasks;
+  const doneTasks = allTasks.filter(t => t.status === 'Done');
+  const onTimeTasks = doneTasks.filter(t => !t.due || new Date(t.due) >= new Date(t.createdAt));
+  document.getElementById('an-sessions').textContent = totalSessions;
+  document.getElementById('an-avg-session').textContent = avgDuration + 'm';
+  document.getElementById('an-total-time').textContent = Math.round(totalTimeSeconds/3600*10)/10 + 'h';
+  document.getElementById('an-ontime').textContent = (doneTasks.length > 0 ? Math.round(onTimeTasks.length/doneTasks.length*100) : 0) + '%';
+  document.getElementById('session-count-badge').textContent = totalSessions + ' sessions';
+
+  // Reliability scores
+  const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
+  const allMembers = new Map();
+  allMembers.set(currentUser.id, {name:currentUser.name, initials:currentUser.initials, bg:'#1B3A6B'});
+  myProjects.forEach(p => { (p.invitedMembers||[]).forEach(m => { if (!allMembers.has(m.email)) allMembers.set(m.email, {name:m.name, initials:m.name.substring(0,2).toUpperCase(), bg:'#065F46'}); }); });
+  document.getElementById('analytics-reliability').innerHTML = Array.from(allMembers.values()).map(m => {
+    const s = calculateReliabilityScore(m.name);
+    return `<div class="member-row">
+      <div class="avatar" style="width:36px;height:36px;font-size:13px;background:${m.bg}">${m.initials}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:600">${m.name}</div><div style="font-size:11px;color:#9ca3af">On-time: ${s.breakdown.onTime}/4 · Completion: ${s.breakdown.completion}/3 · Quality: ${s.breakdown.quality}/2 · Consistency: ${s.breakdown.consistency}/1</div></div>
+      <div class="score-circle ${s.color}" style="width:44px;height:44px;font-size:16px;margin-left:12px">${s.score}</div>
+    </div>`;
+  }).join('');
+
+  // Sessions
+  const slEl = document.getElementById('session-list');
+  if (store.sessions.length === 0) { slEl.innerHTML = '<div class="empty-state"><div class="empty-icon">🔐</div><div class="empty-title">No sessions yet</div></div>'; }
+  else { slEl.innerHTML = store.sessions.slice().reverse().map(s => `<div class="session-row"><strong>${s.userName}</strong><span style="color:#6b7280">Login: ${formatTime(s.loginTime)}</span><span style="color:#6b7280">${s.logoutTime?'Logout: '+formatTime(s.logoutTime):'<span style="color:#10B981;font-weight:600">Active now</span>'}</span><span class="badge ${s.duration?'b-blue':'b-green'}">${s.duration?s.duration+' mins':'Active'}</span></div>`).join(''); }
+
+  // Deadline compliance
+  const tasksWithDue = store.tasks.filter(t => t.due);
+  const dcEl = document.getElementById('deadline-compliance');
+  if (tasksWithDue.length === 0) { dcEl.innerHTML = '<div class="empty-state"><div>No tasks with deadlines yet</div></div>'; }
+  else {
+    const byAssignee = tasksWithDue.reduce((acc,t) => { if (!acc[t.assignee]) acc[t.assignee]={total:0,overdue:0,done:0}; acc[t.assignee].total++; if(isOverdue(t)) acc[t.assignee].overdue++; if(t.status==='Done') acc[t.assignee].done++; return acc; }, {});
+    dcEl.innerHTML = Object.entries(byAssignee).map(([name,data]) => {
+      const compliance = Math.round((data.total - data.overdue) / data.total * 100);
+      return `<div class="member-row"><div class="avatar" style="width:32px;height:32px;font-size:11px;background:#1B3A6B">${name.substring(0,2).toUpperCase()}</div><div style="flex:1"><div style="font-size:13px;font-weight:600">${name}</div><div style="font-size:11px;color:#9ca3af">${data.total} tasks · ${data.done} done · ${data.overdue} overdue</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div class="bar-bg"><div class="bar-fill" style="width:${compliance}%;background:${compliance>=80?'#10B981':compliance>=60?'#F59E0B':'#EF4444'}"></div></div></div></div><span class="badge ${compliance>=80?'b-green':compliance>=60?'b-amber':'b-red'}">${compliance}%</span></div>`;
+    }).join('');
+  }
+
+  // Time tracking
+  const ttEl = document.getElementById('time-tracking-list');
+  if (store.timeTracking.length === 0) { ttEl.innerHTML = '<div class="empty-state"><div>No time tracked yet. Open a task and use the Start/Stop timer.</div></div>'; }
+  else {
+    const byTask = store.timeTracking.reduce((acc,t) => { if(!acc[t.taskTitle]) acc[t.taskTitle]={total:0,user:t.userName,sessions:0}; acc[t.taskTitle].total+=t.seconds; acc[t.taskTitle].sessions++; return acc; }, {});
+    ttEl.innerHTML = Object.entries(byTask).map(([title,data]) => { const mins = Math.round(data.total/60); return `<div class="session-row"><div style="flex:1;font-weight:600;font-size:13px">${title}</div><div style="color:#6b7280;font-size:12px">${data.user}</div><div style="color:#6b7280;font-size:12px">${data.sessions} session${data.sessions>1?'s':''}</div><span class="badge b-teal">${mins>=60?Math.round(mins/60*10)/10+'h':mins+'m'}</span></div>`; }).join('');
+  }
 }
 
 // ============================================
@@ -1215,9 +1695,8 @@ function refreshReports() {
   const myProjects = store.projects.filter(p => p.createdBy === currentUser.id);
   const allTasks = store.tasks.filter(t => myProjects.some(p => p.id === t.projectId));
   const done = allTasks.filter(t => t.status === 'Done').length;
-  const pct = allTasks.length > 0 ? Math.round(done / allTasks.length * 100) : 0;
-  const allMembers = new Set();
-  myProjects.forEach(p => { (p.invitedMembers || []).forEach(m => allMembers.add(m.email)); });
+  const pct = allTasks.length > 0 ? Math.round(done/allTasks.length*100) : 0;
+  const allMembers = new Set(); myProjects.forEach(p => { (p.invitedMembers||[]).forEach(m => allMembers.add(m.email)); });
   document.getElementById('rep-completion').textContent = pct + '%';
   document.getElementById('rep-done').textContent = done;
   document.getElementById('rep-projects').textContent = myProjects.length;
@@ -1227,12 +1706,8 @@ function refreshReports() {
   el.innerHTML = myProjects.map(p => {
     const tasks = store.tasks.filter(t => t.projectId === p.id);
     const d = tasks.filter(t => t.status === 'Done').length;
-    const pct2 = tasks.length > 0 ? Math.round(d / tasks.length * 100) : 0;
-    return `<div style="margin-bottom:16px">
-      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="font-weight:600">${p.name}</span><span style="font-weight:700;color:#1B3A6B">${pct2}%</span></div>
-      <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${pct2}%;background:#1B3A6B"></div></div>
-      <div style="font-size:11px;color:#6b7280;margin-top:4px">${tasks.length} tasks · ${d} completed · ${tasks.filter(t=>isOverdue(t)).length} overdue</div>
-    </div>`;
+    const pct2 = tasks.length > 0 ? Math.round(d/tasks.length*100) : 0;
+    return `<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="font-weight:600">${p.name}</span><span style="font-weight:700;color:#1B3A6B">${pct2}%</span></div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${pct2}%;background:#1B3A6B"></div></div><div style="font-size:11px;color:#6b7280;margin-top:4px">${tasks.length} tasks · ${d} completed · ${tasks.filter(t=>isOverdue(t)).length} overdue</div></div>`;
   }).join('');
 }
 
@@ -1251,47 +1726,36 @@ function saveSettings() {
 }
 
 // ============================================
-// ACTIVITY & NOTIFICATIONS
+// NOTIFICATIONS
 // ============================================
-function addActivity(text, color, icon) {
-  store.activity.push({ text, color: color || '#DBEAFE', icon: icon || '•', time: new Date() });
-  if (store.activity.length > 50) store.activity.shift();
-}
-
-function addNotification(text) {
-  store.notifications.push({ text, time: new Date(), read: false });
-}
-
+function addNotification(text, type) { store.notifications.push({id:genId(), text, type:type||'info', time:new Date(), read:false}); updateNotifBell(); }
+function updateNotifBell() { const unread = store.notifications.filter(n => !n.read).length; document.getElementById('notif-dot').style.display = unread > 0 ? 'block' : 'none'; }
+function markNotifsRead() { store.notifications.forEach(n => n.read = true); updateNotifBell(); }
 function renderNotifications() {
   const el = document.getElementById('notif-list');
   if (store.notifications.length === 0) { el.innerHTML = '<div style="text-align:center;color:#9ca3af;padding:20px;font-size:13px">No notifications yet</div>'; return; }
-  el.innerHTML = store.notifications.slice(-10).reverse().map(n => `
-    <div class="notification-item">
-      <div class="act-icon" style="background:#DBEAFE;font-size:12px">🔔</div>
-      <div><div class="act-text">${n.text}</div><div class="act-time">${formatTime(n.time)}</div></div>
-    </div>
-  `).join('');
+  el.innerHTML = store.notifications.slice().reverse().map(n => `<div class="notification-item ${n.read?'':'notif-unread'}"><div style="width:28px;height:28px;border-radius:7px;background:${n.type==='success'?'#D1FAE5':n.type==='warning'?'#FEF3C7':'#DBEAFE'};display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">${n.type==='success'?'🎉':n.type==='warning'?'⚠️':'ℹ️'}</div><div><div style="font-size:12px;color:#374151">${n.text}</div><div style="font-size:10px;color:#9ca3af;margin-top:2px">${formatTime(n.time)}</div></div></div>`).join('');
 }
 
-const origOpenModal = openModal;
-window.openModal = function(id) {
-  if (id === 'modal-notifs') renderNotifications();
-  origOpenModal(id);
-};
+// ============================================
+// ACTIVITY
+// ============================================
+function addActivity(text, color, icon) { store.activity.push({text, color:color||'#DBEAFE', icon:icon||'•', time:new Date()}); if(store.activity.length>100) store.activity.shift(); }
 
 // ============================================
 // UTILS
 // ============================================
 function formatTime(date) {
   if (!date) return '';
-  const d = new Date(date);
-  const now = new Date();
-  const diff = now - d;
+  const d = new Date(date), now = new Date(), diff = now - d;
   if (diff < 60000) return 'Just now';
   if (diff < 3600000) return Math.floor(diff/60000) + 'm ago';
   if (diff < 86400000) return Math.floor(diff/3600000) + 'h ago';
-  return d.toLocaleDateString('en-AU', { day:'numeric', month:'short' });
+  return d.toLocaleDateString('en-AU', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
 }
+
+const _openModal = openModal;
+window.openModal = function(id) { if (id === 'modal-notifs') renderNotifications(); _openModal(id); };
 </script>
 </body>
 </html>
