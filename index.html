@@ -602,22 +602,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- MODAL: ADD PAST PROJECT -->
 <div class="modal-overlay" id="modal-add-past-proj">
   <div class="modal">
-    <div class="modal-title">Add past project</div>
-    <div class="modal-sub">Add a previous research project to build your identity profile</div>
-    <div class="form-group"><label class="form-label">Project title *</label><input class="form-input" id="pp-title" placeholder="e.g. Productive Entrepreneurship in Sub-Saharan Africa"></div>
-    <div class="form-group"><label class="form-label">Research area *</label><input class="form-input" id="pp-area" placeholder="e.g. Entrepreneurship, Social Enterprise, Africa"></div>
+    <div class="modal-title">Add research project or publication</div>
+    <div class="modal-sub">Add to your research identity profile</div>
+    <div class="form-group"><label class="form-label">Project or publication title *</label><input class="form-input" id="pp-title" placeholder="e.g. Productive Entrepreneurship in Sub-Saharan Africa"></div>
+    <div class="form-group"><label class="form-label">Project or paper description *</label><textarea class="form-input" rows="3" id="pp-desc" placeholder="Brief description of the research, key findings or contributions..."></textarea></div>
+    <div class="form-group"><label class="form-label">Research keywords *</label><input class="form-input" id="pp-area" placeholder="e.g. Entrepreneurship, Social Enterprise, Ethiopia, Ecosystem"></div>
+    <div style="font-size:11px;color:#9ca3af;margin-top:-12px;margin-bottom:16px">Separate keywords with commas — these drive your identity analysis</div>
+    <div class="form-group"><label class="form-label">Journal or publication name (if applicable)</label><input class="form-input" id="pp-journal" placeholder="e.g. Journal of Business Venturing, Entrepreneurship Theory and Practice"></div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">Year started</label><input class="form-input" type="number" id="pp-start-year" placeholder="2020"></div>
-      <div class="form-group"><label class="form-label">Year ended</label><input class="form-input" type="number" id="pp-end-year" placeholder="2022"></div>
+      <div class="form-group"><label class="form-label">Year of publication or start</label><input class="form-input" type="number" id="pp-start-year" placeholder="2022" min="1980" max="2026"></div>
+      <div class="form-group"><label class="form-label">Year ended (if ongoing leave blank)</label><input class="form-input" type="number" id="pp-end-year" placeholder="2024" min="1980" max="2026"></div>
     </div>
-    <div class="form-group"><label class="form-label">Your role</label>
+    <div class="form-group"><label class="form-label">Your role *</label>
       <select class="form-select" id="pp-role">
-        <option>Principal Investigator</option><option>Co-Investigator</option><option>Postdoc Researcher</option><option>PhD Student</option><option>Research Assistant</option>
+        <option>Lead Author</option>
+        <option>Co-Author</option>
+        <option>Principal Investigator</option>
+        <option>Co-Investigator</option>
+        <option>Postdoc Researcher</option>
+        <option>PhD Student</option>
+        <option>Research Assistant</option>
       </select>
     </div>
     <div class="form-group"><label class="form-label">Institution</label><input class="form-input" id="pp-inst" placeholder="RMIT University"></div>
-    <div class="form-group"><label class="form-label">Brief description</label><textarea class="form-input" rows="2" id="pp-desc" placeholder="What was this research about?"></textarea></div>
-    <div class="form-group"><label class="form-label">Research outputs</label><input class="form-input" id="pp-outputs" placeholder="e.g. 3 journal papers, 1 book chapter"></div>
+    <div class="form-group"><label class="form-label">Research outputs (optional)</label><input class="form-input" id="pp-outputs" placeholder="e.g. 3 journal papers, 1 book chapter, 2 conference papers"></div>
     <div class="modal-actions">
       <button class="btn-modal-cancel" onclick="closeModal('modal-add-past-proj')">Cancel</button>
       <button class="btn-modal-primary" onclick="addPastProject()">Add to my profile</button>
@@ -1505,16 +1513,31 @@ function regenerateNarrative() {
 }
 
 async function addPastProject() {
-  const title=document.getElementById('pp-title').value.trim();
-  const area=document.getElementById('pp-area').value.trim();
-  if(!title||!area){alert('Please enter the project title and research area.');return;}
-  const pp={id:genId(),userId:currentUser.id,title,area,startYear:document.getElementById('pp-start-year').value||new Date().getFullYear(),endYear:document.getElementById('pp-end-year').value||'',role:document.getElementById('pp-role').value,institution:document.getElementById('pp-inst').value||'',description:document.getElementById('pp-desc').value||'',outputs:document.getElementById('pp-outputs').value||'',addedAt:new Date().toISOString()};
+  const title = document.getElementById('pp-title').value.trim();
+  const area = document.getElementById('pp-area').value.trim();
+  const desc = document.getElementById('pp-desc').value.trim();
+  if (!title || !area) { alert('Please enter the project title and research keywords.'); return; }
+  const pp = {
+    id: genId(),
+    userId: currentUser.id,
+    title,
+    area,
+    description: desc,
+    journal: document.getElementById('pp-journal').value.trim(),
+    startYear: document.getElementById('pp-start-year').value || new Date().getFullYear(),
+    endYear: document.getElementById('pp-end-year').value || '',
+    role: document.getElementById('pp-role').value,
+    institution: document.getElementById('pp-inst').value || 'RMIT University',
+    outputs: document.getElementById('pp-outputs').value || '',
+    addedAt: new Date().toISOString()
+  };
   localPastProjects.push(pp);
-  await saveToFirebase('pastProjects',pp.id,pp);
-  await addActivity('📚 Added past project: '+title,'#EDE9FE','📚');
-  ['pp-title','pp-area','pp-start-year','pp-end-year','pp-inst','pp-desc','pp-outputs'].forEach(id=>document.getElementById(id).value='');
+  await saveToFirebase('pastProjects', pp.id, pp);
+  await addActivity('📚 Added to research profile: ' + title, '#EDE9FE', '📚');
+  ['pp-title','pp-area','pp-desc','pp-journal','pp-start-year','pp-end-year','pp-inst','pp-outputs'].forEach(id => document.getElementById(id).value = '');
   closeModal('modal-add-past-proj');
   refreshIdentityPage();
+  alert('Added to your research identity profile!');
 }
 
 async function removePastProject(id) {
