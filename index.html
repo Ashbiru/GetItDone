@@ -1443,11 +1443,13 @@ function generateNarrative(analysis) {
 }
 
 function refreshIdentityPage() {
-  const analysis=analyseProjects();
-  const totalProjects=localProjects.length+localPastProjects.length;
-  document.getElementById('current-proj-count').textContent=localProjects.length+' project'+(localProjects.length!==1?'s':'');
-  document.getElementById('identity-area-count').textContent=analysis?analysis.sortedThemes.length+' areas':'0 areas';
-  if(!analysis||analysis.sortedThemes.length===0){
+  const userPastProjects = localPastProjects.filter(p => p.userId === currentUser.id);
+  const hasIntentionalProjects = userPastProjects.length > 0;
+  const analysis = hasIntentionalProjects ? analyseProjects() : null;
+  const totalProjects = localProjects.length + userPastProjects.length;
+  document.getElementById('current-proj-count').textContent = localProjects.length + ' project' + (localProjects.length !== 1 ? 's' : '');
+  document.getElementById('identity-area-count').textContent = analysis ? analysis.sortedThemes.length + ' areas' : '0 areas';
+  if (!analysis || analysis.sortedThemes.length === 0) {
     document.getElementById('identity-hero-name').textContent=currentUser.name;
     document.getElementById('identity-hero-tagline').textContent='Add projects to discover your research identity';
     document.getElementById('identity-hero-tags').innerHTML='<span class="identity-tag">Add projects to get started</span>';
@@ -1487,9 +1489,19 @@ function refreshIdentityPage() {
 }
 
 function regenerateNarrative() {
-  const analysis=analyseProjects();
-  if(!analysis||analysis.sortedThemes.length===0){alert('Add at least one project to generate a narrative.');return;}
-  document.getElementById('narrative-text').textContent=generateNarrative(analysis);
+  const allPastProjects = localPastProjects.filter(p => p.userId === currentUser.id);
+  if (allPastProjects.length === 0 && localProjects.length === 0) {
+    alert('Add at least one project to generate a narrative.');
+    return;
+  }
+  const analysis = analyseProjects();
+  if (!analysis || analysis.sortedThemes.length === 0) {
+    alert('No research themes detected yet. Add more detail to your project descriptions and research areas.');
+    return;
+  }
+  const newNarrative = generateNarrative(analysis);
+  document.getElementById('narrative-text').textContent = newNarrative;
+  addActivity('↻ ' + currentUser.name.split(' ')[0] + ' regenerated research identity narrative', '#EDE9FE', '↻');
 }
 
 async function addPastProject() {
