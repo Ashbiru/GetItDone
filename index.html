@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GetItDone — Research Team Management</title>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("mRu2He__p3G1srPGS");</script> 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
@@ -1037,11 +1039,28 @@ async function createProject() {
   };
   localProjects.push(p);
   await saveToFirebase('projects', p.id, p);
-  inviteEmails.forEach(async email => {
-    const inv = { id:genId(), email, name:email, role:'Collaborator', projectId:p.id, projectName:p.name, sentBy:currentUser.id, sentByName:currentUser.name, status:'Pending', sentAt:new Date().toISOString(), respondedAt:null };
+  for (const email of inviteEmails) {
+    const inv = {
+      id: genId(), email, name: email, role: 'Collaborator',
+      projectId: p.id, projectName: p.name,
+      sentBy: currentUser.id, sentByName: currentUser.name,
+      status: 'Pending', sentAt: new Date().toISOString(),
+      respondedAt: null, userId: currentUser.id, emailSent: true
+    };
     localInvitations.push(inv);
     await saveToFirebase('invitations', inv.id, inv);
-  });
+    try {
+      await emailjs.send('service_ash44', 'template_okw5kyj', {
+        to_email: email,
+        to_name: email.split('@')[0],
+        from_name: currentUser.name,
+        from_institution: currentUser.institution || 'RMIT University',
+        project_name: p.name,
+        role: 'Collaborator',
+        platform_url: 'https://ashbiru.github.io/GetItDone'
+      });
+    } catch(e) { console.error('Failed to send invite email to ' + email, e); }
+  }
   await addActivity('+ ' + currentUser.name.split(' ')[0] + ' created project: ' + name, '#D1FAE5', '+');
   inviteEmails.length = 0;
   document.getElementById('np-invite-chips').innerHTML = '';
@@ -1069,32 +1088,70 @@ async function sendInvite() {
   const name = document.getElementById('inv-name').value.trim();
   const role = document.getElementById('inv-role').value;
   if (!email) { alert('Please enter an email address.'); return; }
-  const inv = {
-    id: genId(), email, name: name||email, role,
-    projectId: currentProjectId,
-    projectName: currentProjectId ? (localProjects.find(p=>p.id===currentProjectId)||{}).name||'Unknown' : 'General',
-    sentBy: currentUser.id, sentByName: currentUser.name,
-    status: 'Pending', sentAt: new Date().toISOString(), respondedAt: null,
-    userId: currentUser.id
-  };
-  localInvitations.push(inv);
-  await saveToFirebase('invitations', inv.id, inv);
-  if (currentProjectId) {
-    const p = localProjects.find(x => x.id === currentProjectId);
-    if (p) {
-      if (!p.invitedMembers) p.invitedMembers = [];
-      p.invitedMembers.push({ email, name:name||email, role });
-      await saveToFirebase('projects', p.id, p);
+
+  const projectName = currentProjectId
+    ? (localProjects.find(p => p.id === currentProjectId) || {}).name || 'Unknown Project'
+    : 'GetItDone Research Platform';
+
+  const btn = document.querySelector('#modal-invite .btn-modal-primary');
+  if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+
+  try {
+    await emailjs.send('service_ash44', 'template_okw5kyj', {
+      to_email: email,
+      to_name: name || email.split('@')[0],
+      from_name: currentUser.name,
+      from_institution: currentUser.institution || 'RMIT University',
+      project_name: projectName,
+      role: role,
+      platform_url: 'https://ashbiru.github.io/GetItDone'
+    });
+
+    const inv = {
+      id: genId(),
+      email,
+      name: name || email,
+      role,
+      projectId: currentProjectId,
+      projectName,
+      sentBy: currentUser.id,
+      sentByName: currentUser.name,
+      status: 'Pending',
+      sentAt: new Date().toISOString(),
+      respondedAt: null,
+      userId: currentUser.id,
+      emailSent: true
+    };
+    localInvitations.push(inv);
+    await saveToFirebase('invitations', inv.id, inv);
+
+    if (currentProjectId) {
+      const p = localProjects.find(x => x.id === currentProjectId);
+      if (p) {
+        if (!p.invitedMembers) p.invitedMembers = [];
+        p.invitedMembers.push({ email, name: name||email, role });
+        await saveToFirebase('projects', p.id, p);
+      }
     }
+
+    await addActivity('✉ Real email invitation sent to ' + (name||email), '#DBEAFE', '✉');
+    await addNotification('Invitation email sent to ' + (name||email) + ' — awaiting response', 'info');
+
+    refreshSidebar();
+    closeModal('modal-invite');
+    document.getElementById('inv-email').value = '';
+    document.getElementById('inv-name').value = '';
+
+    if (currentProjectId) renderProjectTeam();
+
+    alert('Invitation email sent successfully to ' + email + '!\n\nThey will receive an email with a link to join GetItDone.\n\nTrack their response in the Invitations page.');
+
+  } catch(e) {
+    console.error('Email send error:', e);
+    alert('Failed to send email. Please check your EmailJS setup and try again.\n\nError: ' + (e.text || e.message || 'Unknown error'));
   }
-  await addActivity('✉ Invitation sent to ' + (name||email), '#DBEAFE', '✉');
-  await addNotification('Invitation sent to ' + (name||email) + ' — awaiting response', 'info');
-  refreshSidebar();
-  closeModal('modal-invite');
-  document.getElementById('inv-email').value = '';
-  document.getElementById('inv-name').value = '';
-  if (currentProjectId) renderProjectTeam();
-  alert('Invitation sent to ' + email + '!\n\nTrack their response in the Invitations page.');
+
+  if (btn) { btn.textContent = 'Send invitation'; btn.disabled = false; }
 }
 
 async function simulateInvitationResponse(invId) {
