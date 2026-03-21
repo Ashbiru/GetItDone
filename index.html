@@ -799,9 +799,21 @@ async function doLogout() {
 // ============================================
 async function loadAllData() {
   try {
-    const [projSnap, taskSnap, invSnap, actSnap, notifSnap, sessSnap, ttSnap, ppSnap] = await Promise.all([
-      db.collection('projects').where('createdBy', '==', currentUser.id).get(),
-      db.collection('tasks').where('createdBy', '==', currentUser.id).get(),
+    const projSnap = await db.collection('projects').where('createdBy', '==', currentUser.id).get();
+    localProjects = projSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    if (localProjects.length > 0) {
+      const projectIds = localProjects.map(p => p.id);
+      const taskPromises = projectIds.map(pid =>
+        db.collection('tasks').where('projectId', '==', pid).get()
+      );
+      const taskSnaps = await Promise.all(taskPromises);
+      localTasks = taskSnaps.flatMap(snap => snap.docs.map(d => ({ id: d.id, ...d.data() })));
+    } else {
+      localTasks = [];
+    }
+
+    const [invSnap, actSnap, notifSnap, sessSnap, ttSnap, ppSnap] = await Promise.all([
       db.collection('invitations').where('sentBy', '==', currentUser.id).get(),
       db.collection('activity').where('userId', '==', currentUser.id).orderBy('time', 'desc').limit(50).get(),
       db.collection('notifications').where('userId', '==', currentUser.id).get(),
@@ -809,19 +821,20 @@ async function loadAllData() {
       db.collection('timeTracking').where('userId', '==', currentUser.id).get(),
       db.collection('pastProjects').where('userId', '==', currentUser.id).get()
     ]);
-    localProjects = projSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-    const projectIds = localProjects.map(p => p.id);
-    if (projectIds.length > 0) {
-      const allTaskSnaps = await db.collection('tasks').where('projectId', 'in', projectIds.slice(0,10)).get();
-      localTasks = allTaskSnaps.docs.map(d => ({ id: d.id, ...d.data() }));
-    } else { localTasks = []; }
+
     localInvitations = invSnap.docs.map(d => ({ id: d.id, ...d.data() }));
     localActivity = actSnap.docs.map(d => ({ id: d.id, ...d.data() }));
     localNotifications = notifSnap.docs.map(d => ({ id: d.id, ...d.data() }));
     localSessions = sessSnap.docs.map(d => ({ id: d.id, ...d.data() }));
     localTimeTracking = ttSnap.docs.map(d => ({ id: d.id, ...d.data() }));
     localPastProjects = ppSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-  } catch(e) { console.error('Load error:', e); }
+
+  } catch(e) {
+    console.error('Load error:', e);
+    if (e.code === 'failed-precondition') {
+      alert('Database index required. Please check the browser console for a link to create the required Firebase index, then refresh the page.');
+    }
+  }
 }
 
 // ============================================
