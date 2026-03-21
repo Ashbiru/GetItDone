@@ -396,9 +396,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <div class="page-sub" id="proj-detail-sub"></div>
           </div>
           <div class="btn-row">
-            <button class="btn-sm btn-sm-outline" onclick="openModal('modal-invite')">+ Invite member</button>
-            <button class="btn-sm btn-sm-primary" onclick="openModal('modal-add-task')">+ Add task</button>
-          </div>
+  <button class="btn-sm btn-sm-outline" onclick="openModal('modal-invite')">+ Invite member</button>
+  <button class="btn-sm btn-sm-primary" onclick="openModal('modal-add-task')">+ Add task</button>
+  <button class="btn-sm btn-sm-red" onclick="deleteProject()">🗑 Delete project</button>
+</div>
         </div>
         <div class="metrics-row" id="proj-detail-metrics"></div>
         <div id="proj-detail-alert" class="alert-bar" style="display:none"><div class="alert-icon">!</div><div><div class="alert-text" id="proj-detail-alert-text"></div></div></div>
@@ -1070,7 +1071,29 @@ async function createProject() {
   refreshSidebar();
   setTimeout(() => openProject(p.id), 100);
 }
-
+async function deleteProject() {
+  const p = localProjects.find(x => x.id === currentProjectId);
+  if (!p) return;
+  const confirmed = confirm('Are you sure you want to delete "' + p.name + '"?\n\nThis will permanently delete the project and all its tasks. This cannot be undone.');
+  if (!confirmed) return;
+  try {
+    const projectTasks = localTasks.filter(t => t.projectId === currentProjectId);
+    for (const task of projectTasks) {
+      await deleteFromFirebase('tasks', task.id);
+    }
+    localTasks = localTasks.filter(t => t.projectId !== currentProjectId);
+    await deleteFromFirebase('projects', currentProjectId);
+    localProjects = localProjects.filter(p => p.id !== currentProjectId);
+    await addActivity('🗑 ' + currentUser.name.split(' ')[0] + ' deleted project: ' + p.name, '#FEE2E2', '🗑');
+    currentProjectId = null;
+    refreshSidebar();
+    navTo('projects');
+    alert('Project deleted successfully.');
+  } catch(e) {
+    console.error('Delete error:', e);
+    alert('Failed to delete project. Please try again.');
+  }
+}
 // ============================================
 // INVITE
 // ============================================
@@ -1179,16 +1202,54 @@ function refreshInvitations() {
   document.getElementById('inv-pending').textContent = myInvs.filter(i=>i.status==='Pending').length;
   document.getElementById('inv-declined').textContent = myInvs.filter(i=>i.status==='Declined').length;
   const el = document.getElementById('invitations-list');
-  if (myInvs.length===0) { el.innerHTML='<div class="empty-state"><div class="empty-icon">✉</div><div class="empty-title">No invitations sent yet</div></div>'; return; }
+  if (myInvs.length === 0) { 
+    el.innerHTML = '<div class="empty-state"><div class="empty-icon">✉</div><div class="empty-title">No invitations sent yet</div></div>'; 
+    return; 
+  }
   el.innerHTML = myInvs.map(inv => {
-    const badgeClass = inv.status==='Accepted'?'b-green':inv.status==='Declined'?'b-red':'b-amber';
+    const badgeClass = inv.status==='Accepted' ? 'b-green' : inv.status==='Declined' ? 'b-red' : inv.status==='Cancelled' ? 'b-gray' : 'b-amber';
     return `<div class="inv-row">
-      <div><div style="font-size:13px;font-weight:600">${inv.name} <span style="color:#9ca3af;font-weight:400">&lt;${inv.email}&gt;</span></div><div style="font-size:11px;color:#9ca3af;margin-top:2px">${inv.role} · ${inv.projectName} · Sent ${formatTime(inv.sentAt)}${inv.respondedAt?' · Responded '+formatTime(inv.respondedAt):''}</div></div>
-      <div style="display:flex;align-items:center;gap:8px"><span class="badge ${badgeClass}">${inv.status}</span>${inv.status==='Pending'?`<button class="btn-sm btn-sm-outline" style="font-size:10px;padding:4px 10px" onclick="simulateInvitationResponse('${inv.id}')">Simulate response</button>`:''}</div>
+      <div>
+        <div style="font-size:13px;font-weight:600">${inv.name} <span style="color:#9ca3af;font-weight:400">&lt;${inv.email}&gt;</span></div>
+        <div style="font-size:11px;color:#9ca3af;margin-top:2px">${inv.role} · ${inv.projectName} · Sent ${formatTime(inv.sentAt)}${inv.respondedAt?' · Responded '+formatTime(inv.respondedAt):''}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="badge ${badgeClass}">${inv.status}</span>
+        ${inv.status==='Pending' ? `
+          <button class="btn-sm btn-sm-outline" style="font-size:10px;padding:4px 10px" onclick="simulateInvitationResponse('${inv.id}')">Simulate response</button>
+          <button class="btn-sm btn-sm-red" style="font-size:10px;padding:4px 10px" onclick="cancelInvitation('${inv.id}')">Cancel</button>
+        ` : ''}
+        ${inv.status==='Cancelled' || inv.status==='Declined' ? `
+          <button class="btn-sm btn-sm-outline" style="font-size:10px;padding:4px 10px" onclick="deleteInvitation('${inv.id}')">Remove</button>
+        ` : ''}
+      </div>
     </div>`;
   }).join('');
 }
+async function cancelInvitation(invId) {
+  const inv = localInvitations.find(i => i.id === invId);
+  if (!inv) return;
+  const confirmed = confirm('Cancel invitation to ' + inv.name + ' (' + inv.email + ')?\n\nThey will not be notified.');
+  if (!confirmed) return;
+  inv.status = 'Cancelled';
+  inv.cancelledAt = new Date().toISOString();
+  await saveToFirebase('invitations', inv.id, inv);
+  await addActivity('❌ Invitation cancelled for ' + inv.name, '#FEE2E2', '❌');
+  addNotification('Invitation to ' + inv.name + ' has been cancelled', 'warning');
+  refreshInvitations();
+  refreshSidebar();
+}
 
+async function deleteInvitation(invId) {
+  const inv = localInvitations.find(i => i.id === invId);
+  if (!inv) return;
+  const confirmed = confirm('Permanently remove this invitation record for ' + inv.name + '?');
+  if (!confirmed) return;
+  await deleteFromFirebase('invitations', invId);
+  localInvitations = localInvitations.filter(i => i.id !== invId);
+  refreshInvitations();
+  refreshSidebar();
+}
 // ============================================
 // TASKS
 // ============================================
