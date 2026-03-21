@@ -439,6 +439,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <button class="btn-sm btn-sm-primary" onclick="openModal('modal-add-past-proj')">+ Add past project</button>
           </div>
         </div>
+        <div id="identity-profile-card"></div>
+
+<!-- ORCID INTEGRATION CARD -->
+<div class="card" style="margin-bottom:16px;border:2px solid #e5e7eb" id="orcid-card">
+  <div class="card-head">
+    <div>
+      <div class="card-title" style="display:flex;align-items:center;gap:8px">
+        <div style="width:20px;height:20px;border-radius:50%;background:#A6CE39;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff">iD</div>
+        Connect ORCID Profile
+      </div>
+      <div style="font-size:12px;color:#6b7280;margin-top:2px">Auto-import all your publications and research works from ORCID</div>
+    </div>
+    <span class="badge b-green" id="orcid-status-badge" style="display:none">Connected</span>
+  </div>
+  <div id="orcid-input-section">
+    <div style="display:flex;gap:10px;align-items:flex-end">
+      <div style="flex:1">
+        <label class="form-label">Your ORCID ID</label>
+        <input class="form-input" id="orcid-id-input" placeholder="0000-0002-1234-5678" style="font-family:monospace;letter-spacing:1px">
+        <div style="font-size:11px;color:#6b7280;margin-top:4px">Find your ORCID ID at <strong>orcid.org</strong> — it looks like 0000-0000-0000-0000</div>
+      </div>
+      <button class="btn-sm btn-sm-primary" onclick="fetchFromORCID()" id="orcid-fetch-btn" style="height:40px;white-space:nowrap">Fetch publications</button>
+    </div>
+    <div id="orcid-loading" style="display:none;margin-top:12px;padding:12px;background:#EFF6FF;border-radius:8px;font-size:13px;color:#1B3A6B;display:flex;align-items:center;gap:8px">
+      <div style="width:16px;height:16px;border:2px solid #1B3A6B;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+      Fetching your publications from ORCID...
+    </div>
+    <div id="orcid-error" style="display:none;margin-top:12px;padding:12px;background:#FEE2E2;border-radius:8px;font-size:13px;color:#991B1B"></div>
+  </div>
+  <div id="orcid-results" style="display:none;margin-top:14px">
+    <div style="font-size:12px;font-weight:700;color:#065F46;margin-bottom:10px" id="orcid-summary"></div>
+    <div id="orcid-works-list"></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn-sm btn-sm-green" onclick="importAllFromORCID()">Import all to my profile</button>
+      <button class="btn-sm btn-sm-outline" onclick="resetORCID()">Clear</button>
+    </div>
+  </div>
+</div>
         <div class="identity-hero">
           <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:0.7;margin-bottom:8px;font-weight:700">Research Identity Profile</div>
           <div class="identity-name" id="identity-hero-name">Your Research Profile</div>
@@ -1462,7 +1500,161 @@ function generateNarrative(analysis) {
   narrative+=`${name.split(' ')[0]} is building a strong scholarly reputation with a clear and purposeful research identity.`;
   return narrative;
 }
+// ============================================
+// ORCID INTEGRATION
+// ============================================
+let orcidData = null;
 
+async function fetchFromORCID() {
+  const input = document.getElementById('orcid-id-input').value.trim();
+  if (!input) { alert('Please enter your ORCID ID.'); return; }
+  const orcidId = input.replace('https://orcid.org/', '').trim();
+  const orcidPattern = /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/;
+  if (!orcidPattern.test(orcidId)) { 
+    document.getElementById('orcid-error').style.display = 'block';
+    document.getElementById('orcid-error').textContent = 'Invalid ORCID ID format. It should look like 0000-0002-1234-5678';
+    return; 
+  }
+  document.getElementById('orcid-error').style.display = 'none';
+  document.getElementById('orcid-results').style.display = 'none';
+  document.getElementById('orcid-loading').style.display = 'flex';
+  document.getElementById('orcid-fetch-btn').disabled = true;
+  try {
+    const headers = { 'Accept': 'application/json' };
+    const [worksRes, personRes, employmentsRes] = await Promise.all([
+      fetch(`https://pub.orcid.org/v3.0/${orcidId}/works`, { headers }),
+      fetch(`https://pub.orcid.org/v3.0/${orcidId}/person`, { headers }),
+      fetch(`https://pub.orcid.org/v3.0/${orcidId}/employments`, { headers })
+    ]);
+    if (!worksRes.ok) throw new Error('ORCID profile not found or not public. Make sure your ORCID profile is set to public.');
+    const [worksData, personData, employmentsData] = await Promise.all([
+      worksRes.json(), personRes.json(), employmentsRes.json()
+    ]);
+    orcidData = processORCIDData(orcidId, worksData, personData, employmentsData);
+    renderORCIDResults(orcidData);
+    document.getElementById('orcid-loading').style.display = 'none';
+    document.getElementById('orcid-results').style.display = 'block';
+  } catch(e) {
+    document.getElementById('orcid-loading').style.display = 'none';
+    document.getElementById('orcid-error').style.display = 'block';
+    document.getElementById('orcid-error').textContent = e.message || 'Failed to fetch from ORCID. Please check your ID and make sure your profile is public.';
+  }
+  document.getElementById('orcid-fetch-btn').disabled = false;
+}
+
+function processORCIDData(orcidId, worksData, personData, employmentsData) {
+  const works = [];
+  if (worksData && worksData.group) {
+    worksData.group.forEach(group => {
+      const summary = group['work-summary'] && group['work-summary'][0];
+      if (!summary) return;
+      const title = summary.title && summary.title.title && summary.title.title.value || 'Untitled';
+      const year = summary['publication-date'] && summary['publication-date'].year && summary['publication-date'].year.value || '';
+      const type = summary.type || 'journal-article';
+      const journalName = summary['journal-title'] && summary['journal-title'].value || '';
+      const externalIds = summary['external-ids'] && summary['external-ids']['external-id'] || [];
+      const doi = externalIds.find(id => id['external-id-type'] === 'doi');
+      const doiUrl = doi ? 'https://doi.org/' + doi['external-id-value'] : '';
+      works.push({ title, year, type, journalName, doiUrl, putCode: summary['put-code'] });
+    });
+  }
+  works.sort((a,b) => (b.year||0) - (a.year||0));
+  const name = personData && personData.name ? 
+    ((personData.name['given-names'] && personData.name['given-names'].value || '') + ' ' + (personData.name['family-name'] && personData.name['family-name'].value || '')).trim() 
+    : '';
+  const biography = personData && personData.biography && personData.biography.content || '';
+  const keywords = personData && personData.keywords && personData.keywords.keyword ? 
+    personData.keywords.keyword.map(k => k.content).join(', ') : '';
+  const employments = [];
+  if (employmentsData && employmentsData['affiliation-group']) {
+    employmentsData['affiliation-group'].forEach(group => {
+      const summaries = group.summaries || [];
+      summaries.forEach(s => {
+        const emp = s['employment-summary'];
+        if (emp) {
+          employments.push({
+            org: emp.organization && emp.organization.name || '',
+            role: emp['role-title'] || '',
+            startYear: emp['start-date'] && emp['start-date'].year && emp['start-date'].year.value || '',
+            endYear: emp['end-date'] && emp['end-date'].year && emp['end-date'].year.value || 'present'
+          });
+        }
+      });
+    });
+  }
+  return { orcidId, name, biography, keywords, works, employments, totalWorks: works.length };
+}
+
+function renderORCIDResults(data) {
+  const summary = document.getElementById('orcid-summary');
+  summary.innerHTML = `Found <strong>${data.totalWorks} publications</strong> on ORCID for ${data.name || 'this researcher'}${data.keywords ? ' · Keywords: ' + data.keywords : ''}`;
+  const list = document.getElementById('orcid-works-list');
+  if (data.works.length === 0) {
+    list.innerHTML = '<div style="font-size:13px;color:#9ca3af;padding:8px 0">No public works found on this ORCID profile.</div>';
+    return;
+  }
+  const typeLabels = { 'journal-article':'Journal Article', 'book-chapter':'Book Chapter', 'conference-paper':'Conference Paper', 'book':'Book', 'report':'Report', 'working-paper':'Working Paper', 'dissertation':'Dissertation', 'other':'Other' };
+  list.innerHTML = data.works.slice(0,10).map(w => `
+    <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f3f4f6">
+      <span style="background:#EFF6FF;color:#1B3A6B;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px">${w.year||'?'}</span>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600;color:#1f2937">${w.title}</div>
+        <div style="font-size:11px;color:#6b7280;margin-top:2px">${typeLabels[w.type]||w.type}${w.journalName?' · <em>'+w.journalName+'</em>':''}</div>
+        ${w.doiUrl?`<a href="${w.doiUrl}" target="_blank" style="font-size:11px;color:#1B3A6B">View DOI →</a>`:''}
+      </div>
+      <span class="badge b-green" style="flex-shrink:0">Will import</span>
+    </div>`).join('') + (data.works.length > 10 ? `<div style="font-size:12px;color:#6b7280;padding:8px 0;text-align:center">+ ${data.works.length - 10} more publications will also be imported</div>` : '');
+}
+
+async function importAllFromORCID() {
+  if (!orcidData) return;
+  const btn = document.querySelector('[onclick="importAllFromORCID()"]');
+  btn.textContent = 'Importing...';
+  btn.disabled = true;
+  let imported = 0;
+  for (const work of orcidData.works) {
+    const keywords = orcidData.keywords || currentUser.area || '';
+    const pp = {
+      id: genId(),
+      userId: currentUser.id,
+      title: work.title,
+      area: keywords,
+      description: '',
+      journal: work.journalName || '',
+      startYear: work.year || new Date().getFullYear(),
+      endYear: work.year || '',
+      role: 'Lead Author',
+      institution: currentUser.institution || 'RMIT University',
+      outputs: work.doiUrl ? 'DOI: ' + work.doiUrl : '',
+      source: 'orcid',
+      orcidId: orcidData.orcidId,
+      addedAt: new Date().toISOString()
+    };
+    localPastProjects.push(pp);
+    await saveToFirebase('pastProjects', pp.id, pp);
+    imported++;
+  }
+  if (orcidData.keywords && currentUser) {
+    currentUser.area = currentUser.area ? currentUser.area + ', ' + orcidData.keywords : orcidData.keywords;
+    await saveToFirebase('users', currentUser.id, { area: currentUser.area });
+  }
+  await saveToFirebase('users', currentUser.id, { orcidId: orcidData.orcidId });
+  await addActivity('🔬 Imported ' + imported + ' publications from ORCID', '#EDE9FE', '🔬');
+  document.getElementById('orcid-status-badge').style.display = 'inline-flex';
+  document.getElementById('orcid-input-section').style.display = 'none';
+  document.getElementById('orcid-results').style.display = 'none';
+  document.getElementById('orcid-card').style.borderColor = '#A6CE39';
+  document.getElementById('orcid-card').innerHTML += `<div style="display:flex;align-items:center;gap:8px;padding:10px;background:#F0FDF4;border-radius:8px;margin-top:10px"><div style="width:20px;height:20px;border-radius:50%;background:#A6CE39;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff">iD</div><div style="font-size:13px;color:#065F46;font-weight:600">Successfully imported ${imported} publications from ORCID ${orcidData.orcidId}</div></div>`;
+  refreshIdentityPage();
+  alert('Successfully imported ' + imported + ' publications from ORCID!\n\nYour Research Identity profile has been updated.');
+}
+
+function resetORCID() {
+  orcidData = null;
+  document.getElementById('orcid-id-input').value = '';
+  document.getElementById('orcid-results').style.display = 'none';
+  document.getElementById('orcid-error').style.display = 'none';
+}
 function refreshIdentityPage() {
   const userPastProjects = localPastProjects.filter(p => p.userId === currentUser.id);
   const hasIntentionalProjects = userPastProjects.length > 0;
