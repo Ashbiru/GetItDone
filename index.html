@@ -295,7 +295,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="auth-left">
     <div>
       <div class="auth-logo"><div class="logo-mark">G</div><span class="logo-text">GetItDone</span><span class="logo-badge">BETA</span></div>
-      <div class="auth-tagline">Join researchers managing smarter</div>
+      <div class="auth-tagline">Join researchers managing er</div>
       <div class="auth-sub">Set up your account in 60 seconds. Your data is saved permanently in the cloud.</div>
     </div>
     <div style="color:rgba(255,255,255,0.4);font-size:11px">© 2026 GetItDone · Research Management Platform</div>
@@ -436,7 +436,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- RESEARCH IDENTITY -->
       <div id="view-identity" class="view">
         <div class="page-head">
-          <div><div class="page-title">Research Identity</div><div class="page-sub">Smart narrative engine powered by your project data</div></div>
+          <div><div class="page-title">Research Identity</div><div class="page-sub"> narrative engine powered by your project data</div></div>
           <div class="btn-row">
             <button class="btn-sm btn-sm-outline" onclick="regenerateNarrative()">↻ Regenerate</button>
             <button class="btn-sm btn-sm-primary" onclick="openModal('modal-add-past-proj')">+ Add past project</button>
@@ -488,7 +488,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div class="identity-stats" id="identity-hero-stats"></div>
         </div>
         <div class="narrative-box">
-          <div class="narrative-label"><span class="narrative-label-text">AI-Generated Research Narrative</span><span class="narrative-ai-badge">SMART ENGINE</span></div>
+          <div class="narrative-label"><span class="narrative-label-text">AI-Generated Research Narrative</span><span class="narrative-ai-badge" id="narrative-engine-badge">SMART ENGINE</span></div>
           <button class="narrative-regenerate" onclick="regenerateNarrative()">↻ Regenerate</button>
           <div class="narrative-text" id="narrative-text">Add at least one project to generate your personalised research identity narrative...</div>
         </div>
@@ -560,6 +560,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             </select>
           </div>
           <button class="btn-sm btn-sm-primary" onclick="saveSettings()">Save changes</button>
+        </div>
+        <div class="card" style="max-width:500px;margin-top:0">
+          <div class="card-head"><div class="card-title">AI Integration</div><span class="badge b-green">Gemini Powered</span></div>
+          <div style="font-size:13px;color:#6b7280;margin-bottom:14px">Enter your Gemini API key to power AI-generated research identity narratives. Get a free key at <a href="https://aistudio.google.com" target="_blank" style="color:#1B3A6B;font-weight:600">aistudio.google.com</a></div>
+          <div class="form-group">
+            <label class="form-label">Gemini API Key</label>
+            <div style="display:flex;gap:8px">
+              <input class="form-input" id="settings-gemini-key" type="password" placeholder="AIzaSy..." style="flex:1">
+              <button class="btn-sm btn-sm-outline" onclick="toggleGeminiKeyVisibility()">👁</button>
+            </div>
+            <div style="font-size:11px;color:#9ca3af;margin-top:4px">Your key is stored securely in your account and never shared</div>
+          </div>
+          <div id="gemini-key-status" style="display:none;padding:10px;background:#D1FAE5;border-radius:8px;font-size:13px;color:#065F46;margin-bottom:12px">✓ Gemini API key saved — AI narratives are enabled</div>
+          <button class="btn-sm btn-sm-primary" onclick="saveGeminiKey()">Save API key</button>
+        </div>
         </div>
       </div>
 
@@ -892,6 +907,7 @@ function initApp() {
   refreshHomeStats();
   updateNotifBell();
   navTo('home');
+  loadGeminiKey();
 }
 
 function getGreeting() { const h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
@@ -1950,13 +1966,35 @@ function refreshIdentityPage() {
   renderReliabilityCard(currentUser.name, 'my-reliability-card');
 }
 
-function regenerateNarrative() {
+async function regenerateNarrative() {
   const userPastProjects = localPastProjects.filter(p => p.userId === currentUser.id);
   const hasAnyData = userPastProjects.length > 0 || (currentUser.area && currentUser.area.length > 0) || localProjects.length > 0;
-  if (!hasAnyData) { alert('Complete your profile with a research area first.'); return; }
+  if (!hasAnyData) { 
+    alert('Complete your profile with a research area or add projects first.'); 
+    return; 
+  }
+  const narrativeEl = document.getElementById('narrative-text');
+  const regenBtn = document.querySelector('[onclick="regenerateNarrative()"]');
+  if (regenBtn) { regenBtn.textContent = '⏳ Generating...'; regenBtn.disabled = true; }
+  narrativeEl.style.opacity = '0.5';
+  narrativeEl.textContent = 'Generating your AI-powered research narrative...';
+  if (currentUser.geminiKey) {
+    const aiNarrative = await generateGeminiNarrative();
+    if (aiNarrative) {
+      narrativeEl.textContent = aiNarrative;
+      narrativeEl.style.opacity = '1';
+      await saveToFirebase('users', currentUser.id, { savedNarrative: aiNarrative });
+      await addActivity('🤖 AI narrative generated via Gemini', '#EDE9FE', '🤖');
+      if (regenBtn) { regenBtn.textContent = '↻ Regenerate'; regenBtn.disabled = false; }
+      return;
+    }
+  }
   const analysis = analyseProjectsWithProfile();
-  document.getElementById('narrative-text').textContent = generateNarrativeWithProfile(analysis);
-  addActivity('↻ ' + currentUser.name.split(' ')[0] + ' regenerated research identity narrative', '#EDE9FE', '↻');
+  const fallbackNarrative = generateNarrativeWithProfile(analysis);
+  narrativeEl.textContent = fallbackNarrative;
+  narrativeEl.style.opacity = '1';
+  if (regenBtn) { regenBtn.textContent = '↻ Regenerate'; regenBtn.disabled = false; }
+  await addActivity('↻ ' + currentUser.name.split(' ')[0] + ' regenerated research identity narrative', '#EDE9FE', '↻');
 }
 
 async function addPastProject() {
@@ -2052,7 +2090,93 @@ async function saveSettings() {
   document.getElementById('header-avatar').textContent=currentUser.initials;
   alert('Settings saved successfully!');
 }
+function toggleGeminiKeyVisibility() {
+  const input = document.getElementById('settings-gemini-key');
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
 
+async function saveGeminiKey() {
+  const key = document.getElementById('settings-gemini-key').value.trim();
+  if (!key) { alert('Please enter your Gemini API key.'); return; }
+  if (!key.startsWith('AIza')) { alert('That does not look like a valid Gemini API key. It should start with AIza...'); return; }
+  currentUser.geminiKey = key;
+  await saveToFirebase('users', currentUser.id, { geminiKey: key });
+  document.getElementById('gemini-key-status').style.display = 'block';
+  alert('Gemini API key saved! AI narratives are now enabled on your Research Identity page.');
+}
+
+async function loadGeminiKey() {
+  if (currentUser.geminiKey) {
+    const input = document.getElementById('settings-gemini-key');
+    if (input) input.value = currentUser.geminiKey;
+    const status = document.getElementById('gemini-key-status');
+    if (status) status.style.display = 'block';
+    const badge = document.getElementById('narrative-engine-badge');
+if (badge) { badge.textContent = 'GEMINI AI'; badge.style.background = '#1a73e8'; }
+  }
+}
+
+async function generateGeminiNarrative() {
+  if (!currentUser.geminiKey) {
+    alert('Please add your Gemini API key in Settings first to enable AI narratives.');
+    navTo('settings');
+    return null;
+  }
+  const userPastProjects = localPastProjects.filter(p => p.userId === currentUser.id);
+  const allProjects = [
+    ...localProjects.map(p => ({ title: p.name, area: p.area||'', desc: p.description||'', year: new Date(p.createdAt).getFullYear(), role: 'PI', institution: p.institution||'' })),
+    ...userPastProjects.map(p => ({ title: p.title, area: p.area||'', desc: p.description||'', year: p.startYear||'', role: p.role||'', institution: p.institution||'', journal: p.journal||'', outputs: p.outputs||'' }))
+  ];
+  if (allProjects.length === 0) {
+    alert('Please add at least one project before generating a narrative.');
+    return null;
+  }
+  const projectsText = allProjects.map(p =>
+    `- Title: ${p.title}\n  Year: ${p.year}\n  Role: ${p.role}\n  Area: ${p.area}\n  Institution: ${p.institution}${p.journal ? '\n  Journal: ' + p.journal : ''}${p.desc ? '\n  Description: ' + p.desc : ''}${p.outputs ? '\n  Outputs: ' + p.outputs : ''}`
+  ).join('\n\n');
+  const prompt = `You are an expert academic writing assistant specialising in researcher profiles and scholarly biographies.
+
+Based on the following researcher profile and their research projects and publications, write a compelling 3-paragraph research identity narrative in third person academic style.
+
+RESEARCHER PROFILE:
+Name: ${currentUser.name}
+Role: ${currentUser.role || 'Researcher'}
+Institution: ${currentUser.institution || 'RMIT University'}
+Primary Research Area: ${currentUser.area || 'Not specified'}
+
+RESEARCH PROJECTS AND PUBLICATIONS:
+${projectsText}
+
+INSTRUCTIONS:
+1. First paragraph: Introduce the researcher, their primary identity and institutional affiliation. Identify their core research themes and theoretical positioning.
+2. Second paragraph: Discuss their methodological approaches, geographic or contextual focus, and the empirical contributions of their work. Reference specific project titles where relevant.
+3. Third paragraph: Describe their research trajectory, emerging areas of expertise, and scholarly significance. End with a forward-looking statement about their research agenda.
+
+Write in formal academic prose. Be specific and cite actual project titles. The narrative should sound like it was written by a senior colleague who deeply understands the researcher's work. Do not use bullet points. Write in flowing paragraphs only.`;
+
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${currentUser.geminiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+      })
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error && error.error.message || 'API request failed');
+    }
+    const data = await response.json();
+    const narrative = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text;
+    if (!narrative) throw new Error('No narrative generated');
+    return narrative;
+  } catch(e) {
+    console.error('Gemini error:', e);
+    alert('Gemini API error: ' + e.message + '\n\nPlease check your API key in Settings.');
+    return null;
+  }
+}
 // ============================================
 // NOTIFICATIONS
 // ============================================
